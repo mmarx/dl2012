@@ -1,0 +1,4356 @@
+\documentclass[openany]{scrbook}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[amsmath,thmmarks,thref]{ntheorem}
+\usepackage{beton}
+\usepackage{eulervm}
+\usepackage{setspace}
+\usepackage{stmaryrd}
+\usepackage[curve]{xypic}
+%\usepackage{undertilde}
+\usepackage{longtable}
+\usepackage{mathtools}
+\usepackage{bussproofs}
+\usepackage{xspace}
+\usepackage{tikz}
+\usepackage{enumerate}
+\usepackage{mathabx}
+\usepackage{tensor}
+\usepackage{cleveref}
+\usepackage{url}
+\usetikzlibrary{fit,scopes,chains,calc,matrix,arrows,positioning,backgrounds,automata}
+
+\renewcommand*{\dictumwidth}{.75\textwidth}
+
+\theoremlisttype{opt}
+\theoremnumbering{arabic}
+\theoremstyle{break}
+\RequirePackage{latexsym}
+\theoremsymbol{\ensuremath{_\Box}}
+\theorembodyfont{\itshape}
+\theoremheaderfont{\normalfont\bfseries}
+\theoremseparator{}
+\newtheorem{Theorem}{Theorem}[chapter]
+\newtheorem{Lemma}[Theorem]{Lemma}
+\newtheorem{Corollary}[Theorem]{Corollary}
+
+\theorembodyfont{\upshape}
+\newtheorem{Fact}[Theorem]{Fact}
+\newtheorem{NumberedRemark}[Theorem]{Remark}
+\newtheorem{Definition}[Theorem]{Definition}
+\newtheorem{Proposition}[Theorem]{Proposition}
+\newtheorem{NumberedExample}[Theorem]{Example}
+\newtheorem{Algorithm}[Theorem]{Algorithm}
+\newtheorem{InferenceRules}[Theorem]{Inference rules}
+\theoremstyle{nonumberbreak}
+\newtheorem{Technique}{Technique}
+\newtheorem{Problem}{Problem}
+\newtheorem{Remark}{Remark}
+\newtheorem{Example}{Example}
+\newtheorem{Notation}{Notation}
+\theoremstyle{nonumberplain}
+\newtheorem{Note}{Note}
+
+\theoremheaderfont{\scshape}
+\theorembodyfont{\normalfont}
+\theoremsymbol{\ensuremath{_\blacksquare}}
+\RequirePackage{amssymb}
+\theoremstyle{nonumberbreak}
+\newtheorem{Proof}{Proof}
+\qedsymbol{\ensuremath{_\blacksquare}}
+\theoremclass{LaTeX}
+
+\crefname{Theorem}{Theorem}{Theorems}
+\crefname{Lemma}{Lemma}{Lemmas}
+\crefname{Corollary}{Corollary}{Corollaries}
+\crefname{Fact}{Fact}{Facts}
+\crefname{NumberedRemark}{Remark}{Remarks}
+\crefname{Definition}{Definition}{Definitions}
+\crefname{Proposition}{Proposition}{Propositions}
+\crefname{NumberedExample}{Example}{Examples}
+
+%\renewcommand{\phi}{\varphi}
+
+\renewcommand{\theta}{\vartheta}
+\renewcommand{\kappa}{\varkappa}
+
+\newcommand{\then}{\Longrightarrow}
+\newcommand{\At}{\mathfrak{At}}
+\newcommand{\Ob}{\operatorname{Ob}}
+\newcommand{\To}{\Rightarrow}
+\newcommand{\A}{\underline{A}}
+\newcommand{\B}{\underline{B}}
+\newcommand{\C}{\underline{C}}
+\newcommand{\D}{\underline{D}}
+\renewcommand{\P}{\underline{P}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Rho}{\underline{\varrho}}
+\newcommand{\sequence}[2][]{\left({#2}\right)\ifx#1\then\else_{#1}\fi}
+\newcommand{\eval}[2][]{\llbracket{#2}\rrbracket\ifx#1\then\else_{#1}\fi}
+\newcommand{\product}[3][]{\left\langle{#2}, {#3}\right\rangle\ifx#1\then\else_{#1}\fi}
+\newcommand{\generates}[2][]{\left\langle{#2}\right\rangle\ifx#1\then\else_{#1}\fi}
+\newcommand{\cogenerates}[2][]{\left[{#2}\right]\ifx#1\then\else_{#1}\fi}
+\newcommand{\tupling}[2][]{\left\langle{#2}\right\rangle\ifx#1\then\else_{#1}\fi}
+\newcommand{\cotupling}[2][]{\left[{#2}\right]\ifx#1\then\else_{#1}\fi}
+\newcommand{\norm}[2][]{\left\|{#2}\right\|\ifx#1\then\else_{#1}\fi}
+\newcommand{\abs}[2][]{\left|{#2}\right|\ifx#1\then\else_{#1}\fi}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\usc}{\underline{\ }}
+\newcommand{\du}{\overset{\cdot}{\cup}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\Id}{\operatorname{Id}}
+\newcommand{\im}{\operatorname{Im}}
+\newcommand{\powerset}[1]{2^{\left\{{#1}\right\}}}
+\newcommand{\Set}{\mathcal{S}et}
+\newcommand{\Met}{\mathcal{M}et}
+\newcommand{\ie}{i{.}\,e{.}\xspace}
+\newcommand{\eq}{\xleftrightarrow{*}}
+\newcommand{\der}{\xleftarrow{*}}
+\newcommand{\red}{\xrightarrow{*}}
+\newcommand{\suc}{\xrightarrow{+}}
+\newcommand{\pre}{\xleftarrow{+}}
+\newcommand{\mto}{\xrightarrow{=}}
+\newcommand{\mot}{\xleftarrow{=}}
+\newcommand{\join}{\downarrow}
+\newcommand{\unf}{\mathbin{\downarrow}}
+\newcommand{\ot}{\leftarrow}
+\newcommand{\mul}{\operatorname{mul}}
+\newcommand{\gm}{>_{\mul}}
+\newcommand{\gc}{\succ_c}
+\newcommand{\Pos}{\operatorname{Pos}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Dom}{\operatorname{Dom}}
+\newcommand{\Ran}{\operatorname{Ran}}
+\newcommand{\VRan}{\operatorname{VRan}}
+\newcommand{\Sub}{\operatorname{Sub}}
+\newcommand{\Cong}{\operatorname{Cong}}
+\newcommand{\CC}{\operatorname{CC}}
+\newcommand{\ST}{\operatorname{ST}}
+\newcommand{\eqp}{\stackrel{?}{=}}
+\newcommand{\lesssimp}{\lesssim^{?}}
+\renewcommand{\vec}{\overrightarrow}
+\newcommand{\cev}{\overleftarrow}
+\newcommand{\Ack}{\operatorname{Ack}}
+\newcommand{\hemb}{\trianglerighteq_{\operatorname{emb}}}
+\newcommand{\hemp}{\trianglelefteq_{\operatorname{emb}}}
+\newcommand{\lpog}{>_{\operatorname{lpo}}}
+\newcommand{\lpoge}{\geq_{\operatorname{lpo}}}
+\newcommand{\lpol}{<_{\operatorname{lpo}}}
+\newcommand{\lpole}{\leq_{\operatorname{lpo}}}
+\newcommand{\CP}{\operatorname{CP}}
+\newcommand{\HC}{\operatorname{HC}}
+\renewcommand{\H}{\operatorname{H}}
+\renewcommand{\R}{\operatorname{R}}
+\newcommand{\MM}{\operatorname{MM}}
+\newcommand{\sqsubsetsim}{\mathrel{\utilde{\sqsubset}}}
+\newcommand{\sqsupsetsim}{\mathrel{\utilde{\sqsupset}}}
+\newcommand{\irrelevant}{\text{\textemdash}}
+\newcommand{\amul}{\succ_{\operatorname{mul}}}
+\newcommand{\lcm}{\operatorname{lcm}}
+\renewcommand{\S}{\operatorname{S}}
+\newcommand{\ui}{\left[0,\,1\right]}
+\newcommand{\eg}{e{.}\,g{.}\xspace}
+\newcommand{\ALC}{{\cal A}{\cal L}{\cal C}}
+\newcommand{\ALCrvm}{{\cal A}{\cal L}{\cal C}_{RVM}}
+\newcommand{\ALCN}{{\cal A}{\cal L}{\cal C}{\cal N}}
+\newcommand{\ALCI}{{\cal A}{\cal L}{\cal C}{\cal I}}
+\newcommand{\ALCO}{{\cal A}{\cal L}{\cal C}{\cal O}}
+\newcommand{\ALCNI}{{\cal A}{\cal L}{\cal C}{\cal N}{\cal I}}
+\newcommand{\FLz}{{\cal F}{\cal L}_0}
+\newcommand{\EL}{{\cal E}{\cal L}}
+\newcommand{\en}{\operatorname{end}}
+\newcommand{\totab}{\to_{\operatorname{tab}}}
+\newcommand{\gtlex}{>_{\operatorname{lex}}}
+\newcommand{\gtmul}{>_{\operatorname{mul}}}
+\newcommand{\nnf}{\mathop{\sim\!}}
+\newcommand{\coNP}{\operatorname{co-NP}}
+\newcommand{\NP}{\operatorname{NP}}
+\newcommand{\PSpace}{\operatorname{PSpace}}
+\newcommand{\NPSpace}{\operatorname{NPSpace}}
+\newcommand{\ExpTime}{\operatorname{ExpTime}}
+\newcommand{\NF}[1]{\operatorname{NF}\left(#1\right)}
+\newcommand{\size}{\operatorname{size}}
+\newcommand{\Fin}{\operatorname{Fin}}
+
+\makeindex
+
+\title{Script Description Logic}
+\author{Dr. Turhan \\
+  \LaTeX: Maximilian Marx}
+\date{Wintersemester 2012/2013}
+
+\begin{document}
+\frontmatter
+
+\maketitle
+
+\setchapterpreamble[u]
+{
+  \dictum[-- Lewis Carroll]
+  {
+    {``}`Contrariwise,' continued Tweedledee, `if it was so, it might be; and if it were so, it would be; but as it isn't, it ain't. That's logic.'{''}
+  }
+  \vspace{1cm}
+}
+
+\tableofcontents
+
+\section*{Contributions}
+Daniel Krähmann contributed notes for some lectures I was unable to
+attend, and numerous fixes for typos.
+
+\section*{License}
+\begin{minipage}{0.975\linewidth}
+  This work is licensed under the Creative~Commons
+  Attribution-NonCommercial-ShareAlike~4.0~International License. To
+  view a copy of this license, visit
+  \url{http://creativecommons.org/licenses/by-nc-sa/4.0/deed.en_US}.
+\end{minipage}
+
+\mainmatter
+
+\chapter{Two examples for early knowledge representation formalisms}
+\section{Semantic Networks}
+Semantic Networks were developed by Quillian in 1968 to represent the
+content of a dictionary. The name derives from the fact that these
+networks describe the semantics of natural language. There was a great
+variety of systems that were used to process natural language.
+Semantic networks consist of labeled nodes and labeled edges, where
+\begin{description}
+\item[nodes] stand for objects, concepts, or situations,
+\item[edges] stand for relationships between nodes,
+\item[property edges] assign properties to objects, concepts or
+  situations, \eg ``frog'' has the property ``green,''
+\item[is-a-\ edges] provide a hierarchical organization of concepts,
+  \eg ``greenback'' is a subconcept of ``frog,'' and instanciations of
+  concepts, \eg ``Kermit'' is an instance of the concept
+  ``greenback.'' Properties are inherited, \eg the concept
+  ``greenback'' inherits the color ``green'' from its superconcept
+  ``frog.'' However, not necessarily all properties are inherited.
+\end{description}
+
+\subsection{Semantics of semantic networks}
+Semantic networks have no formal semantics, their meaning is defined
+in terms of the processes that access or operate on them. In
+particular, identical networks can lead to different results in
+different systems. There is no common procedure for processing
+semantic networks in all systems. Often used techniques include
+``spreading activation'' and ``matching.''
+
+\subsection{Spreading activation}
+The goal is to determine connections between a pair of concepts by
+extending the activation of nodes starting from two search nodes:
+Starting from the nodes to be compared, the nodes reachable by
+connecting edges get activated in a wave-like fashion. If a node is
+activated, twice (from different directions), a connection has been
+found. In Quillian's system, the paths found by this method were used
+to generate an output in a simplified natural language.
+
+\subsection{Matching}
+To answer a query with respect to the network, a subnetwork is
+constructed, which describes the query object or concept. This
+substructer is searched for in the semantic network.
+
+\begin{Example}
+  \begin{itemize}
+  \item Which color do frogs have?
+    %%% FIXME image
+    %%% +----+  has-color  +---+
+    %%% |frog| ----------> | ? |
+    %%% +----+             +---+
+  \item Which color do greenbacks have?
+    %%% FIXME image
+    %%% +---------+  has-color  +---+
+    %%% |greenback| ----------> | ? |
+    %%% +---------+             +---+
+  \end{itemize}
+
+  A simple structural comparison is not enough. One needs to modify
+  the net according to inheritance.
+  \begin{itemize}
+  \item Which color do grassfrogs have?
+    %%% FIXME image
+    %%% +---------+  has-color  +---+
+    %%% |grassfrog| ----------> | ? |
+    %%% +---------+             +---+
+    Conflict resolution is needed: On the hand ``brown'' is stated
+    directly, on the other hand, ``green'' is inherited.
+  \end{itemize}
+
+  Due to the lack o formal semantics, the meaning of a given semantic
+  network is actually unclear.
+\end{Example}
+
+\subsection{Meaning of nodes}
+There is no clear distinction between concepts (which describe sets of
+objects) and objects.
+
+\subsection{Meaning of edges}
+Since is--a and porperties are both described by edges, the important
+role of is-a regarding inheritance is not emphasized. What is the
+meaning of is-a edges?
+\begin{itemize}
+\item is-a edges describe the concept hierarchy and instance-of, and
+\item stand for the strict sub-concept relation or for ``typically''
+  (do they admit exceptions?)
+\end{itemize}
+
+\subsection{Meaning of property edges}
+What does this mean?
+    %%% FIXME image
+    %%% +----+  has-color  +-----+
+    %%% |frog| ----------> |green|
+    %%% +----+             +-----+
+\begin{description}
+\item[value restriction] frog has only the color green, or
+\item[existential restriction] frog has at least the color green and
+  might also have other colors.
+\item[default] frog typically has the color green, there may be exception.
+\end{description}
+
+\section{Frames}
+The notion of frames was introduced by Marvin Minsky as a data
+structure representing prototypical situations (\eg entering a café,
+party, \ldots). Frames collect relevant knowledge about world objects,
+situations, et cetera. It is used to interprete new data (\eg image
+processing). The idea is that humans use knowledge of experiences in
+similar situations to interprete new situations and react in an
+appropriate way. The reaction often depends on standard expectations
+in certain situations.
+
+\begin{NumberedExample}[Entering a restaurant]
+  \label{ex:1.1}
+  Even if this particular restaurant is entered for the first time,
+  one would have knowledge of what to expect.
+  % Slide
+\end{NumberedExample}
+
+A frame has a name and consists of ``slots'' filled with
+values. Values can again be frames.
+
+Generic frames
+\begin{itemize}
+\item represent prototypical situations, objects, \ldots, and
+\item have generic slots, which can have different types, \eg
+  \begin{itemize}
+  \item ``specialization-of'' describing the hierarchical structure
+    between frames to inhert properties,
+  \item fixed generic values, which cannot be overwritten,
+  \item default values, which are assumed to be true as laong as no
+    other information is available, and
+  \item attached procedures (``if-needed''), describing methods to
+    compute a value if it is needed.
+  \end{itemize}
+\end{itemize}
+
+Instance frames
+\begin{itemize}
+\item represent actual situations, objects, \ldots, and
+\item are connected by a specialization slot to generic frames.
+\end{itemize}
+
+Again, there was no formal semantics at first, which led to similar
+problems as with the semantic networks. A partial logic-based
+reconstruction of the meaning of frames was devised by Hayes.
+
+\subsection{Procedures operation on frames}
+Selection of a frame that best fits a given situation: Matching
+\begin{itemize}
+\item of an instance frame, that describes the actual situation to a
+  best fitting generic frame (which situation are we in?),
+\item filling in values of the instance frame using
+  \begin{itemize}
+  \item known values from the actual situation,
+  \item default values, and
+  \item attached procedure
+  \end{itemize}
+  while taking vaue restrictions of the individual slots into
+  account.
+\end{itemize}
+
+The matching process is influenced by the ``overall goal'' of the
+system. Frames often contain information about what to do if matching
+fails.
+
+\chapter{A basic description logic}
+\label{chap:2}
+
+\begin{Definition}[Syntax of $\ALC$]
+  \label{2.1}
+  Let ${\cal N}_C$ and ${\cal N}_R$ be disjoint sets of concept and
+  role names, respectively.
+
+  The set of all $\ALC$-concept descriptions is defined inductively:
+  \begin{itemize}
+  \item If $A \in {\cal N}_C$, then $A$ is an $\ALC$-concept
+    description, and
+  \item if $C, D$ are $\ALC$-concept descriptions, then the following
+    are $\ALC$-concept descriptions:
+    \begin{description}
+    \item[conjunction] $C \sqcap D$,
+    \item[disjunction] $C \sqcup D$,
+    \item[negation] $\neg C$,
+    \item[value restriction] $\forall r.C$, and
+    \item[existential restriction] $\exists r.C$
+    \end{description}
+  \end{itemize}
+
+  Additionally, we define the following abbreviations:
+  \begin{description}
+  \item[top] $\top := A \sqcup \neg A$,
+  \item[bottom] $\bot := A \sqcap \neg A$, and
+  \item[implication] $C \then D := \neg C \sqcup D$.
+  \end{description}
+\end{Definition}
+
+\begin{Notation}
+  We call concept names atomic, and all other concept descriptions
+  complex. Instead of $\ALC$-concept description, we often say
+  $\ALC$-concept, concept description, or concept. Commonly, $A, B$
+  refer to concept names, $C, D$ to complex concept descriptions, and
+  $r, s$ to role names.
+\end{Notation}
+
+\begin{Definition}[Semantics of $\ALC$]
+  \label{2.2}
+  An interpretation ${\cal I} = (\Delta^{\cal I}, \cdot^{\cal I})$
+  consists of a non-empty domain $\Delta^{\cal I}$ and an extension
+  mapping $\cdot^{\cal I}$ such that
+  \begin{itemize}
+  \item concepts are interpreted as sets, \ie
+    \begin{equation*}
+      A^{\cal I} \subseteq \Delta^{\cal I}\ \text{for all}\ A \in
+      {\cal N}_C,\ \text{and}
+    \end{equation*}
+  \item roles are interpreted as binary relations, \ie
+    \begin{equation*}
+      r^{\cal I} \subseteq \Delta^{\cal I} \times {\cal D}^{\cal I}\
+      \text{for all}\ r \in {\cal N}_R.
+    \end{equation*}
+  \end{itemize}
+
+  The extension mapping is then extended to complex $\ALC$-concept
+  descriptions as follows:
+  \begin{align*}
+    (C \sqcap D)^{\cal I} & := C^I \cap D^I \\
+    (C \sqcup D)^{\cal I} & := C^I \cup D^I \\
+    (\neg C)^I & := \Delta^{\cal I} \setminus C^{\cal I} \\
+    (\forall r.C)^{\cal I} & := \set{d \in {\cal D}^{\cal I}; \forall
+      e \in {\cal D}^{\cal I}: (d, e) \in r^{\cal I} \to e \in C^{\cal
+        I}} \\
+    (\exists r.C)^{\cal I} & := \set{d \in {\cal D}^{\cal I}; \exists
+      e \in {\cal D}^{\cal I}: (d, e) \in r^{\cal I} \wedge e \in
+      C^{\cal I}}.
+  \end{align*}
+\end{Definition}
+
+We can translate a concept description $C$ into a first-order formula
+with one free variable $\tau_x(C)$:
+\begin{itemize}
+\item $\tau_x(A) := A(x)$ for $A \in {\cal N}_C$,
+\item $\tau_x(C \sqcap D) := \tau_x(C) \wedge \tau_x(D)$,
+\item $\tau_x(C \sqcup D) := \tau_x(C) \vee \tau_x(D)$,
+\item $\tau_x(\neg C) := \neg \tau_x(C)$,
+\item $\tau_x(\forall r.C) := \forall y.(r(x, y) \to \tau_y(C))$, and
+\item $\tau_x(\exists r.C) := \exists y.(r(x, y) \wedge \tau_y(C))$.
+\end{itemize}
+
+\begin{Lemma}
+  \label{2.3}
+  $C$ and $\tau_x(C)$ have the same extension, \ie
+  \begin{equation*}
+    C^I = \set{d \in \Delta^I; I \models \tau_x(C)(d)}.
+  \end{equation*}
+\end{Lemma}
+
+\begin{Proof}[\cref{2.3}]
+  By induction on the structure of $C$.
+\end{Proof}
+
+$\ALC$ can be seen as a fragment of first-order logic:
+\begin{itemize}
+\item Concept names are unary predicates, and role names are binary
+  predictates.
+\item Concept descriptions $C$ yield formulae with one free variable
+  $\tau_x(C)$.
+\end{itemize}
+These formulae belong to known decidable subclasses of first-order
+logic
+\begin{itemize}
+\item the two-variable fragment, and
+\item the guarded fragment.
+\end{itemize}
+
+$\ALC$ is a syntactic variant of the basic modal logick $K$:
+\begin{itemize}
+\item Concept names are propositional variables, and role names are
+  names for transition relations.
+\item Concept descriptions $C$ yield modal formulae $\Theta(C)$:
+  \begin{itemize}
+  \item $\Theta(A) := a$ for $A \in {\cal N}_C$,
+  \item $\Theta(C \sqcap D) := \Theta(C) \wedge \Theta(D)$,
+  \item $\Theta(C \sqcup D) := \Theta(C) \vee \Theta(D)$,
+  \item $\Theta(\neg C) := \neg\Theta(C)$,
+  \item $\Theta(\forall r.C) := \square_r \Theta(C)$, and
+  \item $\Theta(\exists r.C) := \diamond_r \Theta(C)$.
+  \end{itemize}
+\end{itemize}
+
+$C$ and $\Theta(C)$ have the same semantics: $C^I$ is the set of
+worlds that make $\Theta(C)$ true in the Kripke structure described by
+$I$.
+
+$\ALC$ is only an example of a description logic. DL researchers have
+introduced and investigated many additional constructors.
+
+\begin{Example}[Letter ${\cal Q}$ in the naming scheme]
+  Qualified number restrictions:
+  \begin{align*}
+    (\geq n r.C)^I & := \set{d \in \Delta^I; \#\set{e; (d, e) \in r^I
+        \wedge e \in C^I} \geq n} \\
+    (\leq n r.C)^I & := \set{d \in \Delta^I; \#\set{(d, e) \in r^I
+        \wedge e \in C^I} \leq n}.
+  \end{align*}
+\end{Example}
+
+\begin{Example}[Letter ${\cal N}$ in the naming scheme]
+  Number restrictions:
+  \begin{align*}
+    (\geq n r)^I & := \set{d \in \Delta^I; \#\set{e; (d, e) \in r^I}
+      \geq n} \\
+    (\leq n r)^I & := \set{d \in \Delta^I; \#\set{e; (d, e) \in r^I}
+      \leq n}.
+  \end{align*}
+\end{Example}
+
+\begin{Example}[Letter ${\cal I}$ in the naming scheme]
+  Inverse roles: If $r$ is a role, then $r^{-1}$ denotes its inverse
+  \begin{equation*}
+    (r^{-1})^I := \set{(e, d); (d, e) \in r^I}.
+  \end{equation*}
+
+  Inverse roles can be used like role names in value and existential
+  restrictions.
+\end{Example}
+
+\begin{Definition}[GCIs and TBoxen]
+  \label{2.4}
+  \begin{itemize}
+  \item A general concept inclusion is of the form $C \sqsubseteq D$,
+    where $C, D$ are concept descriptions,
+  \item a TBox is a finite set of GCIs,
+  \item the interpretation $I$ satisfies the GCI $C \sqsubseteq D$ iff
+    $C^I \subseteq D^I$, andn
+  \item the interpretation $I$ is a model of the TBox ${\cal T}$ iff
+    it satsfies all the GCIs in ${\cal T}$.
+  \end{itemize}
+
+  Note that this definition is not specific to $\ALC$, it also applies
+  to other concept description languages. We call two TBoxen
+  equivalent if they have the same models.
+\end{Definition}
+
+\begin{Definition}[Concept definition, acyclic TBox, primitive
+  concept, defined concept]
+  \begin{itemize}
+  \item A concept definition is of the form $A \equiv C$ where $A$ is
+    a concept name, and $C$ is a concept description. The
+    interpretation $I$ satisfies the concept definition $A \equiv C$
+    iff $A^I = C^I$.
+  \item An acyclic TBox is a finite set of concept definitions that
+    contains neither multiple definitions nor cyclic definitions (\ie
+    there is no sequence $A_1 \equiv C_1, \dotsc, A_n \equiv C_n \in
+    {\cal T}$ ($n \geq 1)$ such that $A_{i + 1}$ occurs in $C_i$ ($1
+    \leq i < n$) and $A_1$ occurs in $C_n$).
+  \end{itemize}
+
+  The intepretation $I$ is a model of the acyclic TBox ${\cal T}$ iff
+  it satisfies its concept definitions, \ie $A^I = C^I$ for all $A
+  \equiv C \in {\cal T}$.
+
+  Given an acyclic TBox, we call a concept name $A$ occuring ${\cal
+    T}$ a defined concept iff there is $C$ such that $A \equiv C \in
+  {\cal T}$, and primitive concept otherwise.
+\end{Definition}
+
+\begin{Proposition}
+  \label{2.6}
+  For every acyclic TBox ${\cal T}$, we can effectively construct an
+  equivalent acyclic TBox $\hat{{\cal T}}$ such that the right-hand
+  sides of concept definitions in $\hat{{\cal T}}$ contain only
+  primitive concepts.
+
+  We call $\hat{{\cal T}}$ the expanded version of ${\cal T}$.
+\end{Proposition}
+
+\begin{Proof}[\cref{2.6}]
+  We expand the concept definitions.
+  \begin{enumerate}
+  \item Let ${\cal T}_0 := {\cal T}$, $i := 0$.
+  \item While a defined concept occurs on the right-hand side of a
+    definition in ${\cal T}_i$, we
+    \begin{enumerate}
+    \item choose $A \equiv C \in {\cal T}_i$ such that a defined
+      concept $B$ occurs in $C$,
+    \item let $B \equiv D$ be the definition of $B$ in ${\cal T}_i$,
+    \item replace all occurences of $B$ in $C$ by $D$ and let
+      $\hat{C}$ be the concept obtained thusly, and
+    \item let ${\cal T}_{i + 1} := ({\cal T}_i \setminus \set{A \equiv
+        C}) \cup \set{A \equiv \hat{C}}$, and
+    \end{enumerate}
+  \item let $\hat{\cal T} := {\cal T}_i$.
+  \end{enumerate}
+
+  This expansion process always terminates and yields an equivalent
+  acyclic TBox $\hat{\cal T}$ where every right-hand side of a
+  definition contains only primitive concepts.
+\end{Proof}
+
+Given an acyclic TBox ${\cal T}$, a primitive interpretation $J$ for
+${\cal T}$ consists of a nonempty set $\Delta^J$ together with an
+extension mapping $\cdot^J$ that maps
+\begin{itemize}
+\item primitive concepts $P$ to sets $P^J \subseteq \Delta^J$, and
+\item role names to binary relations $r^J \subseteq \Delta^J \times
+  \Delta^J$.
+\end{itemize}
+
+Teh interpretation $I$ is an extension of the primitive
+interpretations $J$ iff $\Delta^I = \Delta^J$ and
+\begin{itemize}
+\item $P^J = P^I$ for all primitive concepts $P$, and
+\item $r^J = r^I$.
+\end{itemize}
+
+\begin{Corollary}
+  \label{2.7}
+  Let ${\cal T}$ be an acyclic TBox. Any primitive interpretation $J$
+  has a unique extension to a model of ${\cal T}$.
+\end{Corollary}
+
+\begin{Proof}[\cref{2.7}]
+  Construct the expanded TBox $\hat{\cal T}$ for ${\cal
+    T}$. Obviously, ${\cal T}$ and $\hat{\cal T}$ have the same
+  primitive and defined concepts. Let $J$ be a primitive
+  interpretation. We define its extension $I$ as follows:
+  For every defined concept $A$, let $A \equiv \hat{C}$ be its
+  definition in $\hat{\cal T}$. Since $\hat{C}$ contains only
+  primitive concepts, $\hat{C}^J$ is well-defined (by definition of
+  the semantics of the concept constructors).
+  \begin{enumerate}
+  \item $I$ is a model of ${\cal T}$. By definition, it is a model of
+    $\hat{{\cal T}}$, and $\hat{{\cal T}}$ and ${\cal T}$ are
+    equivalent.
+  \item $I$ is unique. Assume that $I'$ is another model of ${\cal T}$
+    that extends $J$. Then $I'$ is also a model of $\hat{\cal T}$, and
+    thus we have for all defined concepts $A$ (where $A \equiv
+    \hat{C}$ is the definition of $A$ in $\hat{\cal T}$):
+    \begin{equation*}
+      A^{I'} = \hat{C}^{I'} = \hat{C}^J = \hat{C}^I = A^I.
+    \end{equation*}
+  \end{enumerate}
+\end{Proof}
+
+$\ALC$-TBoxen can be translated into first-order logic:
+\begin{equation*}
+  \tau({\cal T}) := \bigwedge_{C \sqsubseteq D \in {\cal T}} \left.\forall
+  x.(\tau_x(C) \to \tau_x(D))\right..
+\end{equation*}
+
+\begin{Lemma}
+  \label{2.8}
+  Let ${\cal T}$ be a TBox and $\tau({\cal T})$ its translation into
+  first-order logic. Then ${\cal T}$ and $\tau({\cal T})$ have the
+  same models.
+\end{Lemma}
+
+\begin{Proof}[\cref{2.8}]
+  Obviously, it suffices to show the claim for the single axioms. We
+  show it here for GCIs, \ie
+  \begin{equation*}
+    I\ \text{is a model of}\ C \sqsubseteq D\ \text{iff}\ I\ \text{is
+      a model of}\ \forall x: \tau_x(C) \to \tau_x(D).
+  \end{equation*}
+  \begin{align*}
+    & I\ \text{is a model of}\ C \sqsubseteq D \\
+    \text{iff}\ & C^I \subseteq D^I \\
+    \text{iff}\ & \forall d \in \delta^I: d \in C^I\ \text{implies}\ d
+    \in D^I \\
+    \text{iff}\ & \forall d \in \delta^I: I \models \tau_x(C)(d)\
+    \text{implies} \tau_x(D)(d) \\
+    \text{iff}\ & I\ \text{is a model of}\ \forall x: \tau_x(C) \to
+    \tau_x(D).
+  \end{align*}
+\end{Proof}
+
+\begin{Definition}[Assertion, ABox]
+  \label{2.9}
+  \begin{itemize}
+  \item An assertion is of the form $C(a)$ (concept assertion) or
+    $r(a, b)$ (role assertion), where $C$ is a concept description,
+    $r$ is a role, and $a, b$ are individual names from a set ${\cal
+      N}_I$ of such names (disjoint with ${\cal N}_C$ and ${\cal
+      N}_R$).
+  \item An ABox is a finite set of assertions.
+  \end{itemize}
+
+  An interpretation $I$ is a model of an ABox ${\cal A}$ if it
+  satisfies all its assertions, \ie
+  \begin{align*}
+    a^I \in C^I & \text{for all}\ C(a) \in {\cal A},\ \text{and} \\
+    (a^I, b^I) \in r^I & \text{for all}\ r(a, b) \in {\cal A}.
+  \end{align*}
+\end{Definition}
+
+$\ALC$-ABoxen can be translated into first-order logic:
+\begin{equation*}
+  \tau({\cal A}) := \bigwedge_{C(a) \in {\cal A}}{\tau_x(C)(a)} \wedge
+    \bigwedge_{r(a, b) \in {\cal A}}{r(a, b)}.
+\end{equation*}
+
+\begin{Lemma}
+  \label{2.10}
+  Let ${\cal A}$ be an ABox and ${\cal T}(A)$ its translation into
+  first-order logic. Then ${\cal A}$ and $\tau({\cal A})$ have the
+  same models.
+\end{Lemma}
+
+\begin{Proof}[\cref{2.10}]
+  Easy.
+\end{Proof}
+
+\begin{Definition}[Knowledge base]
+  \label{2.11}
+  A knowledge base ${\cal K} = ({\cal T}, {\cal A})$ consists of a
+  TBox ${\cal T}$ and an ABox ${\cal A}$. The interpretation $I$ is a
+  model of the knowledge base ${\cal K} = ({\cal T}, {\cal A})$ iff it
+  is a model of ${\cal T}$ and a model of ${\cal A}$.
+\end{Definition}
+
+$\ALC$-knowledge bases can be translated into first-order logic:
+\begin{equation*}
+  \tau({\cal K}) := \tau({\cal T}) \wedge \tau({\cal A}).
+\end{equation*}
+
+\begin{Lemma}
+  \label{2.12}
+  Let ${\cal K}$ be a knowledge base and $\tau({\cal K})$ its
+  translation into first-order logic. Then ${\cal K}$ and $\tau({\cal
+    K})$ have the same models.
+\end{Lemma}
+
+\begin{Proof}[\cref{2.12}]
+  The claim follows immediately from \cref{2.8,2.10}.
+\end{Proof}
+
+Individual names can also be used as concept constructors to increase
+the expressive power of the concept description language. They yield a
+singleton set consisting of the extension of the individual name.
+
+\begin{Example}[Letter ${\cal O}$ in the naming scheme]
+  Nominals $\set{a}$ for $a \in {\cal N}_I$ with semantics
+  \begin{equation*}
+    \set{a}^I := \set{a^I}.
+  \end{equation*}
+
+  Nominals can be used to express ABox assertions using GCIs:
+  \begin{align*}
+    C(a) & \text{is expressed by}\ \set{a} \sqsubseteq C,\ \text{and} \\
+    r(a, b) & \text{is expressed by}\ \set{a} \sqsubseteq \exists r.\set{b}.
+  \end{align*}
+\end{Example}
+
+\begin{Definition}[Terminological reasoning]
+  Let ${\cal T}$ be a TBox.
+  \begin{description}
+  \item[Satisfiability] $C$ is satisfiable with respect to ${\cal T}$
+    iff $C^I \ne \varnothing$ for some model $I$ of ${\cal T}$,
+  \item[Subsumption] $C$ is subsumed by $D$ with respect to ${\cal T}$
+    ($C \sqsubseteq_{\cal T} D$) iff $C^I \subseteq D^I$ for all
+    models $I$ of the TBox ${\cal T}$, and
+  \item[Equivalence] $C$ is equivalent to $D$ with respect to ${\cal
+      T}$ ($C \equiv_{\cal T} D$) iff $C^I = D^I$ for all models $I$
+    of the TBox ${\cal T}$.
+  \end{description}
+
+  If ${\cal T} = \varnothing$, then
+  satisfiability/subsumption/equivalence with respect to ${\cal T}$ is
+  simply called satisfiability/subsumption/equivalence and we write
+  $\sqsubseteq$ and $\equiv$.
+\end{Definition}
+
+\begin{Lemma}
+  \label{2.14}
+  The subsumption relation $\sqsubseteq_{\cal T}$ is a pre-order on
+  concept descriptions, \ie
+  \begin{itemize}
+  \item $C \sqsubseteq_{\cal T} C$ (reflexivity), and
+  \item $c \sqsubseteq_{\cal T} D \wedge D \sqsubseteq_{\cal T} E \to
+    C \sqsubseteq_{\cal T} E$ (transitivity).
+  \end{itemize}
+
+  It is not a partial order since it is not antisymmetric, \ie $C
+  \sqsubseteq_{\cal T} D$ and $D \sqsubseteq_{\cal T} C$ do not imply
+  that $C = D$.
+
+  The constructors existential restriction and value restriction are
+  monotonic with respect to subsumption, \ie
+  \begin{equation*}
+    C sqsubseteq_{\cal T} D \to \exists r.C \sqsubseteq_{\cal T}
+    \exists r.D \wedge \forall r.C \sqsubseteq_{\cal T} \forall r.D.
+  \end{equation*}
+\end{Lemma}
+
+\begin{Proof}[\cref{2.14}]
+  \begin{enumerate}
+  \item Subsumption is a preorder follows from the fact that set
+    inclusion is transitive and reflexive. Note that $C \sqsubseteq_{\cal T} D$
+    and $D \sqsubseteq_{\cal T} C$ means that $C \equiv_{\cal T} D$. Concepts may be
+    equivalent (\ie they have the same extension) without being
+    syntactically equal. For example:
+    \begin{align*}
+      \forall r.  \top & \equiv \top \\
+      B \sqcap A & \equiv A \sqcap B.
+    \end{align*}
+  \item Assume $C \sqsubseteq D$. To show that
+    \begin{equation*}
+      \forall r. C \sqsubseteq_{\cal T}\ \forall r. D,
+    \end{equation*}
+    we consider a model $I$ of $T$. We must show
+    \begin{equation*}
+      (\forall r. C)^I \subseteq (\forall r. D)^I.
+    \end{equation*}
+    Thus, let $d \in (\forall r. C)^I$, \ie for all $e \in \Delta^I$
+    we have that $(d, e) \in r^I$ implies that $e \in C^I$. But then
+    $C \sqsubseteq_{\cal T} D$ implies $C^I \subseteq D^I$, which yields that
+    for all $e \in \Delta^I$, we also have that $(d, e) \in r^I$
+    implies $e \in D^I$, which shows that $d \in (\forall
+    r. D)^I$. The proof for existential restrictions is analogous.
+  \end{enumerate}
+\end{Proof}
+
+\begin{Definition}
+  \label{2.15}
+  Let ${\cal K} = ({\cal T}, {\cal A})$ be a knowledge base. Then
+  ${\cal K}$ is called consistent iff there exists a model of ${\cal
+    K}$. An individual $a$ is called an instance of $C$ with respect
+  to ${\cal K}$ iff $a^I \in C^I$ for all models $I$ of ${\cal K}$.
+\end{Definition}
+
+\begin{Lemma}
+  \label{2.16}
+  Let ${\cal K} = ({\cal T}, {\cal A})$ be a knowledge base. If $a$ is
+  an instance of $C$ with respect to ${\cal K}$ and $C
+  \sqsubseteq_{\cal T} D$, then $a$ is an instance of $D$ with respect
+  to ${\cal K}$.
+\end{Lemma}
+
+\begin{Proof}[\cref{2.16}]
+  Exercise.
+\end{Proof}
+
+\begin{Theorem}
+  \label{2.17}
+  Let ${\cal K} = ({\cal T}, {\cal A})$ be a knowledge base, $C, D$
+  concept descriptions, and $a \in {\cal N}_I$.
+  \begin{enumerate}
+  \item $C \equiv_{\cal T} D$ iff $C \sqsubseteq_{\cal T} D$ and $D
+    \sqsubseteq_{\cal T} C$,
+  \item $C \sqsubseteq_{\cal T} D$ iff $C \equiv_{\cal T} C \sqcap D$,
+  \item $C \sqsubseteq_{\cal T} D$ iff $C \sqcap \neg D$ is
+    unsatisfiable with respect to ${\cal T}$,
+  \item $C$ is satisfiable with respect to ${\cal T}$ iff
+    $C\not\sqsubseteq_{\cal T} \bot$,
+  \item $C$ is satisfiable with respect to ${\cal T}$ iff $({\cal T},
+    \set{C(a)})$ is consistent,
+  \item $a$ is an instance of $C$ with respect to ${\cal K}$ iff
+    $({\cal T}, {\cal A} \cup \set{\neg C(a)})$ is inconsistent, and
+  \item ${\cal K}$ is consistent iff $a$ is not an instance of
+    $\bot$ with respect to ${\cal K}$.
+  \end{enumerate}
+\end{Theorem}
+
+\begin{Proof}[\cref{2.17}]
+  All of these reductions are fairly obvious, we only prove two of
+  them in detail.
+  \begin{enumerate}
+  \item[3.] $C \sqsubseteq_{\cal T} D$ iff $C \sqcap \neg D$ is unsatisfiable
+    with respect to $T$.
+    \begin{align*}
+      & C \sqsubseteq_{\cal T} D \\
+      \text{iff}\ & \text{for every model}\ I\ \text{of}\ T\ \text{we
+        have}\ C^I \subseteq D^I \\
+      \text{iff}\ & \text{for every model}\ I\ \text{of}\ T\ \text{we
+        have}\ C^I \cap \left(\Delta^I \setminus D^I\right) =
+      \varnothing \\
+      \text{iff}\ & \text{for every model}\ I\ \text{of}\ T\ \text{we
+        have}\ C^I \cap (\neg D)^I = \varnothing \\
+      \text{iff}\ & \text{for every model}\ I\ \text{of}\ T\ \text{we
+        have}\ (C \sqcap \neg D)^I = \varnothing \\
+      \text{iff}\ & \text{there is no model}\ I\ \text{of}\ T\
+      \text{such that}\ (C \sqcap \neg D)^D \ne \varnothing \\
+      \text{iff}\ & C \sqcap \neg D\ \text{is unsatisfiable with
+        respect to}\ T.
+    \end{align*}
+  \item[7.] ${\cal K}$ is consistent iff $a$ is not an instance of
+    $\bot$ with respect to ${\cal K}$.
+
+    Assume that ${\cal K}$ is consistent, and let $I$ be a model of
+    ${\cal K}$. Then we have $a^I \ne \varnothing = \bot^I$. Hence,
+    $a$ is not an instance of $\bot$ with respect to ${\cal K}$.
+
+    Conversely, assume that $a$ is not an instance of $\bot$ with
+    respect to ${\cal K}$. Then there is a model $I$ of ${\cal K}$
+    with $A^I \not\in \bot^I$. But then, there exists a model of ${\cal
+      K}$, and hence ${\cal K}$ is consistent.
+  \end{enumerate}
+\end{Proof}
+
+\begin{Example}[Expansion of concepts and ABoxen]
+  \label{exp-blowup}
+  Let ${\cal K} = ({\cal T}, {\cal A})$ be a knowledge base, where
+  ${\cal T}$ is acyclic, and $C$ a concept description. The expanded
+  versions $\hat{C}$ and $\hat{\cal A}$ of $C$ and ${\cal A}$ with
+  respect to ${\cal T}$ are obtained by replacing all defined concepts
+  occuring in $C$ and ${\cal A}$ by their definitions in the expanded
+  version $\hat{\cal T}$ of ${\cal T}$.
+
+  This reduction is in general not polynomial, since the expanded
+  versions may be exponential in the size of ${\cal T}$:
+  \begin{align*}
+    A_0 & \equiv \forall r. A_1 \sqcap \forall s. A_1 \\
+    A_1 & \equiv \forall r. A_2 \sqcap \forall s. A_2 \\
+    & \vdots \\
+    A_{n - 1} & \equiv \forall r. A_n sqcap \forall s. A_n.
+  \end{align*}
+
+  The size of ${\cal T}$ is linear in $n$, but the expanded version
+  $\widehat{{\cal A}_0}$ of ${\cal A}_0$ contains ${\cal A}_n$ exactly
+  $2^n$ times.
+\end{Example}
+
+\begin{Proposition}
+  \label{2.18}
+  \begin{enumerate}
+  \item $C$ is satisfiable with respect to ${\cal T}$ iff $\hat{C}$ is
+    satisfiable, and
+  \item ${\cal K} = ({\cal T}, {\cal A})$ is consistent iff
+    $(\varnothing, \hat{{\cal A}})$ is consistent.
+  \end{enumerate}
+\end{Proposition}
+
+\begin{Proof}[\cref{2.18}]
+  \begin{enumerate}
+  \item Let $I$ be a model of $C$ and ${\cal T}$ such that $C^I \ne
+    \varnothing$. Then $I$ is also a model of $\hat{\cal T}$ (by
+    \cref{2.6}) and we have $\varnothing \ne C^I = \hat{C}^I$. Hence,
+    we have
+    \begin{equation*}
+      A \equiv D \in \hat{\cal T} \then A^I = \hat{D}^I.
+    \end{equation*}
+
+    Conversely, let $I$ be an interpretation such that $\hat{C}^I \ne
+    \varnothing$, and let $J$ be the primitive interpretation of which
+    $I$ is an extension. Then $J$ has an extension $I'$ to a model of
+    $\hat{\cal T}$. Since $\hat{C}$ does not contain defined concepts,
+    \begin{equation*}
+      \varnothing \ne \hat{C}^I = \hat{C}^{I'} = C^{I'}.
+    \end{equation*}
+    In addition, $I'$ is also a model of ${\cal T}$.
+  \end{enumerate}
+\end{Proof}
+
+\begin{Lemma}
+  \label{2.19}
+  Let ${\cal K} = ({\cal T}, {\cal A})$ be a knowledge base, $C, D$ be
+  $\ALC$-concept descriptors, and $a$ an individual name. Then it
+  holds that
+  \begin{enumerate}
+  \item $C \sqsubseteq_{\cal T} D$ iff $\tau({\cal T}) \models \forall
+    x.(\tau_x(C) \to \tau_x(D))$,
+  \item ${\cal K}$ is consistent iff $\tau({\cal K})$ is consistent, and
+  \item $a$ is an instance of $C$ with respect to ${\cal K}$ iff
+    $\tau({\cal K}) \models \tau_x(C)(a)$.
+  \end{enumerate}
+\end{Lemma}
+
+\begin{Proof}[\cref{2.19}]
+  \begin{enumerate}
+  \item The following are equivalent:
+    \begin{itemize}
+    \item $C \sqsubseteq_{\cal T} D$,
+    \item $C^I \subseteq D^I$ for all models $I$ of ${\cal T}$,
+    \item for all models $I$ of ${\cal T}$ and all $d \in \Delta^I$,
+      it holds that $d \in C^I$ implies $d \in D^I$,
+    \item for all models $I$ of ${\cal T}$ and all $d \in \Delta^I$,
+      $I \models \tau_x(C)(d)$ implies $I \models \tau_x(D)(d)$, and
+    \item $\tau({\cal T}) \models \forall x.(\tau_x(C) \ot
+      \tau_x(D))$.
+    \end{itemize}
+  \item The proof is similiar.
+  \item The proof is similiar.
+  \end{enumerate}
+\end{Proof}
+
+\chapter{Basic Model Theory}
+\begin{Definition}[Bisimulation]
+  \label{3.1}
+  Let $I_1, I_2$ be interpretations.
+  The relation $\rho \subseteq \Delta^{I_1} \times \Delta^{I_2}$ is a
+  bisimulation between $I_1$ and $I_2$ iff
+  \begin{itemize}
+  \item $d_1 \rho d_2$ implies $d_1 \in A^{I_1}$ iff $d_2 \in A^{I_2}$
+    for all $A \in {\cal N}_C$,
+  \item $d_1 \rho d_2$ and $(d_1, d_1') \in r^{I_1}$ implies the
+    existence of $d_2' \in \Delta^{I_2}$, such that $d_1' \rho d_2'$
+    and $(d_2, d_2') \in r^{I_2}$ for all $r \in {\cal N}_r$, and
+  \item $d_1 \rho d_2$ and $(d_2, d_2') \in r^{I_2}$ implies the
+    existence of $d_1' \in \Delta^{I_1}$ such that $d_1' \rho d_2'$
+    and $(d_1, d_1') \in r^I$ for all $r \in {\cal N}_R$.
+  \end{itemize}
+
+  we write $(I_1, d_1) \sim (I_2, d_2)$ iff there is a bisimulations
+  $\rho$ between $I_1$ and $I_2$ such that $d_1 \rho d_2$.
+\end{Definition}
+
+\begin{Theorem}[Bisimulation invariance of $\ALC$]
+  \label{3.2}
+  If $(I_1, d_1) \sim (I_2, d_2)$, then the following holds for all
+  $\ALC$-concepts $C$:
+  \begin{equation*}
+    d_1 \in C^{I_1}\ \text{iff}\ d_2 \in C^{I_2}.
+  \end{equation*}
+\end{Theorem}
+
+\begin{Proof}[\cref{3.2}]
+  Let $\rho$ be a bisimulation of $I_1$ and $I_2$ such that $d_1 \rho
+  d_2$. We prove the theorem by induction on the structure of $C$:
+  \begin{itemize}
+  \item Assume that $C = A$ for a concept name $A$. Then $d_1 \in
+    A^{I_1}$ iff $d_2 \in A^{I_2}$.
+  \item Assume that $C = D \sqcap E$. We have
+    \begin{align*}
+      d_1 \in (D \sqcap E)^{I_1} & \ \text{iff}\ d_1 \in D^{I_1}
+    \wedge d_1 \in E^{I_1} \\
+    & \ \text{iff}\ d_2 \in D^{I_2} \wedge d_2 \in E^{I_2} \\
+    & \ \text{iff} d_2 \in (D \sqcap E)^{I_2}.
+    \end{align*}
+  \item Negation and disjunction can be treated similarly.
+  \item Assume that $C = \exists r.D$. We have $d_1 \in (\exists
+    r.D)^{I_1}$ iff there is $d_1' \in D^{I_1}$ such that $(d_1, d_1')
+    \in r^{I_1}$ and $d_1' \in D^{I_1}$. This holds iff there is a
+    $d_2' \in \Delta^{I_2}$ such that $(d_2, d_2') \in r^{I_2}$ and
+    $d_2' \in D^{I_2}$, \ie iff $d_2 \in (\exists r.D)^{I_2}$. This
+    follows from $(d_1, d_1') \in r^{I_1}$ and $(d_1, d_2) \in \rho$
+    as bisimularity yields $d_2'$ such that $(d_2, d_2') \in r^{I_2}$
+    and $(d_1', d_2') \in \rho$. Since $d_1' \in D^{I_1}$, we get
+    $d_2' \in D^{I_2}$. Since $d_1' \in D^{I_1}$, we get $d_2' \in
+    D^{I_2}$ by induction. The other direction of the implication can
+    be shown analogously.
+  \item Value restriction can be treated similarly.
+  \end{itemize}
+\end{Proof}
+
+We have introduced extensions of $\ALC$ by the concept constructors
+number restriction, nominals and the role constructor inverse
+role. How can we show that these constructors really extend $\ALC$,
+\ie that they cannot be expressed using the constructors of $\ALC$? We
+do this by showing that for any of these constructors, we can
+construct concept descriptions that cannot be expressed by
+$\ALC$-concep tdescriptions, \ie that do not have an equivalent
+$\ALC$-concept description.
+
+\begin{Proposition}
+  \label{3.3}
+  No $\ALC$-concept description is equivalent to the $\ALCN$-concept
+  description $(\leq 1r)$.
+\end{Proposition}
+
+\begin{Proof}[\cref{3.3}]
+  Assume that $C$ is an $\ALC$-concept description such that
+  \begin{equation*}
+    C \equiv (\leq 1 r),\ \ie
+  \end{equation*}
+  $C^I = (\leq 1r)^I$ holds for all interpretations $I$. Consider the
+  following two interpretations:
+  \begin{align*}
+    I_1:\ \xymatrix{d_1 \ar[d]^r \\ e_1} && I_2:\
+    \xymatrix{& d_2 \ar[ld]_{r} \ar[rd]^{r} \\
+    e_{1,2} && e_{2,2}}
+  \end{align*}
+
+  Then
+  \begin{equation*}
+    \rho := \set{(d_1, d_2), (e_1, e_{1, 2}), (e_1, e_{2, 2})}
+  \end{equation*}
+  is a bisimulation between $I_1$ and $I_2$. Hence, we have
+  \begin{equation*}
+    (I_1, d_1) \sim (I_2, d_2),\ \text{and thus}
+  \end{equation*}
+  we have $d_1 \in C^{I_1}$ iff $d_2 \in C^{I_2}$. This yields a
+  contradiction, since we have
+  \begin{align*}
+    d_1 \in (\leq 1 r)^{I_1} & = C^{I_1},\ \text{but} \\
+    d_2 \not\in (\leq 1 r)^{I_2} & = C^{I_2}.
+  \end{align*}
+\end{Proof}
+
+\begin{Proposition}
+  \label{3.4}
+  No $\ALC$-concept description is equivalent to the $\ALCI$-concept
+  description
+  \begin{equation*}
+    \exists r^{-1}.\top.
+  \end{equation*}
+\end{Proposition}
+
+\begin{Proof}[\cref{3.4}]
+  Assume that $C$ is an $\ALC$-concept description such that $C \equiv
+  \exists r^{-1}.\top$.
+
+  Consider the following two interpretations:
+  \begin{align*}
+    I_1:\ \xymatrix{e_1 \\ \ar[u]^r d_1} && I_2:\
+    \xymatrix{d_2}
+  \end{align*}
+
+  Then
+  \begin{equation*}
+    \rho = \set{(d_1, d_2)}
+  \end{equation*}
+  is a bisimulation between $I_1$ and $I_2$, and hence we have
+  \begin{equation*}
+    (I_1, d_1) \sim (I_2, d_2).
+  \end{equation*}
+  Thus we have $d_1 \in C^{I_1}$ iff $d_2 \in C^{I_2}$. This yields a
+  contradiction, since
+  \begin{align*}
+    d_1 \in (\exists r^{-1}. \top)^{I_1} & = C^{I_1},\ \text{but} \\
+    d_2 \not\in (\exists r^{-1}. \top)^{I_2} & = C^{I_2}.
+  \end{align*}
+\end{Proof}
+
+\begin{Proposition}
+  \label{3.5}
+  No $\ALC$-concept description is equivalent to the $\ALCO$-concept
+  description $\set{a}$.
+\end{Proposition}
+
+\begin{Proof}[\cref{3.5}]
+  Assume that $C$ is an $\ALC$-concept description such that $C \equiv
+  \exists \set{a}$, \ie $C^I = \set{a}$.
+
+  Consider the following two interpretations:
+  \begin{align*}
+    I_1:\ \xymatrix{d_1} && I_2:\
+    \xymatrix{d_2 & e},\ \text{where} \\
+    a^{I_1} = d_1\ \text{and}\ a^{i_2} = e.
+  \end{align*}
+
+  Then
+  \begin{equation*}
+    \rho = \set{(d_1, d_2)}
+  \end{equation*}
+  is a bisimulation between $I_1$ and $I_2$, and hence we have
+  \begin{equation*}
+    (I_1, d_1) \sim (I_2, d_2).
+  \end{equation*}
+  Thus we have $d_1 \in C^{I_1}$ iff $d_2 \in C^{I_2}$. This yields a
+  contradiction, since
+  \begin{align*}
+    d_1 \set{a}^{I_1} & = C^{I_1},\ \text{but} \\
+    d_2 \not\in \set{a}^{I_2} & = C^{I_2}.
+  \end{align*}
+\end{Proof}
+
+Recall that interpretations can be viewed as graphs, where
+\begin{itemize}
+\item the elements of $\Delta^I$ are the nodes,
+\item the interpretations of role names are edges, and
+\item the interpretations of concept names are node labels.
+\end{itemize}
+We can unravel the graph into a tree starting at a given node without
+``changing membership'' in concepts.
+
+\begin{Definition}[Tree model]
+  Let ${\cal T}$ be a TBox and $C$ a concept description. The
+  interpretation $I$ is a tree model of $C$ with respect to ${\cal T}$
+  iff $I$ is a model of ${\cal T}$, and the graph
+  \begin{equation*}
+    \left(\Delta^I, \bigcup_{r \in {\cal N}_R}{r^I}\right)
+  \end{equation*}
+  is a tree whose root belongs to $C^I$.
+\end{Definition}
+
+\begin{Theorem}[Tree model property of $\ALC$]
+  \label{3.7}
+  $\ALC$ has the tree model property, \ie if ${\cal T}$ is an
+  $\ALC$-TBox and $C$ an $\ALC$-concept description such that $C$ is
+  satisfiable with respect to ${\cal T}$, then $C$ has a tree model
+  with respect to ${\cal T}$.
+\end{Theorem}
+
+\begin{Proof}[\cref{3.7}]
+  Let $I$ be a model of ${\cal T}$ and $d \in \Delta^I$ be such that
+  $d \in C^I$. A $d$-path in $I$ is a sequence $d_0r_rd_1 \dotsm r_{n
+    - 2}d_{n - 1}$ of $2n$ (with $n \geq 1$) elements of $\Delta^I$
+  and $N_r$ such that
+  \begin{itemize}
+    \item $d_0 = d$, and
+    \item for all $i$ such that $0 \leq i \leq n - 2$ we have $r_i \in
+      N_R$ such that $(d_i, d_{i + 1}) \in r_i^I$.
+  \end{itemize}
+
+  Given a $d$-path $p = d_0 r_0 d_1 \dots r_{n - 2} d_{n - 1}$, we
+  define $\en(p) = d_{n - 1}$. The unraveling of $I$ at $d$ is the
+  following interpretation $J$:
+  \begin{itemize}
+  \item $\Delta^I := \set{p; p\ \text{is a $d$-path in}\ J}$,
+  \item $A^J := \set{p \in \Delta^J; \en(p) \in A^I}$ for $A \in
+    N_C$, and
+  \item $r_j^J := \set{(p, p'); p' = p \cdot r_j \cdot \en(p')}$.
+  \end{itemize}
+
+  It is easy to see that the graph $(\Delta^J, \bigcup_{r \in
+    N_R}{r^J})$ is a tree with root $d$ (which is a one-element path).
+
+  We claim that for all $\ALC$-concept descriptions $D$ and all $p \in
+  \Delta^J$, we have that
+  \begin{equation*}
+    p \in D^J\ \text{iff}\ \en(p) \in D^J.
+  \end{equation*}
+
+  The claim follows from the fact that
+  \begin{equation*}
+    \rho := \set{(p, \en(p)); p \in \Delta^J}
+  \end{equation*}
+  is a bisimulation between $J$ and $I$:
+  \begin{itemize}
+  \item $p \in A^J$ iff $\en(p) \in A^J$ is satisfied by the
+    definition of $J$.
+  \item Let $(p, p') \in r^J$. Then we need to show $(\en(p), \en(p'))
+    \in r^J$, which holds by construction of $J$, \ie
+    \begin{equation*}
+      \xymatrix{p \ar@{-}[r] \ar[d]_r & \en(p) \ar[d]^r \\
+        p' \ar@{-}[r] & \en(p')}
+    \end{equation*}
+  \item Let $(e, f) \in r^J$ and $(p, e) \in \rho$.
+    Define $p' := p \cdot r \cdot f$. Then $p'$ is a d-path. Thus we
+    have $p' = p \cdot r \cdot \en(p')$ and $(\en(p), \en(p')) \in
+    r^J$, which yields $(p, p') \in r^J$.
+  \end{itemize}
+
+  We now show that $J$ is a model of ${\cal T}$. Let $C_1 \sqsubseteq
+  C_2 \in {\cal T}$, and $p \in C_1^J$. Since $\en(p) \in C_1^J$, we
+  know that $\en(p) \in C_2^I$. Via bisimulation invariance, we obtain
+  $p \in C_2^J$.
+
+  Next, we show that $d$ (the root of the tree $(\Delta^J, \bigcup_{r
+    \in N_r}{r^J})$) is an element of $C^J$.
+  We have $\en(d) = d$ and thus $d \rho d$. Consequently, $d \in C^I$
+  yields $d \in C^J$.
+
+  The stated result follows immediately.
+\end{Proof}
+
+\begin{Proposition}
+  \label{3.8}
+  $\ALCO$ does not have the tree model property.
+\end{Proposition}
+
+\begin{Proof}[\cref{3.8}]
+  The concept $\set{a}$ does not have a tree model with respect to
+  $\set{set{a} \sqsubseteq \exists r.\set{a}}$.
+\end{Proof}
+
+\begin{Definition}[Disjoint union]
+  \label{3.9}
+  Let $I_1, I_2$ be interpretations over disjoint domains.
+  Their disjoint union $I_1 \uplus I_2$ is defined as follows:
+  \begin{align*}
+    \Delta^{I_1 \uplus I_2} & := \Delta^{I_1} \cup \Delta^{I_2}, \\
+    A^{I_1 \uplus I_2} & := A^{I_1} \cup A^{I_2}\ \text{for all}\ A \in
+    {\cal N}_C,\ \text{and} \\
+    r^{I_1 \uplus I_2} & := r^{I_1} \cup r^{I_2}\ \text{for all}\ r
+    \in {\cal N}_R.
+  \end{align*}
+\end{Definition}
+
+\begin{Lemma}
+  \label{3.10}
+  For all $\ALC$-concept descriptions $C$ and $I_1, I_2$ (with
+  $\Delta^{I_1} \cap \Delta^{I_2} = \varnothing$) and all $d \in
+  \Delta^{I_1}$ ($1 \leq i \leq 2$), we have
+  \begin{equation*}
+    d \in C^{I_1} \vee d \in C^{I_2} \longleftrightarrow d \in C^{I_1
+      \uplus I_2}.
+  \end{equation*}
+\end{Lemma}
+
+\begin{Theorem}
+  \label{3.10b}
+  Let $I_1, I_2$ be interpretations over disjoint domains, and ${\cal
+    T}$ be an $\ALC$-TBox. If both $I_1$ and $I_2$ are a model of
+  ${\cal T}$, then $I_1 \uplus I_2$ is a model of ${\cal T}$.
+\end{Theorem}
+
+\begin{Proof}[\cref{3.10b}]
+  Let $I_1 = (\Delta^{I_1}, \cdot^{I_1})$ and $I_2 = (\Delta^{I_2},
+  \cdot^{I_2})$ with $\Delta^{I_1} \cap \Delta^{I_2} = \varnothing$ be
+  models of ${\cal T}$. Let $C \sqsubseteq D \in {\cal T}$. We need to
+  show that for all $a \in \Delta^{I_1 \uplus I_2}$, we have that:
+  \begin{align*}
+    a \in C^{I_1 \uplus I_2} & \to a \in D^{I_1 \uplus I_2}\
+    \text{and} \\
+    C^{I_1 \uplus I_2} \subseteq D^{I_1 \uplus I_2}.
+  \end{align*}
+
+  Let $a \in C^{I_1 \uplus I_2}$ (then $a \in \Delta^{I_1 \uplus
+    I_2}$). We know that $a \in \Delta^{I_i}$ and hence $a \in
+  C^{I_i}$ for some $i \in \set{1, 2}$. Without loss of generality, we
+  assume $i = 1$. Then $a \in C^{I_1}$ and since $I_1$ is a model of
+  ${\cal T}$, we have that $a \in D^{I_1}$. With \cref{3.10}, we
+  obtain $a \in D^{I_1 \uplus I_2}$ immediately.
+\end{Proof}
+
+\begin{Definition}[Finite model]
+  \label{3.11}
+  Let ${\cal T}$ be a TBox and $C$ a concept description. The
+  interpretation $I$ is a finite model of $C$ with respect to ${\cal
+    T}$ iff $I$ is a model of ${\cal T}$, $C^I \ne \varnothing$, and
+  $\Delta^I$ is finite.
+\end{Definition}
+
+\begin{Theorem}[Finite model property]
+  \label{3.12}
+  $\ALC$ has the finite model property, \ie
+  if ${\cal T}$ is an $\ALC$-TBox and $C$ an $\ALC$-concept
+  description such that $C$ is satisiable with respect to ${\cal T}$,
+  then $C$ has a finite model of $C$ with respect to ${\cal T}$.
+\end{Theorem}
+
+\begin{Definition}[Concept size]
+  We define concept size for an $\ALC$-concept description $C$ as
+  follows:
+  \begin{itemize}
+  \item $\abs{A} := 1$ for $A \in {\cal N}_C$,
+  \item for $C = C_1 \sqcap C_2$ or $C = C_1 \sqcup C_2$, define
+    $\abs{C} := 1 + \abs{C_1} + \abs{C_2}$, and
+  \item for $C = \neg D$ or $C = \exists r.D$ or $C = \forall r.D$,
+    define $\abs{C} := 1 + \abs{D}$.
+  \end{itemize}
+
+  The size of a TBox is defined as follows:
+  \begin{equation*}
+    \abs{{\cal T}} := \sum_{C \sqsubseteq D \in {\cal T}}{\abs{C} + \abs{D}}.
+  \end{equation*}
+\end{Definition}
+
+\begin{Definition}[Subdescriptions]
+  We define subdescriptions for an $\ALC$-concept description $C$ as
+  follows:
+  \begin{itemize}
+  \item $\Sub(A) := \set{A}$ for $A \in N_C$,
+  \item for $C = C_1 \sqcap C_2$ or $C = C_1 \sqcup C_2$, define
+    $\Sub(C) := \set{C} \cup \Sub(C_1) \cup \Sub(C_2)$, and
+  \item for $C = \neg D$ or $C = \exists r.D$ or $C = \forall r.D$,
+    define $\Sub(C) := \set{C} \cup \Sub(D)$.
+  \end{itemize}
+
+  The subdescriptions of a TBox are defined as follows:
+  \begin{equation*}
+    \Sub({\cal T}) := \bigcup_{C \sqsubseteq D \in {\cal T}}{\Sub(C)
+      \cup \Sub(D)}.
+  \end{equation*}
+\end{Definition}
+
+The cardinality of $\Sub(C)$ is bounded by $\abs{C}$, and the
+cardinality of $\Sub({\cal T})$ is bounded by $\abs{{\cal T}}$.
+
+\begin{Definition}[$S$-type]
+  \label{3.13}
+  Let $S$ be a finite set of concept descriptions, and $I$ an
+  interpretation. The $S$-type of $d \in \Delta^I$ is defined as
+  \begin{equation*}
+    t_S(d) := \set{C \in S; d \in C^I}.
+  \end{equation*}
+\end{Definition}
+
+\begin{Lemma}[Number of $S$-types]
+  \label{3.14}
+  \begin{equation*}
+    \abs{\set{t_S(d); d \in \Delta^I}} \leq 2^{\abs{S}}.
+  \end{equation*}
+\end{Lemma}
+
+\begin{Definition}[$S$-filtration]
+  \label{3.15}
+  Let $S$ be a finite set of concept descriptions, and $I$ an
+  interpretation. We define an equivalence relation $\simeq$ on
+  $\Delta^I$ as follows:
+  \begin{equation*}
+    d \simeq e\ \text{iff}\ t_S(d) = t_S(e).
+  \end{equation*}
+
+  We denote the $\simeq$-equivalence class of $d \in \Delta^I$ by
+  $[d]$, and define the $S$-filtration of $I$ as the following
+  interpretation $J$:
+  \begin{itemize}
+    \item $\Delta^J := \set{[d]; d \in \Delta^I}$,
+    \item $A^J := \set{[d]; \exists d' \in [d]. d' \in AI}$ for all $A
+      \in {\cal N}_C$, and
+    \item $r^J := \set{([d], [e]); \exists d' \in [d], e' \in
+        [e]. (d', e') \in r^I}$ for all $r \in {\cal N}_R$.
+  \end{itemize}
+
+  Obviously, $\abs{\Delta^J} \leq 2^{\abs{S}}$.
+
+  We call a finite set $S$ of concept descriptions closed iff
+  \begin{equation*}
+    \bigcup\set{\Sub(C); C \in S} \subseteq S.
+  \end{equation*}
+\end{Definition}
+
+\begin{Lemma}
+  \label{3.16}
+  Let $S$ be a finite, closed set of $\ALC$-concept descriptions, $I$
+  an interpretation, and $J$ the $S$-filtration of $I$. Then we have
+  \begin{equation*}
+    d \in C^I\ \text{iff}\ [d] \in C^J
+  \end{equation*}
+  for all $d \in \Delta^I$ and $C \in S$.
+\end{Lemma}
+
+\begin{Proof}[\cref{3.16}]
+  Let $C \in S$. We show the claim by induction on the structure of
+  $C$.
+  \begin{description}
+  \item[$C = A$ for $A \in {\cal N}_C$:] If $d \in A^I$, we have $[d]
+    \in A^J$ by definition of $J$ and $d \in [d]$. Conversely, if $[d]
+    \in A^J$, then there is $d' \in [d]$ with $d' \in A^I$. Since $C =
+    A \in S$, we have $d' \in A^I$ iff $d \in A^I$ by definition of
+    $\simeq$, thus $d \in A^I$.
+  \item[$C = D \sqcap E$:] Since $S$ is closed, we have $D, E \in S$,
+    and also $d \in (D \sqcap E)^I$ iff $d \in D^I \wedge d \in E^I$
+    iff $[d] \in D^J \wedge [d] \in E^J$ iff $[d] \in (D \sqcap E)^J$.
+  \item[$C = D \sqcup E$:] can be treated similarly.
+  \item[$C = \neg D$:] can be treated similarly.
+  \item[$C = \exists r.D$:] If $d \in (\exists r.D)^I$, then there is
+    $e \in \Delta^I$ with $(d, e) \in r^I \wedge e \in D^I$. We have
+    $([d], [e]) \in r^J$ (by definition of $J$). Since $d \in [d]$, $e
+    \in [e]$ and (by induction) $[e] \in D^J$, we obtain $[d] \in
+    (\exists r. D)^J$. Conversely, if $[d] \in (\exists r.D)^J$, then
+    there exists $[e]$ such that $([d], [e]) \in r^J \wedge [e] \in
+    D^J$. By induction, we have $e \in D^J$. Additionally, there are
+    $d' \in [d], e' \in [e]$ such that $(d', e') \in r^I$. Since $e
+    \simeq e'$, we have that $e \in D^I$ implies $e' \in
+    D^I$. Consequently, $d' \in (\exists r.D)^I$. Since $d \simeq d'$,
+    this implies $d \in (\exists r.D)^I$.
+  \item[$C = \forall r.C$:] can be treated similarly.
+  \end{description}
+\end{Proof}
+
+\begin{Proposition}[Bounded model property]
+  \label{3.17}
+  Let ${\cal T}$ be an $\ALC$-TBox, $C$ an $\ALC$-concept
+  description, and $S := \Sub(C) \cup \Sub({\cal T})$.
+
+  If $C$ is satisfiable with respect to ${\cal T}$, then there is a
+  model $\hat{I}$ of ${\cal T}$ such that $C^{\hat{I}} \ne
+  \varnothing$ and $\abs{\Delta^{\hat{I}}} \leq 2^{\abs{S}}$.
+\end{Proposition}
+
+\begin{Proof}[\cref{3.17}]
+  Let $I$ be a model of ${\cal T}$ with $C^I \ne \varnothing$ and
+  $\hat{I}$ be the $S$-filtration of $I$. Then
+  \begin{itemize}
+  \item $\abs{\Delta^{\hat{I}}} \leq 2^{\abs{S}}$ follows immediately
+    from \cref{3.14},
+  \item $C^{\hat{I}} \ne \varnothing$ follows from \cref{3.16}, since
+    we have $d \in C^J$ for some $d \in \Delta^J$ and $C \in S$, and
+    thus $[d] \in C^{\hat{I}}$, and
+  \item $\hat{I}$ is a model of ${\cal T}$: Let $C \sqsubseteq D \in
+    {\cal T}$ and $[e] \in C^{\hat{I}}$. We must show $[e] \in
+    D^{\hat{I}}$. By \cref{3.16}, and since $C \in S$, we have $e \in
+    C^I$, which yields $e \in D^I$, since $I$ is a model of ${\cal
+      T}$. This then yields $[e] \in D^{\hat{I}}$ by \cref{3.16} since
+    $D \in S$.
+  \end{itemize}
+\end{Proof}
+
+\begin{Corollary}
+  \label{3.17b}
+  In $\ALC$, satisfiability of a concept description with respect to a
+  TBox is decidable.
+\end{Corollary}
+
+\begin{Theorem}
+  \label{3.18}
+  $\ALCNI$ does not have the finite model property.
+\end{Theorem}
+
+\begin{Proof}[\cref{3.18}]
+  Let $C = \neg A \sqcap \exists r. A$ and ${\cal T} = \set{ A
+    \sqsubseteq \exists r.A, T \sqsubseteq (\leq 1 r^{-1})}$. We claim
+  that $C$ does not have a finite model with respect to ${\cal T}$.
+
+  Assume that $I$ is a finite model of ${\cal T}$ and $d_0 \in
+  \Delta^I$ is such that $d_0 \in C^I$. Then there is $d_1 \in
+  \Delta^I$ with $(d_0, d_1) \in r^I$ and $d_1 \in A^I$. Because of
+  the first GCI, there is $d_2 \in \Delta^I$ with $(d_1, d_2) \in r^I$
+  and $d_2 \in A^I$, et cetera.
+  \begin{equation*}
+    \xymatrix{d_0 \ar[r]^r & d_1 \ar[r]^br & d_2 \ar[r]^r & d_3
+      \ar[r]^r & \dotso \\
+      \neg A & A & A & A}
+  \end{equation*}
+
+  Since $I$ is finite, there is $i < j$ wth $d_i = d_j$. Let $i$ be
+  minimal with this property. It is impossible that $i = 0$, since
+  $d_0 \not\in A^I$, but $d_j \in A^I$. Hence $i > 0$. Then $(d_{i -
+    1}, d_i) \in r^I$ and $(d_{j - 1}, d_j) \in r^I$. Since $d_i \in
+  (\leq 1 r^{-1})^I$ (due to the second GCI), we have $d_{i - 1} =
+  d_{j - 1}$. This is a contradiction to the minimality of $i$.
+\end{Proof}
+
+\chapter{Reasoning with tableau algorithms}
+We start with an algorithm for deciding consistency of an ABox without
+a TBox since this covers most of the inference problems we have
+introduced so far: Acyclic TBoxen can be eliminated by expansion, and
+satisfiability, subsumption and the instance problem can be reduced to
+ABox consistency.
+
+The tableau-based consistency algorithm tries to generate a finite
+model for the input ABox ${\cal A}_0$:
+\begin{itemize}
+\item It applies tableau rules (one rule per constructor) to extend
+  the ABox, and
+\item checks for obvious contradictions, such that
+\item an ABox that is complete (\ie no rule applies) and open (\ie it
+  contains no obvious contradictions) describes a model.
+\end{itemize}
+
+\begin{Algorithm}[Tableau algorithm]
+  Input: An $\ALC$-ABox ${\cal A}_0$. Output: ``yes'' if ${\cal A}_0$
+  is consistent, ``no'' otherwise.
+
+  Preprocessing: Transform all concept descriptions in ${\cal A}_0$
+  into negation normal form by applying the following rules:
+  \begin{align*}
+    \neg(C \sqcap D) & \rightsquigarrow \neg C \sqcup \neg D, \\
+    \neg(C \sqcup D) & \rightsquigarrow \neg C \sqcap \neg D, \\
+    \neg\neg C & \rightsquigarrow C, \\
+    \neg(\exists r.C) & \rightsquigarrow \forall r. \neg C,\
+    \text{and} \\
+    \neg(\forall r.C) & \rightsquigarrow \exists r.\neg C.
+  \end{align*}
+
+  The negation normal form can be computed in polynomial time and does
+  not change the semantics of the concept.
+
+  As a data structure, we use a finite set of ABoxen rather than a
+  single ABox. We start using $\set{{\cal A_0}}$, where ${\cal A}_0$
+  is in negation normal form.
+
+  The algorithm applies rules by taking one ABox from the set and replacing
+  it by finitely many new ABoxen. If no more rules apply to any ABox
+  in the set (\ie all ABoxen are complete), the algorithm terminates.
+
+  The algorithm outputs ``consistent'' if the set contains an open
+  ABox, \ie an ABox not containing an obvious contradiction of the
+  form
+  \begin{equation*}
+    A(a)\ \text{and}\ \neg A(a)\ \text{for some individual name}\ a,\ \text{and}
+  \end{equation*}
+  ``inconsistent'' if all ABoxen in the set are closed (\ie not
+  open).
+
+  Tableau rules:
+  \begin{description}
+  \item[$\sqcap$-rule] If ${\cal A}$ contains $(C \sqcap D)(a)$, but
+    noth both $C(a)$ and $D(a)$, replace ${\cal A}$ by ${\cal A}' :=
+    {\cal A} \cup \set{C(a), D(a)}$,
+  \item[$\sqcup$-rule] if ${\cal A}$ contains $(C \sqcup D)(a)$, but
+    neither $C(a)$ nor $D(a)$, replace ${\cal A}$ by ${\cal A}' :=
+    {\cal A} \cup \set{C(a)}$ and ${\cal A}'' := {\cal A} \cup \set{D(a)}$,
+  \item[$\exists$-rule] if ${\cal A}$ contains $(\exists r.C)(a)$, but
+    there is no $c$ with $\set{r(a, c), C(c)} \subseteq {\cal A}$,
+    replace ${\cal A}$ by ${\cal A}' := {\cal A} \cup \set{r(a, b),
+      C(b)}$, where $b$ is a new individual name, and
+  \item[$\forall$-rule] if ${\cal A}$ contains $(\forall r.C)(a)$ and
+    $r(a, b)$, but not $C(b)$, replace ${\cal A}$ by ${\cal A}' :=
+    {\cal A} \cup \set{C(b)}$.
+  \end{description}
+\end{Algorithm}
+
+\begin{Definition}[Consistent set of ABoxen]
+  We say that a finite set ${\cal M}$ of ABoxen is consistent if one
+  of its elements is consistent. We write ${\cal M} \totab {\cal M}'$
+  to indicate that ${\cal M}'$ is obtained from ${\cal M}$ by the
+  application of one of the tableau rules.
+\end{Definition}
+
+\begin{Lemma}[Local correctness]
+  \label{4.1}
+  If ${\cal M} \totab {\cal M}'$, then ${\cal M}$ is consistent iff
+  ${\cal M}'$ is consistent.
+\end{Lemma}
+
+\begin{Proof}[\cref{4.1}]
+  We consider here only the $\sqcup$-rule and the $\exists$-rule and
+  leave the other rules as an exercise.
+
+  For the $\sqcup$-rule, ${\cal A} \in {\cal M}$ is replaced by ${\cal
+    A}'$ and ${\cal A}''$, where $(C \sqcup D)(a) \in {\cal A}$,
+  ${\cal A}' = {\cal A} \cup \set{C(a)}$ and ${\cal A}'' = {\cal A}
+  \cup \set{D(a)}$. It is enough to show that ${\cal A}$ has a model
+  iff ${\cal A}'$ has a model or ${\cal A}''$ has a model. Let $I$ be
+  a model of ${\cal A}$. Since $(C \sqcup D)(a) \in {\cal A}$, we have
+  $a^I \in (C \sqcup D)^I = C^I \cup D^I$. Thus, $a^I \in C^I$ or $a
+  \in D^I$. If $a^I \in C^I$, then $I$ is a model of ${\cal
+    A}'$. Similarly, if $a^I \in D^I$, then $I$ is a model of ${\cal
+    A}''$. Let $I$ be a model of ${\cal A}'$ or ${\cal A}''$. Then
+  ${\cal A} \subseteq {\cal A}'$ and ${\cal A} \subseteq {\cal A}''$,
+  and the claim follows trivially.
+
+  For the $\exists$-rule, ${\cal A}$ is replaced by ${\cal A}'$, where
+  $(\exists r.C)(a) \in {\cal A}$, and ${\cal A}' = {\cal A} \cup
+  \set{r(a, b).C(b)}$ for an individual $b$ not contained in the ABox
+  ${\cal A}$. It suffices to show that ${\cal A}$ has a model iff
+  ${\cal A}'$ has a model. Let $I$ be a model ${\cal A}$. Since
+  $(\exists r.C)(a) \in {\cal A}$, we have $a^I \in (\exists r.C)^I$,
+  and thus there is $d \in \Delta^I$ such that $(a^I, d) \in r^I$ and
+  $d \in C^I$. Let $I'$ be an interpretation that coincides with $I$,
+  with the exception that $b^{I'} = d$. Since $b$ does not occur in
+  ${\cal A}$, $I'$ is also a model of ${\cal A}$. By definition of
+  $b^{I'}$, $I'$ is also a model of $\set{r(a, b), C(b)}$, and thus of
+  ${\cal A}'$. Let $I$ be a model of ${\cal A}'$. Since ${\cal A} \subseteq
+  {\cal A}'$, the claim holds trivially.
+\end{Proof}
+
+\begin{Lemma}[Soundness, Completeness]
+  \label{4.2}
+  \begin{enumerate}
+  \item If ${\cal A}$ is open and complete, then ${\cal A}$ has a model.
+  \item A closed ABox does not have a model.
+  \end{enumerate}
+\end{Lemma}
+
+\begin{Proof}[\cref{4.2}]
+  \begin{enumerate}
+  \item Let ${\cal A}$ be a complete and open ABox. The canonical
+    interpretation $I_{\cal A}$ induced by ${\cal A}$ is defined as
+    follows:
+    \begin{itemize}
+    \item $\Delta^{I_{\cal A}} := \set{x \in {\cal N}_i; x\
+        \text{occurs in}\ {\cal A}}$ (without loss of generality, we
+      assume ${\cal A} \ne \varnothing$),
+    \item $x^{I_{\cal A}} := x$ for all $x \in {\cal N}_i$ occuring in
+      ${\cal A}$ (the others are irrelevant),
+    \item $C^{I_{\cal A}} := \set{x; C(x) \in {\cal A}}$ for all $C
+      \in {\cal N}_C$.
+    \item $r^{I_{\cal A}} := \set{(x, y); r(x, y) \in {\cal A}}$.
+    \end{itemize}
+
+    We claim that $I_{\cal A}$ is a model of ${\cal A}$.
+    \begin{itemize}
+    \item If $r(x, y) \in {\cal A}$, then $(x^{I_{\cal A}}, y^{I_{\cal
+          A}}) = (x, y) \in r^{I_{\cal A}}$ by the definition of $r^{I_{\cal A}}$.
+    \item For $C(x) \in {\cal A}$, we show $x^{I_{\cal A}} = x \in
+      C^{I_{\cal A}}$ by induction on the structure of $C$.
+      \begin{description}
+      \item[$C = B \in {\cal N}_C$:] Then $B(x) \in {\cal A}$ implies
+        $x \in B^{I_{\cal A}}$ by the definition of $B^{I_{\cal A}}$.
+      \item[$C = \neg B \in {\cal N}_C$:] Since ${\cal A}$ is open, we
+        have $B(x) \not\in {\cal A}$ and thus $x \not\in B^{I_{\cal
+            A}}$ (by definition), which shows $x \in \Delta^{I_{\cal
+            A}} \setminus B^{I_{\cal A}} = (\neg B)^{I_{\cal A}}$.
+      \item[$C = C_1 \sqcap C_2$:] Since ${\cal A}$ is complete, we
+        have $C_1(x) \in {\cal A}$ and $C_2(x) \in {\cal A}$. By
+        induction, this yields $x \in C_1^{I_{\cal A}}$ and $x \in
+        C_2^{I_{\cal A}}$. Hence, $x \in (C_1 \sqcap C_2)^{I_{\cal
+            A}}$.
+      \item[$C = \forall r.D$:] Assume that there is a $y \in
+        \Delta^{I_{\cal A}}$ such that $(x, y) \in r^{I_{\cal A}}$
+        (otherwise, the claim holds trivially). Since $(\forall
+        r.D)(x) \in {\cal A}$ and $r(x, y) \in {\cal A}$, completeness
+        of ${\cal A}$ implies that $D(y) \in {\cal A}$, and by
+        induction, we have $y \in D^{I_{\cal A}}$.
+      \end{description}
+    \end{itemize}
+    The other constructors can be treated similarly.
+  \item If ${\cal A}$ is closed, then there is a concept name $C$ and
+    an individual $a$ such that $\set{C(a), \neg C(a)} \subseteq {\cal
+      A}$. Thus, for a model of ${\cal A}$, we would need to have $a^I
+    \in C^I$ and $a^I \in \neg C^I = \Delta^I \setminus C^I$, which is
+    impossible.
+  \end{enumerate}
+\end{Proof}
+
+We show termination by mapping sets of ABoxen into a well-founded
+partial order. If there is a mapping $K$ from finitine sets of ABoxen
+into a well-founded partial order $(P, >)$ such that ${\cal M}_1
+\totab {\cal M}_2$ implies $K({\cal M}_1) > K({\cal M}_2)$, then
+obviously, there cannot be an infinite chain of rule applications:
+This would yield an infinite descending chain in the partial
+order. Obviously, the normal order $>$ on natural numbers is
+well-founded. To show termination, it is often more convenient to take
+more complex well-founded partial orders. For this, we use the
+lexicographic product and the multiset extension.
+
+\begin{Definition}[Well-founded partial order]
+  \label{4.3}
+  The (strict) partial order $(P, >)$ is well-founded if there are no
+  infinite descending chains
+  \begin{equation*}
+    p_1 > p_2 > p_3 > \dotso
+  \end{equation*}
+  of elements of $P$.
+\end{Definition}
+
+\begin{Definition}[Lexicographic product, multiset extension, subdescriptions]
+  \label{4.4}
+  Let $(P_1, >_1), \dotsc, (P_n, >_n)$ be partial orders and $P = P_1
+  \times P_2 \times \dotsb \times P_n$. Define
+  \begin{equation*}
+    (p_1, \dotsc, p_n) \gtlex (q_1, \dotsc, q_n)\ \text{iff there is}\
+    1 \leq i \leq n\ \text{such that}
+  \end{equation*}
+  \begin{itemize}
+  \item $p_1 = q_1, \dotsc, p_{i - 1} = q_{i - 1}$, and
+  \item $p_i > q_i$.
+  \end{itemize}
+
+  Then $(P, \gtlex)$ is a strict partial order.
+
+  Multisets are ``sets'' with repeated entries, \eg $\set{a, a, b, b,
+    b}$. More formally, given a set $S$ of elements, a multiset is a
+  mapping $M: S \to \N$. For $s \in S$, $M(s)$ yields the number of
+  occurences of $s$ in $M$. As an example, for $S = \set{a, b, c}$,
+  the multiset above is given by the mapping $M: S \to \N: s
+  \mapsto \begin{cases} 2, & s = a, \\ 3, & s = b, \\ 0, s =
+    c \end{cases}$. Most notions can be transferred from sets to
+  multisets in an obvious way:
+  \begin{description}
+  \item[empty set] $\varnothing: S \to \N: s \mapsto 0$,
+  \item[union] $(M_1 \cup M_2)(s) := M_1(s) + M_2(s)$,
+  \item[difference] $(M_1 \setminus M_2)(s) := \max\set{M_1(s) -
+      M_2(s), 0}$,
+  \item[element] $s \in M$ iff $M(s) > 0$.
+  \end{description}
+
+  A multiset $M$ is called finite iff $\set{s \in S; M(s) > 0}$ is
+  finite. By $MM(s)$ we denote the set of finite multisets over $S$.
+
+  Given a (strict) partially ordered set $(P, >)$ we define its
+  multiset extension $(MM(P), \gtmul)$ as
+  \begin{equation*}
+    M_1 \gtmul M_2\ \text{iff}\ \exists x, y \in MM(P)\ \text{such that}
+  \end{equation*}
+  \begin{itemize}
+  \item $\varnothing \ne X \subseteq M_1$,
+  \item $M_2 = (M_1 \setminus X) \cup Y$, and
+  \item $\forall y \in Y\ \exists x \in X: x > y$.
+  \end{itemize}
+
+  $M_2$ is obtained from $M_1$ by removing some elements from $M_1$
+  and replacing them by finitely many smaller ones, \eg
+  \begin{equation*}
+    \set{3, 1} \gtmul \set{2, 2, 2} \gtmul \set{2, 2} \gtmul \set{2,
+      1, 1, 1}.
+  \end{equation*}
+
+  Again, well-foundedness is preserved by multiset extension, \ie if
+  $(P, >)$ is a well-founded strict partial order, then $(MM(P),
+  \gtmul)$ is also a well-founded strict partial order.
+
+  Let $C$ be a concept description and ${\cal A}$ an ABox. We denote
+  the set of subdescriptions of ${\cal A}$ by:
+  \begin{equation*}
+    \Sub({\cal A}) := \bigcup_{C(a) \in {\cal A}}{Sub(C)}.
+  \end{equation*}
+\end{Definition}
+
+What makes the lexicographic product powerful for showing termination
+is that a decrease in an early component outweights an arbitrary
+increase in a later component.
+
+\begin{Lemma}
+  \label{4.5}
+  Let ${\cal A}$ be an ABox obtained by applying tableau rules to
+  ${\cal A}_0$:
+  \begin{enumerate}
+  \item If $C(a) \in {\cal A}$, then $C \in \Sub({\cal A}_0)$, and
+  \item if $r(a, x) \in {\cal A}$ and $x$ is a new individual, then
+    \begin{equation*}
+      \max\set{\abs{C}; C(a) \in {\cal A}} > \max\set{\abs{C}; C(x)
+        \in {\cal A}}.
+    \end{equation*}
+  \end{enumerate}
+\end{Lemma}
+
+\begin{Proof}[\cref{4.5}]
+  Induction on the number of rule applications (exercise).
+\end{Proof}
+
+\begin{Lemma}
+  \label{4.6}
+  Let ${\cal A}$ be an ABox obtained from ${\cal A}_0$ by application
+  fo tableau rules. Define $\widehat{m} := \sum_{C(a) \in {\cal
+      A}_0}{\abs{C}}$. Then we have
+  \begin{enumerate}
+  \item $\abs{\Sub({\cal A}_0)} \leq \widehat{m}$,
+  \item $\abs{C} \leq \widehat{m}$ for all $C \in \Sub({\cal A}_0)$, and
+  \item if ${\cal A}$ is an ABox obtained by applying the tableau
+    rules to ${\cal A}_0$ and $x$ is an individual in ${\cal A}$, then
+    $d_{\cal A}(x) \leq \widehat{m}$.
+  \end{enumerate}
+\end{Lemma}
+
+\begin{Proof}[\cref{4.6}]
+  \begin{enumerate}
+  \item Obvious.
+  \item Obvious.
+  \item The claim follows from \cref{4.5}.
+  \end{enumerate}
+\end{Proof}
+
+Let ${\cal A}$ be an ABox. We assign a multiset of 3-tuples of natural
+numbers to to ${\cal A}$ by
+\begin{enumerate}
+\item assigning a 3-tuple to every individual name occuring in
+  ${\cal A}$, and
+\item taking the multiset of these 3-tuples.
+\end{enumerate}
+
+In the definition of the 3-tuple corresponding to a particular
+individual, we need to distinguish between old individuals (\ie ones
+that were already present in the input ABox ${\cal A}_0$) and new
+individuals (\ie those introduced by the $\exists$-rule). In the
+following, we consider only ABoxen that are obtained from an input
+ABox ${\cal A}_0$ by application of the tableau rules, \ie
+\begin{equation*}
+  \set{{\cal A}_0} \xrightarrow{*}_{\operatorname{tab}} M \ni
+  {\cal A}.
+\end{equation*}
+We extend the notion of subdescriptions to ABoxen. Recall that
+$\abs{\Sub(C)} \leq \abs{C}$. Let ${\cal A}$ be an ABox obtained by
+applying the tableau rules to ${\cal A}_0$. we define the depth of
+individuals as follows:
+\begin{enumerate}
+\item $d_{\cal A}(a) := 0$ if $a$ is an old individual,
+\item $d_{\cal A}(x) := n$ if $x$ is a new individual, where $n$
+  is the length of unique path
+  \begin{equation*}
+    r_1(a, x_1), r_2(x_1, x_2), \dotsc, r_n(x_{n - 1}, x) \in {\cal A}
+  \end{equation*}
+  for an old individual $a$ and new individuals $x_1, \dotsc, x_{n
+    - 1}$.
+\end{enumerate}
+
+\begin{Definition}[Termination order]
+  \label{4.7}
+  et ${\cal M}$ be a set of ABoxen with
+  \begin{equation*}
+    \set{{\cal A}_0} \xrightarrow{*}_{\operatorname{tab}} {\cal
+      M}.
+  \end{equation*}
+  Let ${\cal A}$ be an ABox in ${\cal M}$, and $a$ an individual name
+  occuring in ${\cal A}$.
+  \begin{enumerate}
+  \item We define $K(a) := (n_1, n_2, n_3)$, where
+    \begin{itemize}
+    \item $n_1 := \widehat{m} - d_{\cal A}(a)$ (age of $a$, $n_1 \in
+      \N$ by \cref{4.6}),
+    \item $n_2 := \widehat{m} - \abs{\set{C; C(a) \in {\cal A}}}$ (number of
+      concept assertions in ${\cal A}$ not ``speaking'' about $a$,
+      $n_2 \in \N$ by \cref{4.5,4.6}), and
+    \item $n_3 := \abs{\set{(\exists r. C)(a) \in {\cal A};\
+        \text{there is no}\ y\ \text{with}\ \set{r(a, y), C(y)}
+        \subseteq {\cal A}}}$ (number of role successors to be
+      introduced by the $\exists$-rule),
+    \end{itemize}
+  \item $K({\cal A})$ is the multiset consisting of the tuples $K(a)$
+    for all individual names occuring in ${\cal A}$.
+  \item $K({\cal M})$ is the multiset consisting of the multisets
+    $K({\cal A})$ for ${\cal A} \in {\cal M}$.
+  \end{enumerate}
+
+  The usual order $>$ on natural numbers is a well-founded, strict
+  partial (even total) order, and so are
+  \begin{itemize}
+  \item its extension $\gtlex$ to 3-tuples,
+  \item the multiset extension $\gtmul$ of $\gtlex$, and
+  \item the multiset extension $\succ$ of $\gtmul$.
+  \end{itemize}
+\end{Definition}
+
+\begin{Lemma}
+  \label{4.8}
+  If $M \totab M'$, then $K(M) \succ K(M')$.
+\end{Lemma}
+
+\begin{Proof}[\cref{4.8}]
+  The application of a tableau rule takes an ABox ${\cal A}$ out of
+  ${\cal M}$ and replaces it by either one new ABox $A'$ or two new
+  ABoxen $A'$ and $A''$. Obviously, it is enough to show that $K({\cal
+    A}) \gtmul K({\cal A}')$ or $K(A) \gtmul K({\cal A}')$ and
+  $K({\cal A}) \gtmul K({\cal A}'')$ respectively.
+
+  The $\sqcap$-rule, the $\sqcup$-rule, and the $\forall$-rule add
+  concept assertions for exactly one individual. The second component
+  decreases, whereas the first component stays the same. Possible
+  changes in the third component of this tuple is irrelevant. Consider
+  the tuple associated with another individual. The first component
+  stays the same. The second component may decrease, but cannot
+  increase. The third component can only increase if the second
+  component decreases.
+
+  Thus, we have $K({\cal A}) \gtmul K({\cal A}')$ for the
+  $\sqcap$-rule and the $\forall$ rule, and $K({\cal A}) \gtmul
+  K({\cal A}'), K({\cal A}) \gtmul K(A'')$ for the $\sqcup$-rule.
+
+  Consider an application of the $\exists$-rule for an existential
+  restriction $(\exists r.C)(x) \in {\cal A}$, which introduces an
+  $r$-successor $y$ of $x$. The tuple associated with $x$ decreases in
+  the third component, whereas the first and the second component stay
+  the same. There is a new tuple for $y$, but its first component is
+  smaller than the one for the tuple $x$. Thus, we again have $K({\cal
+    A}) \gtmul K({\cal A}')$.
+\end{Proof}
+
+\begin{Theorem}
+  \label{4.9}
+  The tableau-based algorithm for checking consistency of
+  $\ALC$-ABoxen always terminates and gives the correct answers.
+\end{Theorem}
+
+\begin{Proof}[\cref{4.9}]
+  Termination is an immediate consequence of \cref{4.8}.
+  Let
+  \begin{equation*}
+    \set{{\cal A}_0} \totab {\cal M}_1 \totab \dotsb \totab {\cal M}_n
+  \end{equation*}
+  be a terminating sequence of rule appilcations.
+  \begin{enumerate}
+  \item If the algorithm answers ``consistent,'' then ${\cal M}_n$
+    contains a complete and open ABox ${\cal A}$. By \cref{4.2},
+    ${\cal A}$ is consistent and thus ${\cal M}_n$ is consistent. By
+    \cref{4.1} this implies that $\set{{\cal A}_0}$, and hence ${\cal
+      A}_0$, is consistent.
+  \item If the algorithm answers ``inconsistent,'' then all the ABoxen
+    in ${\cal M}_n$ are closed. By \cref{4.2}, all these ABoxen are
+    inconsistent, and this ${\cal M}_n$ is inconsistent. By
+    \cref{4.1}, this implies that $\set{{\cal A}_0}$ and hence ${\cal
+      A}_0$, is inconsistent.
+  \end{enumerate}
+\end{Proof}
+
+Until now, we have considered consistentency of ABoxen, \ie of
+knowledge bases with an empty TBox. We will now extend the algorithm
+in two steps such that it handles
+\begin{enumerate}
+\item acyclic TBoxen, and
+\item general TBoxen, \ie finite sets of GCIs.
+\end{enumerate}
+
+In principle, acyclic TBoxen can be handled by expansion. However,
+this may lead to an exponential blow-up of the size of the input.
+
+\begin{Example}
+  \label{4.10}
+  Consider the TBox ${\cal T}_n$ (from \cref{exp-blowup}):
+  \begin{align*}
+    {\cal T}_n = \big\{ A_0 & \equiv \forall r. A_1 \sqcap \forall
+        s. A_1, \\
+        A_1 & \equiv \forall r. A_2 \sqcap \forall s. A_2, \\
+        & \vdots \\
+        A_{n - 1} & \equiv \forall r. A_n \sqcap \forall s. A_n \big\}
+  \end{align*}
+  The knowledge base $({\cal T}_n, {\cal A}_n)$ with ${\cal A}_n =
+  \set{A_0 \sqcap \exists r. \neg A_1 (a)}$ is inconsistent. If we
+  fully expand the concept $A_0, A_1$ in ${\cal A}_n$ before applying
+  the tableau algorithm, we have an exponential blow-up. However, if
+  we use lazy expansion within the algorithm, then this blow-up can be
+  avoided.
+\end{Example}
+
+\begin{Notation}
+  We denote by $\nnf C$ the negation normal form of $\neg C$.
+\end{Notation}
+
+\begin{Definition}[Lazy expansion rules]
+  \label{4.11}
+  \begin{description}
+  \item[$\equiv_1$-rule:] Replace ${\cal A}$ by ${\cal A}'$ if $B(a)
+    \in {\cal A}$ and $B \equiv C \in {\cal T}$, but $C(a) \not\in
+    {\cal A}$, where ${\cal A}' = {\cal A} \cup \set{C(a)}$,
+  \item[$\equiv_2$-rule:] replace ${\cal A}$ by ${\cal A}'$ if $\neg
+    B(a) \in {\cal A}$ and $B \equiv C \in {\cal T}$, but $\nnf C(a)
+    \not\in {\cal A}$, where ${\cal A}' = {\cal A} \cup \set{\nnf
+      C}$.
+  \end{description}
+\end{Definition}
+
+We assume in the following that the input TBox ${\cal T}$ is also in
+negation normal form, \ie for any definition $B \equiv C \in {\cal
+  T}$, $C$ is in negation normal form.
+
+Consider the algorithm obtained by adding these two expansion rules to
+the $\ALC$-tableau rules. To show that it yields a decision procedure
+for consistency of knowledge bases with acyclic TBoxen, we must extend
+the proofs given for the case of the empty TBox.
+
+\begin{Lemma}[Local correctness]
+  \label{4.12}
+  The lazy expansion rules of \cref{4.11} preserve consistency.
+\end{Lemma}
+
+\begin{Proof}[\cref{4.12}]
+  We consider the $\equiv_1$-rule, the $\equiv_2$-rule can be treated
+  similarly. ${\cal A} \in {\cal M}$ is replaced by ${\cal A}'$, where
+  $B(a) \in {\cal A}$ and $B \equiv C \in {\cal T}$, and ${\cal A}' =
+  {\cal A} \cup \set{C(a)}$. We must show that $({\cal T}, {\cal A})$
+  has a model iff $({\cal T}, {\cal A}')$ has a model.
+
+  Since ${\cal A} \subseteq {\cal A}'$, every model of $({\cal T},
+  {\cal A}')$ is also a model of $({\cal T}, {\cal A})$. Let $I$ be a
+  model of ${\cal A}$ and ${\cal T}$. It is enough to show that $a^I
+  \in C^I$. However, we know that $a^I \in B^I = C^I$.
+\end{Proof}
+
+\begin{Lemma}[Soundness and completeness]
+  \label{4.13}
+  \begin{enumerate}
+  \item If ${\cal A}$ is open and complete, $({\cal T}, {\cal A})$ has
+    a model, and
+  \item a closed ABox does not have a model.
+  \end{enumerate}
+\end{Lemma}
+
+Note that we now call an ABox complete if neither a tableau rule nor a
+lazy expansion rule is applicable. Also, clashes $(A, \neg A)$ can now
+also be due to the presence of $\set{A(a), \neg A(a)}$, where $A$ is a
+defined concepts. Using lazy expansion, this does not only mean that
+one can avoid the full expansion, but also that clashes can be
+detected early (confer \cref{4.10}).
+
+\begin{Proof}[\cref{4.13}]
+  \begin{enumerate}
+  \item We first define a canonical primitive interpretation $J_{\cal
+      A}$ as in the proof of \cref{4.2}. \Cref{2.7} then yields that
+    this primitive interpretation extends uniquely to a model $I_{\cal
+      A}$ of ${\cal T}$. It remains to show that $I_{\cal A}$ is
+    indeed a model of ${\cal A}$. For role assertions, this follows
+    trivially. For $C(x) \in {\cal A}$ we want to show $x \in
+    C^{I_{\cal A}}$ by induction. However, induction on the structure
+    of $C$ falls short since for $A \equiv D \in {\cal T}$ we don't
+    have that $D$ is ``smaller'' than $A$, and similarly that $\nnf D$
+    is ``smaller'' than $\neg A$. Additionally, we still need that
+    $C_1, c_2$ are ``smaller'' than $C_1 \sqcap C_2$, et cetera. Thus,
+    we define a new notion of the size of a concept description in
+    negation normal form with respect to an acyclic TBox ${\cal T}$:
+    \begin{itemize}
+    \item $\abs[{\cal T}]{P} := 1$ and $\abs[{\cal T}]{\neg P}$ for
+      primitive concepts $P$,
+    \item $\abs[{\cal T}]{C \sqcap D} := 1 + \abs[{\cal T}]{C} +
+      \abs[{\cal T}]{D} =: \abs[{\cal T}]{C \sqcup D}$,
+    \item $\abs[{\cal T}]{\forall r. C} := 1 + \abs[{\cal T}]{C} =:
+      \abs[{\cal T}]{\exists r.C}$, and
+    \item if $A$ is a defined concept, then
+      \begin{align*}
+        \abs[{\cal T}]{A} & := 1 + \abs[{\cal T}]{C},\  \text{where}\
+        A \equiv C \in {\cal T},\ \text{and} \\
+        \abs[{\cal T}]{\neg A} & := 2 + \abs[{\cal T}]{C},
+        \ \text{where}\ A \equiv C \in {\cal T}.
+      \end{align*}
+    \end{itemize}
+
+    It is not hard to show (using the fact that ${\cal T}$ is acyclic)
+    that this defines a unique natural number $\abs[{\cal T}]{C}$ for
+    every concept description $C$ in negation normal form.
+
+    We show the claim by induction on $\abs[{\cal T}]{C}$. The base
+    case $C = P$ and the cases where $C$ is a complex concept
+    description can be treated as in the proof of \cref{4.2}.
+
+    Consider a defined concept $C = A$ with definition $A
+    \equiv D \in {\cal T}$. Since $A(x) \in {\cal A}$ and ${\cal A}$
+    is complete, we have $D(x) \in {\cal A}$, and since $\abs[{\cal
+      T}]{A} = 1 + \abs[{\cal T}]{D} > \abs[{\cal T}]{D}$, induction
+    yields $x \in D^{I_{\cal A}}$. Since $I_{\cal A}$ is a model of
+    ${\cal T}$, we have $A^{I_{\cal A}} = D^{I_{\cal A}}$, and thus $x
+    \in A^{I_{\cal A}}$.
+    The case of $C = \neg A$ for a defined concept $A$ can be treated
+    similarly.
+  \item This claim follows trivially.
+  \end{enumerate}
+\end{Proof}
+
+It remains to show termination. Basically, we can use the same ideas
+as for the case of an empty TBox, we just need to adapt some notions,
+and we need to make sure that the application of the $\equiv_i$-rules
+also leads to a decrease with respect to the order $\prec$.
+
+Subdescriptions need to be adapted such that if $A \equiv C \in {\cal
+  T}$, we have
+\begin{itemize}
+\item $\Sub_{\cal T}(A) = \set{A} \cup \Sub_{\cal T}(C)$, and
+\item $\Sub_{\cal T}(\neg A) = \set{A, \neg A} \cup \Sub_{\cal T}(\nnf
+  C)$.
+\end{itemize}
+
+For the size of concept descriptions, we use $\abs[{\cal T}]{C}$
+instead of $\abs{C}$. Given these definitions, \cref{4.5} holds
+accordingly, \ie if ${\cal A}$ is an ABox obtained from ${\cal A}_0$
+by appyling tableau rules and lazy expansion rules with respect to the
+acyclic TBox ${\cal T}$, then
+\begin{enumerate}
+\item if $C(a) \in {\cal A}$, then $C \in \Sub_{\cal T}({\cal A}_0)$, and
+\item if $R(a, x) \in {\cal A}$ and $x$ is a new individual, then
+  \begin{equation*}
+    \max\set{\abs[{\cal T}]{C}; C(a) \in {\cal A}} >
+    \max\set{\abs[{\cal T}]{D}; D(x) \in {\cal A}}.
+  \end{equation*}
+\end{enumerate}
+
+If we define
+\begin{equation*}
+  \widehat{m}_{\cal T} := \sum_{C(a) \in {\cal A}_0}{\abs[{\cal
+      T}]{C}},\ \text{then}
+\end{equation*}
+also \cref{4.6} holds accordingly, \ie
+\begin{enumerate}
+\item $\abs{\Sub_{\cal T}({\cal A}_0)} \leq \widehat{m}_{\cal T}$,
+\item $\abs[{\cal T}]{C} \leq \widehat{m}_{\cal T}$ for all $C \in
+  \Sub_{\cal T}({\cal A}_0)$, and
+\item if ${\cal A}$ is an ABox obtained from ${\cal A}_0$ by applying
+  tableau rules or lazy expansion rules with respect to the acyclic
+  TBox ${\cal T}$, then $d_{\cal A}(x) \leq \widehat{m}_{\cal T}$ for
+  all individuals $x$ in ${\cal A}$.
+\end{enumerate}
+The tuple $K_{\cal T}(a)$ associated with an ABox individual in ${\cal
+  A}$ is now defined as before, \ie
+\begin{itemize}
+\item $n_1 := \widehat{m}_{\cal T} - d_{\cal A}(a) \in \N$,
+\item $n_2 := \widehat{m}_{\cal T} - \abs{\set{C; C(a) \in {\cal A}}}
+  \in \N$, and
+\item $n_3 := \abs{\set{(\exists r.C)(a) \in {\cal A};\ \text{there is
+        no individual}\ y\ \text{such that}\ \set{r(a, y), C(y)}
+      \subseteq {\cal A}}}$.
+\end{itemize}
+
+$K_{\cal T}({\cal A})$ and $K_{\cal T}(M)$ are defined as before. It
+is not hard to show that the analogue of \cref{4.8} holds:
+If $M'$ is obtained from $M$ by application of tableau rules and/or lazy
+expansion rules, then $K_{\cal T}(M) \succ K_{\cal T}(M')$. In
+particular, the lazy expansion rules decrease the second component of
+$K_{\cal T}(a)$.
+
+\begin{Theorem}
+  \label{4.14}
+  The algorithm for checking consistency of $\ALC$-knowledge bases
+  with acyclic TBoxen always terminates and gives the correct answer.
+\end{Theorem}
+
+Next, we consider knowledge bases where the TBox is arbitrary, \ie any
+finite set of GCIs. Given a GCI $C \sqsubseteq D$, we cannot just wait
+until $C(a)$ is asserted and then add $D(a)$. This is illustrated by
+the following example: Consider ${\cal K} = ({\cal T}, {\cal A}_0)$,
+where ${\cal T} = \set{\exists r. A \sqsubseteq \neg A}$ and ${\cal A}_0
+= \set{(\forall r. A)(a), (\exists r. \top)(a), A(a)}$. The
+inconsistency is not detected, since $(\exists r.A)(a)$ is not
+explicitly present, and thus $\neg A(a)$ is never added. More
+generally, the point is that an element of the canonical model may
+belong to a complex concept description even though there is a
+assertion stating this explicitly.
+
+\begin{Definition}[$\sqsubseteq$-rule]
+  \label{4.15}
+  Replace ${\cal A}$ by ${\cal A}'$ if $C \sqsubseteq D \in {\cal T}$,
+  $a$ occurs in ${\cal A}$, but $(\nnf C \sqcup D)(a) \not\in {\cal
+    A}$, where ${\cal A}' = {\cal A} \cup \set{(\nnf C \sqcup D)(a)}$.
+\end{Definition}
+
+As before, we assume that the input TBox ${\cal T}$ is in negation
+normal form, \ie if $C \sqsubseteq D \in {\cal T}$, then both $C$ and
+$D$ are in negation normal form. Unfortunately, adding this rule to
+the tableau rules leads to a non-terminating rule system.
+
+\begin{Example}
+  \label{4.16}
+  Consider ${\cal T} = \set{A \sqsubseteq \exists r.A}$ and ${\cal
+    A}_0 = \set{A(a)}$. The $\sqsubseteq$-rule will generate an
+  infinite number of $r$-successors.
+\end{Example}
+
+To avoid the generation of such infinite chains of new individuals, we
+restrict the application of the $\exists$-rule. The idea is that the
+application of this rule is blocked for a new individual $x$ if it has
+an ancestor in the ABox that has all the concept assertions that $x$
+has.
+
+\begin{Definition}[Ancestor, blocking]
+  \label{4.17}
+  Given an ABox ${\cal A}$, the individual $a$ is an ancestor of the
+  individual $x$ if there are $n \geq 1$ assertions such that
+  \begin{equation*}
+    r_1(a, x_1), r_2(x_1, x_2), \dotsc, r_n(x_{n - 1}, x) \in {\cal A}.
+  \end{equation*}
+
+  Let ${\cal A}$ be an ABox obtained by applying tableau rules and the
+  $\sqsubseteq$-rule to the initial ABox ${\cal A}_0$. An individual
+  $x$ is directly blocked by an individual $b$ in ${\cal A}$ if
+  \begin{itemize}
+  \item $x$ is a new individual,
+  \item $b$ is an ancestor of $x$, and
+  \item $\set{C; C(x) \in A} \subseteq \set{D; D(b) \in {\cal A}}$.
+  \end{itemize}
+
+  An individual $x$ is indirectly blocked if it has an ancestor that
+  is directly blocked. Finally, an individual $x$ is blocked if it is
+  directly or indirectly blocked.
+\end{Definition}
+
+\begin{Example}[Blocking]
+  Let ${\cal T} = \set{\top \sqsubseteq \exists r.(A \sqcap B)}$ and
+  ${\cal A}_0 = \set{(A \sqcap B)(b)}$. We obtain $A \sqcap B$, $\bot
+  \sqcup \exists r.(A \sqcap B)$, $\exists r.(A \sqcap B)$, $A$, and $B$ for $b$,
+  $A \sqcap B$, $A$, $B$, $\bot \sqcup \exists r.(A \sqcap B)$
+  (blocked by $b$), and
+  $\exists r.(A \sqcap B)$ (not blocked) for $x_1$, and $A \sqcap B$
+  for $x_2$ (blocked by both $x_1$ and $b$).
+\end{Example}
+
+The $\exists$-rule is now modified as follows:
+\begin{Definition}[Revised $\exists$-rule with blocking]
+  Replace ${\cal A}$ by ${\cal A}'$ if $(\exists r.C)(a) \in {\cal
+    A}$, $a$ is not blocked, and there is no $c$ with $\set{r(a, c),
+    C(c)} \subseteq {\cal A}$, where ${\cal A}' = {\cal A} \cup
+  \set{r(a, c), C(c)}$ and $c$ is a new individual.
+\end{Definition}
+
+We now use the tableau rules with this modified $\exists$-rule and the
+$\sqsubseteq$-rule.
+
+\begin{Lemma}[Local correctness]
+  \label{4.18}
+  The $\sqsubseteq$-rule preserves consistency.
+\end{Lemma}
+
+\begin{Proof}[\cref{4.18}]
+  ${\cal A}$ is replaced by ${\cal A}'$, where ${\cal A}' = {\cal A}
+  \cup \set{(\nnf C \sqcup D)(a)}$ for $a$ occuring in ${\cal A}$ and
+  $C \sqsubseteq D \in {\cal T}$. Given a model $I$ of ${\cal A}$ and
+  ${\cal T}$, it suffices to show that it is also a model of
+  $\set{(\nnf C \sqcup D)(a)}$. If $a^I \not\in C^I$, then $a^I \in
+  (\neg C)^I$ and hence $a^I \in (\nnf C \sqcup D)^I$. Otherwise, $a^I
+  \in C^I$ implies $a^I \in D^I$, since $C \sqsubseteq D \in {\cal
+    T}$, and again $a^I \in (\nnf C \sqcup D)^I$.
+\end{Proof}
+
+\begin{Lemma}[Soundness, completeness]
+  \label{4.19}
+  \begin{enumerate}
+  \item Assume that ${\cal A}$ is obtained by applying the (modified)
+    tableau rules and the $\sqsubseteq$-rule to the input ABox ${\cal
+      A}_0$ and the input TBox ${\cal T}$. If ${\cal A}$ is open and
+    complete, then $({\cal T}, {\cal A}_0)$ has a model.
+  \item If ${\cal A}$ is closed, then it does not have a model.
+  \end{enumerate}
+\end{Lemma}
+
+\begin{Example}
+  Consider again \cref{4.16}: ${\cal T} = \set{A \sqsubseteq \exists
+    r. A}$, ${\cal A}_0 = \set{A(a)}$. We obtain the assertions $A$,
+  $\neg A \sqcup \exists r.A$, and $\exists r.A$ for $a$ and $A$,
+  $\neg A \sqcup \exists r.A$, and $\exists r.A$ for $x_1$. This is
+  obviously not a model, since $x_1$ is missing an $r$-successor in
+  ${\cal A}$. The idea is now that the blocked individual receives the
+  $r$-successors of the blocking individual, \ie $x_1$ becomes its own
+  $r$-successor.
+\end{Example}
+
+\begin{Proof}[\cref{4.19}]
+  \begin{enumerate}
+  \item Soundness must now be read also with respect to the
+    $\sqsubseteq$-rule and the modified $\exists$-rule (with
+    blocking). Since blocking prevents the introduction of
+    $r$-successors that are required by existential restrictions, the
+    canonical model as previously defined is not a model of the
+    ABox. We adapt the definition of the canonical interpretation:
+    \begin{itemize}
+    \item $\Delta^{I_{\cal A}} := \set{x \in {\cal N}_i; x\
+        \text{occurs in}\ {\cal A}\ \text{and is not indirectly
+          blocked}}$,
+    \item $A^{I_{\cal A}} := \set{x \in \Delta^{I_{\cal A}}; A(x) \in
+        {\cal A}}$, and
+    \item to define under which condition $(x, y) \in r^{I_{\cal A}}$
+      for given elements $x, y \in \Delta^{I_{\cal A}}$, we consider
+      two cases:
+      \begin{enumerate}
+      \item Case: $x$ is not (directly) blocked. Then $(x, y) \in
+        r^{I_{\cal A}}$ iff $r(x, y) \in {\cal A}$. Note that if $r(x,
+        y) \in {\cal A}$, then $y \in \Delta^{I_{\cal A}}$, since
+        otherwise $x$ or an ancestor of $x$ would need to be directly
+        blocked, violating the assumption.
+      \item Case: $x$ is (directly) blocked by an ancestor $a$. Then
+        $(x, y) \in r^{I_{\cal A}}$ iff $(a, y) \in r^{I_{\cal A}}$.
+      \end{enumerate}
+    \end{itemize}
+    Obviously, this canonical interpretation is no longer a model of
+    the whole ABox ${\cal A}$ since it ignores the assertions for
+    indirectly blocked individuals. However, it is a model of the
+    assertions involving no indirectly blocked individuals. We define
+    $\hat{\cal A} := \set{C(x); x \in \Delta^{I_{\cal A}}, C(x) \in
+      {\cal A}} \cup \set{r(x, y); x, y \in \Delta^{I_{\cal A}}, r(x,
+      y) \in {\cal A}}$. Since old individuals can not be blocked, and
+    our rules only extend the ABox, we have that ${\cal A} \subseteq
+    \hat{\cal A}$, where ${\cal A}_0$ is the input ABox. Thus, it
+    suffices to show that $I_{\cal A}$ is a model of $\hat{\cal
+      A}$. If $r(x, y) \in \hat{\cal A}$, then $y$ is not indirectly
+    blocked. In particular, this implies that $x$ is not (directly)
+    blocked, and thus $r(x, y) \in \hat{\cal A} \subseteq {\cal A}$
+    implies $(x, y) \in r^{I_{\cal A}}$. For $C(x) \in \hat{\cal A}$,
+    we show $x \in C^{I_{\cal A}}$ by induction on the structure of
+    $C$. The only interesting case (that differs from the proof of
+    \cref{4.2}) is the one where $C = \exists r.D$.
+    \begin{enumerate}
+    \item If $x$ is not blocked, then we can proceed as in the proof
+      of \cref{4.2}.
+    \item Otherwise, let $a$ be the individual blocking $x$ chosen in
+      the definition of $I_{\cal A}$. We have $(\exists r.D)(a) \in
+      \hat{\cal A}$, and since $a$ is not blocked, we proceed as
+      above.
+    \end{enumerate}
+    This yields $a \in (\exists r.D)^{I_{\cal A}}$, \ie there is $y
+    \in \Delta^{I_{\cal A}}$ such that $(a, y) \in r^{I_{\cal A}}$ and
+    $y \in D^{I_{\cal A}}$. By the definition of the canonical
+    interpretation, we also have $(x, y) \in r^{I_{\cal A}}$. This
+    shows $x \in (\exists r.D)^{I_{\cal A}}$.
+  \item The claim is clear.
+  \end{enumerate}
+\end{Proof}
+
+It remains to show termination. First, we define the notion of
+subdescriptions appropriately:
+\begin{align*}
+  \Sub_{\cal T}({\cal A}) & := \Sub({\cal A}) \cup \Sub({\cal T}),\
+  \text{where} \\
+  & \Sub({\cal T}) := \bigcup_{C \sqsubseteq D \in {\cal T}}{\Sub(\nnf
+    C \sqcup D)}.
+\end{align*}
+
+\begin{Corollary}
+  \label{4.20}
+  The first part of \cref{4.5} holds with this notion of
+  subdescriptions: If ${\cal A}$ is an ABox obtained by applying the
+  (modified) tableau rules and the $\sqsubseteq$-rule to ${\cal A}_0$
+  with respect to the TBox ${\cal T}$, then $C(a) \in {\cal A}$
+  implies that $C \in \Sub_{\cal T}({\cal A}_0)$. However, the second
+  part of \cref{4.5} which says that the maximal size of concept
+  assertions decreases following $r$-edges to new individuals, and no
+  longer hold, due to the presence of the $\sqsubseteq$-rule.
+
+  Let ${\cal A}$ be an ABox obtained by applying the rules to ${\cal
+    A}_0$ with respect to ${\cal T}$ and we define the depth of
+  individuals $d_{\cal A}(x)$ as before. Let $\hat{n} :=
+  2^{\abs{\Sub_{\cal T}({\cal A}_0)}}$.
+\end{Corollary}
+
+\begin{Lemma}
+  \label{4.21}
+  We have $d_{\cal A}(x) \leq \hat{n}$ for all individuals occuring in
+  ${\cal A}$.
+\end{Lemma}
+
+\begin{Proof}[\cref{4.21}]
+  Assume that $d_{\cal A}(x) > \hat{n}$, \ie there is a path
+  \begin{equation*}
+    r_1(a, x_1), r_2(x_1, x_2), \dotsc, r_n(x_{n - 1}, x) \in {\cal A}
+  \end{equation*}
+  with $n > \hat{n}$. The assertion $r_n(x_{n - 1}, x)$ was introduced
+  by an application of the modified $\exists$-rule to an ABox ${\cal
+    A}' \subseteq {\cal A}$. At that time, the assertions
+  \begin{equation*}
+    r_1(a, x_1), r_2(x_1, x_2), \dotsc, r_{n - 1}(x_{n - 2}, x_{n - 1}) \in {\cal A}'
+  \end{equation*}
+  were already present, where $n - 1 \geq \hat{n}$. We have $n >
+  \hat{n} = 2^{\abs{\Sub_{\cal T}({\cal A}_0)}}$ individuals $(x_0 =
+  a, x_1, \dotsc, x_{n - 2})$ on this path. Thus the sets of concept
+  assertions $M_i:= \set{C; C(x_i) \in {\cal A}'}$ cannot al be
+  different. This means that $x_{n - 1}$ or one of its ancestors must
+  be directly blocked. In both cases, $x_{n - 1}$ is blocked, and thus
+  the modified $\exists$-rule is not applicable.
+\end{Proof}
+
+Termination can now be shown by a mapping into the well-founded strict
+partial order.
+\begin{Definition}
+  \label{4.22}
+  Let $M$ be a set of ABoxen with $\set{{\cal A}_0}
+  \xrightarrow{*} M$ where the (modified) tableau rules and the
+  $\sqsubseteq$-rule have been applied, and let $x$ be an individual
+  occuring in ${\cal A} \in M$.
+  \begin{enumerate}
+  \item We define $K(n) := (n_1, n_2, n_3)$ as follows:
+    \begin{itemize}
+    \item $n_1 := \hat{n} - d_{\cal A}(n) \in \N$ (by \cref{4.21}),
+    \item $n_2 := \abs{\Sub_{\cal T}({\cal A}_0)} - \abs{\set{C(x) \in
+          {\cal A}}} i \N$ (by \cref{4.20}), and
+    \item $n_3 := \abs{\set{(\exists r.C)(x) \in {\cal A};\
+          \text{there is no}\ y\ \text{such that}\ \set{r(x, y), C(y)}
+        \subseteq {\cal A}}}$.
+  \item $K({\cal A})$ and $K({\cal M})$ as well as the order
+    $\succ_{\cal A}$ are defined as in \cref{4.7}.
+    \end{itemize}
+  \end{enumerate}
+\end{Definition}
+
+\begin{Lemma}
+  \label{4.23}
+  If $M'$ is obtained from $M$ by applying (modified) tableau rules
+  and the $\sqsubseteq$-rule, then $K(M) \succ K(M')$.
+\end{Lemma}
+
+\begin{Proof}[\cref{4.23}]
+  Except for the $\exists$-rule, all rules add concept assertions for
+  exactly one individual. The second component of the tuple associated
+  with this individual decreases, whereas the first component stays
+  the same. Changes in the third component are irrelevant, and no
+  other triple changes. Applying the $\forall$-rule leaves $n_1$
+  unchanged and may decrease the second component. Consider an
+  application of the (modified) $\exists$-rule which introduces an
+  $r$-successor $y$ of $x$. The tuple associated with $x$ decreases in
+  the third component, whereas its first two components are
+  unchanged. There is a new tuple for $y$, but its first component is
+  smaller than the one of the tuple for $x$.
+\end{Proof}
+
+Overall, this shows:
+\begin{Theorem}
+  \label{4.24}
+  The algorithm for checking consistency of $\ALC$-knowledge bases
+  $({\cal T}, {\cal A})$ (with general TBoxen) always terminates and
+  gives the correct answer.
+\end{Theorem}
+
+\chapter{Other reasoning techniques}
+\label{chap:5}
+Although the tableau technique is the most widely used reasoning
+technique in description logics, there are also other approaches:
+\begin{itemize}
+\item automata-based,
+\item translation-based (translate into other logics, \eg first-order
+  logic or propositional dynamic logic, and use techniques developed
+  for those logics), and
+\item structural approaches for inexpressive description logics.
+\end{itemize}
+
+Here, we consider the automata-based and the structural approaches.
+\section{The automata-based approach}
+In this section, we restrict the attention to satisfiability of a
+concept with respect to a (general) TBox. There are various instances
+of the automato-based approach, with differ with respect to
+\begin{itemize}
+\item the description logic under consideration, and
+\item the automata model used.
+\end{itemize}
+However, they all have the following ideas in common:
+\begin{enumerate}
+\item Show that the logic has the tree model property (\cref{3.7}). If
+  a concept $C$ is satisfiable with respect to ${\cal T}$ at all, then
+  it is also satisfiable with respect to ${\cal T}$ in a tree-shaped
+  interpretation whose root belongs to the concept $C$.
+\item Devise a translation from pairs $C, {\cal T}$ of concepts and
+  TBoxen to an appropriate tree-automaton ${\cal A}_{C, {\cal T}}$,
+  such that ${\cal A}_{C, {\cal T}}$ accepts exactly the tree models
+  of $C$ with respect to ${\cal T}$.
+\item Apply the emptiness test for the employed automata model to
+  check whether there is such a model.
+\end{enumerate}
+
+The complexity of the algorithm obtained in this way depends on the
+complexity of the translation and of the complexity of the emptiness
+test. For satisfiability in $\ALC$ (with respect to general TBoxen),
+we have the following situation:
+\begin{itemize}
+\item $C, {\cal T}$ is translated into a so-called looping automaton
+  whose size is exponential in $C, {\cal T}$, and
+\item the emptiness test for looping automata is polynomial in the
+  size of the automaton.
+\end{itemize}
+
+Overall, this gives a deterministic exponential time
+($\operatorname{ExpTime}$) complexity for the satisfiability
+system. Note that the tableau-based algorithm yields an upper bound
+that is worse: At best we get a non-deterministic exponential time
+upper bound. However, from a practical point of view, the
+tableau-based approach behaves better, since the automata-based
+approach is always exponential due to the fact that the automaton
+first has to be constructed.
+
+\subsection{Looping tree automaton}
+Tree automata generalize finite automata working on words.
+
+\begin{equation*}
+  \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,semithick,baseline]
+    \node[initial,state] (A) {$q_0$};
+    \node[accepting,state] (B) [right of=A] {$q_1$};
+
+    \path (A) edge [bend left] node {$a$} (B)
+    (B) edge [bend left] node {$b$} (A);
+  \end{tikzpicture} \quad
+  aba\ \text{is accepted.}
+\end{equation*}
+
+We view the word as a tree and obtain a run of the automaton on the
+tree.
+
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.5cm,
+                    semithick]
+  \node[state] (a) [label=left:$q_0$]{$a$};
+  \node[state] (b) [below of=a,label=left:$q_1$] {$b$};
+  \node[state] (a2) [below of=b,label=left:$q_0$] {$a$};
+  \node[state] (q) [right of=a2,label=above:$q_1$,label=right:leaf] {};
+
+  \path (a) edge (b);
+  \path (b) edge (a2);
+  \path (a2) edge (q);
+\end{tikzpicture}
+This is an accepting run since $q_1$ is a final state.
+
+Looping tree automata further generalize this to infinite trees. There
+are no longer final states, \ie acceptance only depends on the
+existence of a run, \ie a labeling of the infinite tree that is
+compatible with the automaton's transition relation. We consider trees
+of a fixed arity $k \geq 1$, where the nodes have labels from an
+alphabet $\Sigma$ and the edges are unlabeled, but have a fixed order.
+
+\begin{Definition}
+  \label{5.1}
+  Let $k \geq 0$ and $\Sigma$ be a finite alphabet. A $k$-ary
+  $\Sigma$-tree is a mapping $T: \set{0, \dotsc, k - 1}^* \to
+  \Sigma$.
+\end{Definition}
+
+\begin{NumberedExample}
+  \label{5.2}
+  The tree
+  \tikzstyle{every node}=[circle,draw=black,thin]
+  \tikzstyle{level 1}=[sibling distance=50mm]
+  \tikzstyle{level 2}=[sibling distance=25mm]
+  \tikzstyle{level 3}=[sibling distance=15mm]
+    \begin{tikzpicture}[baseline]
+      \node [label=above:$a$] {}
+      child { node [label=above:$b$] {}
+        child { node [label=above:$b$] {}
+                child {}
+                child {}}
+        child { node [label=above:$b$] {}
+                child {}
+                child {}}}
+      child { node [label=above:$a$] {}
+        child { node [label=above:$a$] {}
+                child {}
+                child {}}
+        child { node [label=above:$a$] {}
+                child {}
+                child {}}};
+    \end{tikzpicture}
+    is formally represented by the mapping
+    \begin{equation*}
+      T: \set{0, 1}^* \to \set{a,
+        b}: u \mapsto \begin{cases} a, & \text{if}\ u\ \text{starts
+          with}\ 0, \\ b,\ \text{otherwise} \end{cases}.
+    \end{equation*}
+\end{NumberedExample}
+
+\begin{Definition}[Looping automaton, run]
+  \label{5.3}
+  A looping automaton working on $k$-ary $\Sigma$-trees is of the form
+  ${\cal A} = (Q, \Sigma, I, \Delta)$, where
+  \begin{itemize}
+  \item $Q$ is a finite set of states and $I \subseteq Q$ is the set
+    of initial states,
+  \item $\Sigma$ is a finite alphabet, and
+  \item $\Delta \subseteq Q \times \Sigma \times Q^k$ is the
+    transition relation.
+  \end{itemize}
+
+  We will write tuples $(q, a, q_1, \dotsc, q_k) \in \Delta$ as $(q,
+  a) \to (q_1, \dotsc, q_k)$.
+
+  A run of ${\cal A}$ on the tree $T: \set{0, \dotsc, k - 1}^* \to
+  \Sigma$ is a $k$-ary $Q$-tree $R: \set{0, \dotsc, k - 1}^* \to Q$
+  such that
+  \begin{equation*}
+    \left(\underbrace{R(u)}_{\in Q}, \underbrace{T(u)}_{\in
+        \Sigma}\right) \to \left(R(u0), \dotsc, R(u(k - 1))\right) \in
+    \Delta\ \text{for all}\ u \in \set{0, \dotsc, k - 1},\ \text{where}
+  \end{equation*}
+  $u0$ is the concatenation of $u$ and $0$. This run is accepting if
+  $R(\epsilon) \in I$.
+
+  The tree languange accepted by ${\cal A}$ is
+  \begin{equation*}
+    L({\cal A}) := \set{T:
+      \set{0, \dotsc, k - 1}^* \to \Sigma;\ \text{there is an accepting
+        run of}\ {\cal A}\ \text{on}\ T}.
+  \end{equation*}
+\end{Definition}
+
+\begin{Example}[\cref{5.2} continued]
+  Consider the automaton ${\cal A} = (Q, \Sigma, I, \Delta)$, where
+  \begin{itemize}
+  \item $Q = \set{q_0, q_1, q_2}$,
+  \item $I = \set{q_0}$,
+  \item $\Sigma = \set{a, b}$, and
+  \item $\Delta$ consists of the transition
+    \begin{align*}
+      (q_0, a) & \to (q_1, q_2), \\
+      (q_0, a_) & \to (q_2, q_1), \\
+      (q_1, b) & \to (q_1, q_1),\ \text{and} \\
+      (q_2, a) \to (q_2, q_2).
+    \end{align*}
+  \end{itemize}
+
+  The following is an accepting run of this automaton on the tree from
+  above.
+
+  \tikzstyle{every node}=[circle,draw=black,thin]
+  \tikzstyle{level 1}=[sibling distance=50mm]
+  \tikzstyle{level 2}=[sibling distance=25mm]
+  \tikzstyle{level 3}=[sibling distance=15mm]
+    \begin{tikzpicture}[baseline]
+      \node [label=above:$a$,label=right:$q_0$] {}
+      child { node [label=above:$b$,label=left:$q_1$] {}
+        child { node [label=above:$b$,label=left:$q_1$] {}
+                child {}
+                child {}}
+        child { node [label=above:$b$,label=left:$q_1$] {}
+                child {}
+                child {}}}
+      child { node [label=above:$a$,label=right:$q_2$] {}
+        child { node [label=above:$a$,label=right:$q_2$] {}
+                child {}
+                child {}}
+        child { node [label=above:$a$,label=right:$q_2$] {}
+                child {}
+                child {}}};
+    \end{tikzpicture}
+
+    Here, we have $R(\epsilon) = q_0$, $R(0u) = q_1$, and $R(1u) =
+    q_2$ for all $u \in \set{0, 1}^*$. Thus, this tree belongs to
+    $L({\cal A})$.
+
+    The only other tree belonging to $L({\cal A})$ is
+    \begin{equation*}
+      T': \set{0, 1}^* \to \set{a, b}: u \mapsto
+      \begin{cases}
+        b, & \text{if}\ u\ \text{starts with}\ 1,\ text{and} \\
+        a, & \text{otherwise}.
+      \end{cases}
+    \end{equation*}
+\end{Example}
+
+\subsection{The emptiness test}
+One might be tempted to try to generate an accepting run top-down, \ie
+start with an initial state at the root and apply transitions. This
+approach has two problems:
+\begin{itemize}
+\item since the automaton may be non-deterministic, one has a choice
+  of which initial state and/or transition to take. Thus one obtains a
+  non-deterministic algorithm or a deterministic one needs to do
+  backtracking, and
+\item since the automaton is supposed to work on infinite trees, it is
+  not clear when to stop the construction. This problem could in
+  principle be overcome by using an appropriate ``blocking''
+  condition.
+\end{itemize}
+
+Instead, we use a bottom-up approach.
+
+\begin{Definition}[Good state, bad state]
+  \label{5.4}
+  A state $q \in Q$ is called good in a looping automaton ${\cal A} =
+  (Q, \Sigma, I, \Delta)$, if there is a run $R$ of ${\cal A}$ on some
+  tree $T$ and a node $u \in \set{0, \dotsc, k - 1}^*$ such that $R(u)
+  = q$. Otherwise, the state is called bad.
+\end{Definition}
+
+\begin{Lemma}
+  \label{5.5}
+  $L({\cal A}) = \varnothing$ iff all the initial states of ${\cal A}$
+  are bad.
+\end{Lemma}
+
+\begin{Proof}[\cref{5.5}]
+  If all initial states are bad, then there cannot exist an accepting
+  run. Thus $L({\cal A}) = \varnothing$.
+
+  Assume that there is a good initial state $q_0$. We must show that
+  then $L({\cal A}) \ne \varnothing$. Since $q_0$ is good, there is a
+  tree $T$, a run $R$ of ${\cal A}$ on this tree, and a node $u$ such
+  that $R(u) = q_0$. We define the tree $T'$ and the run $R'$ as
+  follows:
+  \begin{align*}
+    T'(v) & := T(uv), & v \in \set{0, \dotsc, k -
+      1}^*,\ \text{and} \\
+    R'(v) & := R(uv), & v \in \set{0, \dotsc, k - 1}^*.
+  \end{align*}
+
+  It is easy to see that $R'$ is a run of ${\cal A}$ on $T'$, and that
+  $R'(\epsilon) = q_0 \in I$. Thus, $T' \in L({\cal A})$.
+\end{Proof}
+
+Thus, it is sufficient to design an algorithm for computing all bad
+states. This can be done as follows:
+Let $B_0 := \set{q \in Q; q\ \text{does not occur on the left-hand
+    side of a transition}}$. Then define
+\begin{align*}
+  B_{i + 1} := B_i \cup \big\{q \in Q;\ &\text{for each transition}\
+    (q, \cdot) \to (q_1, \dotsc, q_k)\ \text{with}\ q\ \text{on the
+      left-hand side,} \\ &\text{there is a}\ 1 \leq j \leq k\
+    \text{such that}\ q_j \in B_i\big\}.
+\end{align*}
+We have $B_0 \subseteq B_1 \subseteq \dotsb \subseteq B_n = B_{n + 1}
+\subseteq Q$ for a finite $n$.
+
+\begin{Lemma}
+  \label{5.6}
+  $B_n$ is the set of all bad states.
+\end{Lemma}
+
+\begin{Proof}[\cref{5.6}]
+  It is easy to show (by induction on $i$) that each set $B_i$
+  contains only bad states. Let $q \not\in B_n$. We show that then,
+  $q$ must be good by constructing a tree $T$ and a run $R$ of ${\cal A}$
+  on $T$ such that $R(\epsilon) = q$. Since $q \not\in B_n = B_{n +
+    1}$, there is a transition $(q, a) \to (q_1, \dotsc, q_k)$ such
+  that $q_1, \dotsc, q_k \not\in B_n$. Let $T(\epsilon) := a$ and
+  $R(\epsilon) := q$. For $i \in \set{0, \dotsc, k - 1}$, we define
+  $R(i) := q_{i + 1}$. Since $R(i) \not\in B_n$, there is a transition
+  $(R(i), a_i) \to (q_1^i, \dotsc, q_k^i)$ such that $q_1^i, \dotsc,
+  q_k^i \not\in B_n$. Define $T(i) := a_i$ and $R(ij) := q_j^i$ for $1
+  \leq j \leq k$. Proceeding this way, we can define an infinite tree
+  and a run $R$ on $T$ with $R(\epsilon) = q$. Thus, $q$ is good.
+\end{Proof}
+
+\begin{Theorem}
+  \label{5.7}
+  The emptiness problem for looping automata can be decided in
+  polynomial time.
+\end{Theorem}
+
+\begin{Proof}[\cref{5.7}]
+  We have $B_0 \subseteq B_1 \subseteq \dotsb \subseteq Q$, and thus
+  there can be at most $\abs{Q}$ strict inclusions in this
+  chain. Consequently, there is an $n \leq \abs{Q}$ with $B_n = B_{n +
+    1}$. Since $B_0$ and $B_{i + 1}$ for given $B_i$ can also be
+  constructed in polynomial time, the set of bad states can be
+  computed in polynomial time. Checking whether all initial states
+  belong to $B_n$ is also polynomial.
+\end{Proof}
+
+\subsection{The reduction}
+Our goal is now to translate an $\ALC$-concept $C$ and a general TBox
+${\cal T}$ into a looping automaton ${\cal A}_{C, {\cal T}}$ that
+accepts the tree models of $C$ with respect to ${\cal T}$.
+
+It turns out that there is a mismatch between the underlying kinds of
+trees: Tree models have labeled edges and no fixed arity, whereas
+looping auotamata work on trees with fixed arity and unlabeled edges.
+
+We solve this by taking the upper bound of the necessary branching
+(\ie the number of existential restrictions in $C$ and ${\cal T}$),
+and do some padding with dummy successors in order to always reach
+this upper bound. Also, we push the edge label into the node label of
+the successor node. Consequently, ${\cal A}_{C, {\cal T}}$ will not
+accept exactly the tree models of $C$ with respect to ${\cal T}$, but
+our construction will ensure that ${\cal A}_{C, {\cal T}}$ accepts a
+tree iff there is a tree model of $C$ with respect to ${\cal T}$.
+
+In the following construction of ${\cal A}_{C, {\cal T}}$, we assume
+that $C$ and the concepts occuring in GCIs in ${\cal T}$ are in
+negation normal form.
+
+We define
+\begin{align*}
+  S_{C, {\cal T}} & := \Sub({\cal C}) \cup \Sub({\cal T}), \\
+  R_{C, {\cal T}} & := \set{r \in {\cal N}_R; r\ \text{occurs in}\ C\
+    \text{or}\ {\cal T}}, \\
+  k_{C, {\cal T}} & := \abs{\set{\exists r.D; \exists r.D \in S_{C,
+        {\cal T}}}},\ \text{and} \\
+  \Sigma_{C, {\cal T}} & := \powerset{A \in {\cal N}_C; A\
+    \text{occurs in}\ C\ \text{or}\ {\cal T}}.
+\end{align*}
+
+\begin{Definition}
+  \label{5.8}
+  The automaton ${\cal A}_{C, {\cal T}} = (Q, \Sigma_{C, {\cal T}}, I,
+  \Delta)$ working on $k_{C, {\cal T}}$-ary $\Sigma_{C, {\cal
+      T}}$-trees is defined as follows:
+  \begin{itemize}
+  \item $Q$ consists of all Hintikka sets of $C$ and ${\cal T}$,\ie
+    subsets $q \subseteq S_{C, {\cal T}} \cup R_{C, {\cal T}}$ such
+    that
+    \begin{itemize}
+    \item $q = \varnothing$, or
+    \item $q \ne \varnothing$, and
+      \begin{itemize}
+      \item $q$ contains exactly one role name,
+      \item if $D \sqsubseteq E \in {\cal T}$, then $\nnf D \sqcup E
+        \in q$,
+      \item if $C_1 \sqcap C_2 \in q$, then $\set{C_1, C_2} \in q$,
+      \item if $C_1 \sqcup C_2 \in q$, then $\set{C_1, C_2} \cap q \ne
+        \varnothing$, and
+      \item $\set{A, \neg A} \subsetneqq q$ for all concept names $A$.
+      \end{itemize}
+    \end{itemize}
+  \item $IU = \set{q \in Q; C \in q}$,
+  \item $\Delta$ consists of those transitions $(q, \delta) \to (q_1,
+    \dotsc, q_{k_{C, {\cal T}}})$ satisfying the following properties:
+    \begin{itemize}
+    \item $q \cap {\cal N}_C = \delta$,
+    \item if $q = \varnothing$, then $q_1, \dotsc, q_{k_{C, {\cal T}}}
+      = \varnothing$,
+    \item if $\exists r.D \in q$, then there is an $i$ such that
+      $\set{D, r} \subseteq q_i$, and
+    \item if $\forall r.D \in q$ and $r \in q_i$, then $D \in q_i$.
+    \end{itemize}
+  \end{itemize}
+\end{Definition}
+
+\begin{Proposition}
+  \label{5.9}
+  $C$ is satisfiable with respect to ${\cal T}$ iff $L({\cal A}_{C,
+    {\cal T}}) \ne \varnothing$.
+\end{Proposition}
+
+\begin{Proof}[\cref{5.9}]
+  Let $T$ be a $k_{C, {\cal T}}$-ary $\Sigma_{C, {\cal T}}$-tree and
+  $R$ an accepting run of ${\cal A}_{C, {\cal T}}$ on this tree. The
+  interpretation $I_R$ is defined as follows:
+  \begin{itemize}
+  \item $\Delta^{I_R} := \set{u \in \set{0, \dotsc, k_{C, {\cal T}} -
+        1}^*; R(u) \ne \varnothing}$,
+  \item $A^{I_R} := \set{u \in \Delta^{I_R}; A \in T(u)}$, and
+  \item $r^{I_R} := \set{(u, ui); r \in R(ui)}$.
+  \end{itemize}
+
+  We claim that for $D \in S_{C, {\cal T}}$, we have that $D \in R(u)$
+  implies $u \in D^{I_R}$. We proceed to show this claim by induction
+  on the structure of $D$.
+  \begin{description}
+  \item[$D = A \in {\cal N}_C$:] $A \in R(u)$ implies $A \in T(u)$,
+    and thus $u \in A^{I_R}$.
+  \item[$D = \neg A, A \in {\cal N}_C$] $\neg A \in R(u)$
+    implies that $A \not\in R(u)$, since $R(u)$ is an Hintikka set. Thus
+    $u \not\in A^{I_R}$, \ie $u \in (\neg A^{I_R})$.
+  \item[$D = C_1 \sqcap C_2$] Then $C_1 \sqcap C_2 \in R(u)$ implies
+    $\set{C_1, C_2} \in R(u)$, and thus $u \in C_1^{I_R}$ and $u \in
+    C_2^{I_R}$ follows by induction. This yields $u \in (C_1 \sqcap
+    C_2)^{I_R}$.
+  \item[$D = C_1 \sqcup C_2$] This case can be treated similarly.
+  \item[$D = \exists r.E$] There is an $i$ ($0 \leq i < k_{C, {\cal
+        T}}$) such that $\set{E, r} \in R(ui)$. Consequently, $(u, ui)
+    \in r^{I_R}$ and $ui \in E^{I_R}$ (by induction). This shows $u
+    \in (\exists r.E)^{I_R}$.
+  \item[$D = \forall r.E$] This case can be treated similarly.
+  \end{description}
+
+  Since $R$ is an accepting run, we have $C \in R(\epsilon)$, and thus
+  $\epsilon \in C^{I_R}$. It remains to show that $I_R$ is a model of
+  ${\cal T}$. Let $u \in \Delta^{I_R}$ and $D \sqsubseteq E \in {\cal
+    T}$. We must show that $u \in D^{I_R}$ implies $u \in
+  E^{I_R}$. However, this is an immediate consequence of the fact that
+  $u \in (\nnf D \sqcup E)^{I_R}$, since $\nnf D \sqcup E \in R(u)$,
+  because $R(u)$ is an Hintikka set.
+
+  Assume that $C$ is satisfiable with respect to ${\cal T}$ and let
+  $I$ be a model of $C$ with respect to ${\cal T}$ with $d_0 \in
+  C^I$. We define mappings
+  \begin{align*}
+    L: \set{0, \dotsc, k_{C, {\cal T}} - 1}^* & \to \Delta^I \cup
+    \set{\varnothing} \\
+    T: \set{0, \dotsc, k_{C, {\cal T}} - 1}^* & \to \Sigma_{C, {\cal
+        T}} \\
+    R: \set{0, \dotsc, k_{C, {\cal T}} - 1}^* & \to Q
+  \end{align*}
+  inductively as follows:
+  \begin{align*}
+    L(\epsilon) & := d_0 \in C^I \\
+    T(\epsilon) & := \set{A \in S_{C, {\cal T}} \cap {\cal N}_C; d_0
+      \in A^I} \\
+    R(\epsilon) & := \set{D \in S_{C, {\cal T}}; d_0 \in D^I} \cup
+    \set{r_0},\ \text{where}
+  \end{align*}
+  $r_0$ is an arbitrary role name in $R_{C, {\cal T}}$.
+  Assume $d = L(u)$ and that $T(u)$, $R(u)$ are already defined such
+  that
+  \begin{align*}
+    T(u) & = \set{A \in S_{C, {\cal T}} \cap {\cal N}_C; d \in A^I} \\
+    R(u) & = \set{D \in S_{C, {\cal T}}; d \in D^I} \cup \set{r_0}\
+    \text{for some role}\ r.
+  \end{align*}
+  Consider an arbitrary enumeration
+  \begin{equation*}
+    \exists r_1.D_1, \dotsc, \exists r_k.D_k
+  \end{equation*}
+  of the different existential restrictions in $R(u)$. We know that $k
+  \leq k_{C, {\cal T}}$ and $d \in (\exists r_i. D_i)^I$ for any $1
+  \leq i \leq k$, there are elements $d_1, \dotsc, d_k \in \Delta^I$
+  such that $(d, d_i) \in r_i^I$ and $d_i \in D_i^I$ for $1 \leq i
+  \leq k$.
+
+  We define
+  \begin{align*}
+    L(u(i - 1)) & := d_i \\
+    T(u(i - 1)) & := \set{A \in S_{C, {\cal T}} \cap {\cal N}_C; d_i
+      \in A^I} \\
+    R(u(i - 1)) & := \set{D \in S_{C, {\cal T}}; d_i \in D^I} \cup
+    \set{r_i}.
+  \end{align*}
+  For $k \leq j < k_{C, {\cal T}}$, we define
+  \begin{equation*}
+    L(uj) = T(uj) = R(uj) := \varnothing.
+  \end{equation*}
+  If $R(u) = \varnothing$, then we define for all $0 \leq i < k_{C,
+    {\cal T}}$:
+  \begin{equation*}
+    L(ui) = T(ui) = R(ui) := \varnothing.
+  \end{equation*}
+
+  Claim: $T$ is a $k_{C, {\cal T}}$-ary $\Sigma_{C, {\cal T}}$-tree
+  and $R$ is an accepting run of ${\cal A}_{C, {\cal T}}$ on $T$.
+  \begin{enumerate}
+  \item $T$ is a mapping $\set{0, \dotsc, k_{C, {\cal T}} - 1}^* \to
+    \Sigma_{C, {\cal T}}$.
+  \item $R$ is indeed a mapping $\set{0, \dotsc, k_{C, {\cal T}} -
+      1}^* \to Q$: $R(u) = \varnothing$ or otherwise
+    \begin{itemize}
+    \item it contains exactly one role name,
+    \item if $D \sqsubseteq E \in {\cal T}$, then $L(u) \in (\nnf D
+      \sqcup E)^I$, and thus $(\nnf D \sqcup E) \in R(u)$ by
+      definition of $R(u)$, and
+    \item if $C_1 \sqcap C_2 \in R(u)$, then $L(u) \in (C_1 \sqcap
+      C_2)^I$, and thus $L(u) \in C_1^I$, $L(u) \in C_2^I$. This
+      yields $C_1, C_2 \in R(u)$.
+    \item The other Hintikka set properties can be shown similarly.
+    \end{itemize}
+  \item $R$ is indeed a run:
+    \begin{itemize}
+    \item $R(u) \cap {\cal N}_C = T(u)$ follows from the definition of
+      $R(u)$ and $T(u)$,
+    \item if $R(u) = \varnothing$, then $R(u0) = \varnothing, \dotsc,
+      R(u(k_{C, {\cal T}})) = \varnothing$ by definition,
+    \item if $\exists r_i.D_i \in R(u)$, then $\set{D_i, r_i} \in
+      R(u(i - 1))$ by definition, and
+    \item if $\forall r.D \in R(u)$ and $r \in R(u(i - 1))$, then we
+      know $(L(u), L(u(i - 1))) \in r^I$, and thus $L(u) \in (\forall
+      r.D)^I$ implies $L(u(i - 1)) \in D^I$, which yields $D \in R(u(i
+      - 1))$.
+    \end{itemize}
+  \item $R$ is accepting, since $d_0 \in C^I$ yields $C \in
+    R(\epsilon)$.
+  \end{enumerate}
+
+  Note that this direction of the proof does not need the tree model
+  property.
+\end{Proof}
+
+\begin{Theorem}
+  \label{5.10}
+  Satisfiability in $\ALC$ with respect to general TBoxen can be
+  decided in $\ExpTime$.
+\end{Theorem}
+
+\begin{Proof}[\cref{5.10}]
+  Since the cardinality of $S_{C, {\cal T}}$ and $R_{C, {\cal T}}$ as
+  well as the number $k_{C, {\cal T}}$ are linear in the size of $C$
+  and ${\cal T}$, the size of $A_{C, {\cal T}}$ (\ie of $Q$,
+  $\Sigma_{C, {\cal T}}$ and $\Delta$) is exponential in the size of
+  $C, {\cal T}$ (recall $\abs{\Delta} \leq \abs{\Sigma_{C, {\cal T}}}
+    \cdot \abs{Q}^{K_{C, {\cal T}} + 1}$). The emptiness test is
+    polynomial in the size of $A_{C, {\cal T}}$.
+\end{Proof}
+
+\section{Structural approaches}
+Early description logic systems used logics that were not closed under
+all boolean operators. In particular, disjunction ($\sqcup$) and
+negation ($\neg$) were missing. For these, subsumption cannot be
+reduced to satisfiability. These systems used so-called structural
+subsumption algorithms, which proceed in two phases:
+\begin{enumerate}
+\item normalize the concept descriptions, and
+\item compare the syntactic structure of the normalized descriptions.
+\end{enumerate}
+
+In the following, we consider two simple description logics for which
+there are polynomial structural subsumption algorithms:
+\begin{enumerate}
+\item $\FLz$, which has conjuction ($\sqcap$), value restrictions
+  ($(\forall r.C)$), and the top concept ($\top$), and
+\item $\EL$, which has conjunction ($\sqcap$), existential
+  restrictions ($(\exists r.C)$), and the top concept ($\top$).
+\end{enumerate}
+
+\subsection{Subsumption in $\FLz$}
+Normalization of $\FLz$-concept descriptions proceeds in two steps:
+\begin{enumerate}
+\item First, distribute value restrictions of conjunctions and remove $\top$
+  using the following (equivalence preserving) rules:
+  \begin{itemize}
+  \item $\top \sqcap C \to C$,
+  \item $C \sqcap \top \to C$,
+  \item $\forall r.\top \to \top$, and
+  \item $\forall r.(C \sqcap D) \to \forall r.C \sqcap \forall r.D$.
+  \end{itemize}
+
+  By applying these relus, every $\FLz$-concept description can be
+  transformed into a description that is $\top$ or a conjunction of
+  descriptions of the form
+  \begin{equation*}
+    \forall r_1. \forall r_2. \dotsm \forall r_k.A
+  \end{equation*}
+  for $k \geq 0$ role names $r_1, \dotsc, r_k$, and $A \in {\cal
+    N}_C$.
+
+  We write $\forall r_1 \dotsm r_k.A$ in place of $\forall r_1.\forall
+  r_2. \dotsm \forall r_k.A$, where $r_1 \dotsm r_k$ is viewed as a
+  word over the alphabet ${\cal N}_R$ of all role names.
+
+  As an example, consider
+  \begin{align*}
+    \forall r_1.\left(\forall r_2. A \sqcap \forall r_1 \left(A \sqcap
+      B\right)\right) \sqcap A,\ \text{which is represented as} \\
+  \forall r_1 r_2. A \sqcap \forall r_1 r_1. A \sqcap \forall
+  r_1r_1. B \sqcap \forall \epsilon.A.
+  \end{align*}
+\item Then group the conjuncts according to concept names: Instead of
+  \begin{align*}
+    \forall w_1.A \sqcap \dotsb \sqcap \forall w_l.A,\ \text{we write} \\
+    \forall \set{w_1, \dotsc, w_l}.A,\ \text{where}
+  \end{align*}
+  $\set{w_1, \dotsc, w_l}$ is a finite set of words over ${\cal N}_R$,
+  \ie a language.
+
+  Applied to the example above, this yileds
+  \begin{equation*}
+    \forall \set{r_1r_2, r_1r_2, \epsilon}. A \sqcap \forall \set{r_1r_1}.B.
+  \end{equation*}
+\end{enumerate}
+
+In order to represent $\top$ also in this way, and to compare concept
+descriptions using different sets of concept names, we define that
+$\forall \varnothing.A$ (where $A$ is an arbitrary concept name) is
+equivalent to $\top$.
+
+Iwe we use the concept names $A, B$, then we obtain the following
+normal forms:
+\begin{align*}
+  T & \leadsto \forall \varnothing.A \sqcap \forall  \varnothing.B,\
+  \text{and} \\
+  \forall r_1.\left(\forall r_2.\left(A \sqcap \forall
+      r_1.A\right)\right) & \leadsto \forall \set{r_1r_2, r_1r_2r_1}.A
+  \sqcap \forall \varnothing.B.
+\end{align*}
+
+Given a finite set of concept names $\set{A_1, \dotsc, A_n}$ and an
+$\FLz$-concept description $C$ containing only these concept names,
+this description can be normalized to an equvilant normal form
+\begin{equation*}
+  \NF{C} = \forall L_1.A_1 \sqcap \dotsb \sqcap \forall L_n.A_n,\ \text{where}
+\end{equation*}
+$L_1, \dotsc, L_n$ are finite languages over the alphabet ${\cal
+  N}_R$.
+
+Note that the semantics of $\NF{C}$ is given by the fact that $\forall
+\set{w_1, \dotsc, w_l}.A_i$ stands for
+\begin{equation*}
+  \forall w_1.A_i \sqcap \dotsb \sqcap \forall w_l.A_i,\ \text{and}
+\end{equation*}
+that $\forall r_1 \dotsm r_k.A_1$ stands for
+\begin{equation*}
+  \forall r_1.\forall r_2. \dotsm \forall r_k. A_i.
+\end{equation*}
+
+\begin{Proposition}
+  \label{5.11}
+  Let $C, D$ be $\FLz$-concept descriptions containing only the
+  concept names $\set{A_1, \dotsc, A_n}$ and
+  \begin{align*}
+    \NF{C} & = \forall L_1.A_1 \sqcap \dotsb \sqcap \forall L_n.A_n,\
+    \text{and} \\
+    \NF{D} & = \forall M_1.A_1 \sqcap \dotsb \sqcap \forall M_n.A_n
+  \end{align*}
+  be their corresponding normal forms. Then
+  \begin{equation*}
+    C \sqsubseteq D\ \text{iff}\ M_1 \subseteq L_1 \wedge \dotsb
+    \wedge M_n \subseteq L_n.
+  \end{equation*}
+\end{Proposition}
+
+\begin{Proof}[\cref{5.11}]
+  Assume $M_1 \subseteq L_1, \dotsc, M_n \subseteq L_n$. Then the
+  claim holds trivially, since all value restrictions in $\NF(D)$
+  also occur in $\NF(C)$.
+
+  Assume now that $C \sqsubseteq D$, and that $M_i \not\sqsubseteq
+  L_i$ fro some $i$, \ie there is a $w = r_1 \dotsm r_k \in M_i
+  \setminus L_i$. We construct an interpretation $I$ containing an
+  element $d_0$ such that $d_0 \in C^I \setminus D^I$:
+  \begin{itemize}
+  \item $\Delta^I := \set{d_0, \dotsc, d_k}$,
+  \item $A_j^I := \Delta^I$ for $i \ne j$ and $A_i^I := \Delta^
+    \setminus \set{d_k}$, and
+  \item $r^I := \set{(d_j, d_{j + 1}); r = r_{j + 1}}$.
+  \end{itemize}
+  \begin{equation*}
+    d_0 \xrightarrow{r_1} d_1 \xrightarrow{r_2} \dotsb
+    \xrightarrow{r_k} d_k,\ \text{where}
+  \end{equation*}
+  $d_0, d_1, \dotsc$ belong to $A_i$, and $d_k$ belongs to $A_j$ (for
+  $i \ne j$), but not to $A_i$.
+
+  We have
+  \begin{itemize}
+  \item $d_0 \not\in D^I$ since $d_0 \not\in\left(\forall r_1. \dotsb
+      \forall r_k. A_i\right)^I$, and
+  \item $d_0 \in C^I$ since $d_0 \in (\forall w. A_j)^I$ if $w
+    \ne r_1 \dotsm r_k$ or $j \ne i$.
+  \end{itemize}
+
+  Thus, we have $C \not\sqsubseteq D$ since $C^I \not\subseteq D^I$.
+\end{Proof}
+
+\begin{Corollary}
+  \label{5.12}
+  Subsumption of $\FLz$-concepts can be decided in polynomial time.
+\end{Corollary}
+
+\begin{Proof}[\cref{5.12}]
+  The transformation into normal form requires only polynomial time
+  (exercise!). Testing inclusions of finite languages that are given
+  explicitly as a list of their elements can also be done in
+  polynomial time: To decide $M_i \subseteq L_i$, we need to consider
+  every word $w \in M_i$, and test for every $u \in L_i$ wether $v =
+  w$. One such test requires $\min\set{\abs{u}, \abs{w}}$ comparisons
+  of letters, and $\abs{M_i} \cdot \abs{L_i}$ such tests are
+  required. Thus, the overall time required for testing $M_i \subseteq
+  L_i$ is clearly polynomial in the size of $M_i$ and $L_i$, where
+  \begin{align*}
+    \size(M_i) & = \sum_{w \in M_i}{\abs{w}},\ \text{and} \\
+    \size(L_i) & = \sum_{w \in L_i}{\abs{w}}.
+  \end{align*}
+\end{Proof}
+
+If the finite languages are not explicitly given as lists of their
+elements, but by an acyclic automaton, then the inclusion test becomes
+harder. The reason is that acyclic automata of the size $O(n)$ can
+accept finite languages of size $O(2^n)$.
+
+\begin{equation*}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.5cm,
+                    semithick]
+  \node[initial,state] (q0) {$q_0$};
+  \node[state] (q1) [right of=q0] {$q_1$};
+  \node (dots) [right of=q1] {\dotso};
+  \node[accepting,state] (qn) [right of=dots] {$q_n$};
+
+  \path (q0) edge [bend left] node [above] {$a$} (q1);
+  \path (q0) edge [bend right] node [below] {$b$} (q1);
+
+  \path (q1) edge [bend left] node [above] {$a$} (dots);
+  \path (q1) edge [bend right] node [below] {$b$} (dots);
+
+  \path (dots) edge [bend left] node [above] {$a$} (qn);
+  \path (dots) edge [bend right] node [below] {$b$} (qn);
+\end{tikzpicture}
+\end{equation*}
+
+$A_n$ has size $O(n)$, but it accepts all words over $\set{a, b}$ of
+length $n$, \ie $2^n$ words.
+
+\begin{Proposition}[Garret/Johnson]
+  \label{5.13}
+  The inclusion problem for acyclic finite automata is $\coNP$-complete,
+  \ie the question whether the languages accepted by two given acyclic
+  finite are not in an inclusion relation is $\NP$-complete.
+\end{Proposition}
+
+We can use this to show that the subsumption problem in $\FLz$ with
+respect to acyclic TBoxen is also $\coNP$-hard.
+
+\begin{Corollary}[Nebel]
+  \label{5.14}
+  Subsumption in $\FLz$ with respect to acyclic TBoxen is $\coNP$-hard.
+\end{Corollary}
+
+\begin{Proof}[\cref{5.14}, sketch]
+  given an acyclic finite automaton ${\cal A}$ with initial state
+  $q_0$, we define an acyclic $FLz$-TBox. As concept names, we take
+  the states $Q$ of ${\cal A}$ and an additional state
+  $\Fin$. As role names, we take the elements of the
+  alphabet $\Sigma$. For every $q \in Q$, the TBox ${\cal T}_{\cal A}$
+  contains the following definitions:
+  \begin{equation*}
+    q \equiv \bigsqcap_{q \xrightarrow{r} q' \in \Delta} \forall r.q' \sqcap \begin{cases}
+      \Fin, & \text{if}\ q\ \text{is a final state},\
+      \text{and} \\
+      \top, & \text{otherwise}
+    \end{cases}
+  \end{equation*}
+  Since ${\cal A}$ is acyclic, ${\cal T}_{\cal A}$ is acyclic as
+  well. Let ${\cal B}$ be another acyclic automaton with initial state
+  $p_0$, and such that its set of states is disjoint with $Q$. The
+  TBox ${\cal T}_{\cal B}$ is then defined analogously to ${\cal T}_{\cal
+    A}$. Let ${\cal T} := {\cal T}_{\cal A} \cup {\cal T}_{\cal B}$.
+
+  We claim that $p_0 \sqsubseteq_{\cal T} q_0$ iff $L({\cal A})
+  \subseteq L({\cal B})$, where $p_0$ is the initial state of ${\cal
+    B}$.
+
+  It is easy to see that the expansion with respect to ${\cal T}$ of
+  $p_0$ and $q_0$ respectively have the normal form $\forall L({\cal
+    B}).\Fin$ and $\forall L({\cal A}).\Fin$. The claim then follows
+  from \cref{5.11}.
+
+  Thus, we have reduced the inclusion problem for acyclic automata to
+  the subsumption problem. Obviously, this reduction can be realized
+  in polynomial time.
+\end{Proof}
+
+Note that, conversely, the subsumption problem in $\FLz$ with respect
+to acyclic TBoxen can also be reduced in polynomial time to the
+inclusion problem for acyclic finite automata. Thus, the subsumption
+problem is actually $\coNP$-complete.
+
+Note that with respect to general TBoxen, subsumption in $\FLz$ is
+$\ExpTime$-complete.
+
+\subsection{Subsumption in $\EL$}
+Subsumption between $\EL$-concept descriptions can be described as
+follows:
+\begin{itemize}
+\item Translate the descriptions $C, D$ into description trees $T_C,
+  T_D$, and
+\item test whether there is a homomorphism from $T_D$ to $T_C$. If
+  there is, then $C \sqsubseteq D$, and $C \not\sqsubseteq D$ otherwise.
+\end{itemize}
+The existence of a homomorphism between trees can be decided in
+polynomial. In contrast to $\FLz$ subsumption in $\EL$ stays
+polynomial even with respect to general TBoxen.
+
+To prove this result, we describe an algorithm that classifies the
+general TBox, \ie computes all subsumption relationships between
+concept names occuring in it:
+\begin{enumerate}
+\item Normalize the general TBox,
+\item translate the normalized TBox into a graph,
+\item complete the graph, and
+\item read off the subsumption relationships.
+\end{enumerate}
+
+Concerning the normalization, we say that a general TBox ${\cal T}$ is
+normalized if every GCI in ${\cal T}$ is of the form
+\begin{align*}
+  A_1 \sqcap A_2 & \sqsubseteq B,\ \text{or} \\
+  A & \sqsubseteq \exists r.B,\ \text{or} \\
+  \exists r.A & \subseteq B,
+\end{align*}
+where $A, A_1, A_2, B \in {\cal N}_C \cup \set{\top}$ and $r \in
+{\cal N}_r$.
+
+\begin{Lemma}
+  \label{5.15}
+  Every general $\EL$-TBox ${\cal T}$ can be transformed in polynomial
+  time into a normalized general $\EL$-TBox $\hat{{\cal T}}$ such that
+  \begin{equation}
+    \label{eq:5.15}
+    A \sqsubseteq_{\cal T} B\ \text{iff}\ A \sqsubseteq_{\hat{\cal T}} B,
+  \end{equation}
+  where $A, B \in \set{\top} \cup \set{P \in {\cal N}_C; P\ \text{is a
+      a concept name in}\ {\cal T}}$.
+\end{Lemma}
+
+\begin{Proof}[\cref{5.15}, sketch]
+  The normal form can be computed using the following rules:
+  \begin{description}
+  \item[(NF1)] $C \sqcap \hat{D} \sqsubseteq E \leadsto \hat{D}
+    \subseteq A, C \sqcap A \sqsubseteq E$, where $\hat{D} \not\in
+    {\cal N}_C \cup \set{\top}$, and $A$ is a new concept name.
+  \item[(NF2)] $\exists r.\hat{D} \sqsubseteq E \leadsto \hat{D}
+    \sqsubseteq A, \exists r.A \sqsubseteq E$, where $\hat{D} \not\in
+    \set{\top} \cup {\cal N}_C$, and $A$ is a new concept name.
+  \item[(NF3)] $B \sqsubseteq \exists r.\hat{C} \leadsto B \sqsubseteq
+  \exists r.A, A \sqsubseteq \hat{C}$, where $\hat{C} \not\in {\cal
+    N}_C \cup \set{\top}$, and $A$ is a new concept name.
+\item[(NF4)] $\hat{C} \sqsubseteq \hat{D} \leadsto \hat{C} \sqsubseteq
+  A$, $A \sqsubseteq \hat{D}$, where $\hat{C}, \hat{D} \not\in
+  \set{\top} \cup {\cal N}_C$, and $A$ is a new concept name.
+\item[(NF5)] $C \sqsubseteq D \sqcap E \leadsto C \sqsubseteq D$, $C
+  \sqsubseteq E$.
+  \end{description}
+
+  We claim that rule application terminates in polynomial time, and
+  that the obtained general TBox $\hat{\cal T}$ is normalized and
+  satisfies \cref{eq:5.15} (exercise).
+
+  Note that if (NF1) and (NF2) are applied with higher priority, then
+  normalization needs only linear time.
+\end{Proof}
+
+Construct a graph $(V, V \times V, S, R)$ of a normalized general
+$\EL$-TBox ${\cal T}$, where
+\begin{itemize}
+\item $V := {\cal N}_C \cup \set{\top}$
+\item $S: V \to \powerset{{\cal N}_C \cup \set{\top}}$ is a node
+  labeling, and
+\item $R: V \times V \to \powerset{{\cal N}_R}$ is an edge labeling.
+\end{itemize}
+
+We initialize $S$ and $R$ by
+\begin{align*}
+  S(A) & := \set{A, \top},\ \text{and} \\
+  R(A, B) & := \varnothing.
+\end{align*}
+
+We want the following invariants to hold during the completion of the
+graph:
+\begin{itemize}
+\item $B \in S(A) \then A \sqsubseteq_{\cal T} B$,
+\item $r \in R(A, B) \then A \sqsubseteq_{\cal T} \exists r.B$.
+\end{itemize}
+
+Obviously, the initial labelings satisfy these invariants.
+
+To complete the graph, we apply the following rules:
+\begin{description}
+\item[(R1)] If $A_1 \sqcap A_2 \sqsubseteq B \in {\cal T}$, and $A_1,
+  A_2 \in S(A)$, then we add $B$ to $S(A)$.
+\item[(R2)] If $A_1 \sqsubseteq \exists r.B \in {\cal T}$, and $A_1
+  \in S(A)$, then we add $r$ to $R(A, B)$.
+\item[(R3)] If $\exists r.B_1 \sqsubseteq A_1 \in {\cal T}$, $B_1 \in
+  S(B)$, and $r \in R(A, B)$, then we add $A_1$ to $S(A)$.
+\end{description}
+
+Note that we only apply rules if the change something.
+
+\begin{Lemma}
+  \label{5.16}
+  The rules (R1)---(R3) preserve the invariants.
+\end{Lemma}
+
+\begin{Proof}[\cref{5.16}]
+  For (R1) and (R2), the claim holds trivially. Consider (R3): Let
+  $\exists r.B_1 \sqsubseteq A_1 \in {\cal T}$, $B_1 \in S(B)$, and $r
+  \in R(A, B)$. This implies $\exists r.B_1 \sqsubseteq_T A_1$, $B
+  \sqsubseteq_{\cal T} B_1$, and $A \sqsubseteq_{\cal T} \exists
+  r.B$, since the invariants hold before the application. From these,
+  it follows that $\exists r.B_1 \sqsubseteq_{\cal T} A_1$, $\exists
+  r.B \sqsubseteq_{\cal T} \exists r.B_1$, and $A \sqsubseteq_{\cal T}
+  \exists r.B$, and this in turn implies $A \sqsubseteq_{\cal T} A_1$.
+\end{Proof}
+
+\begin{Proposition}
+  \label{5.17}
+  \begin{enumerate}
+  \item Rule application terminates after a polynomial number of
+    steps, and
+  \item if no more rules are applicable, then
+    \begin{equation*}
+      A \sqsubseteq_{\cal T} B\ \text{iff}\ B \in S(A).
+    \end{equation*}
+  \end{enumerate}
+\end{Proposition}
+
+\begin{Proof}[\cref{5.17}]
+  \begin{enumerate}
+  \item Termination in polynomial time is a consequence of the
+    following facts:
+    \begin{itemize}
+    \item The number of nodes in $V$ is linear and the number of edges
+      is quadratic in the size of ${\cal T}$,
+    \item the size of the label sets is linear in the size of ${\cal
+        T}$, and
+    \item applying one rule needs polynomial time.
+    \end{itemize}
+  \item $B \in S(A) \then A \sqsubseteq_{\cal T} B$ follows from
+    \cref{5.16} and the fact that the initial graph satisfies then
+    invarient. Assume now that $B \not\in S(A)$. We show that $A
+    \not\sqsubseteq_{\cal T} B$ by constructing the following model of
+    ${\cal T}$, violating the subsumption relationship:
+    \begin{itemize}
+    \item $\Delta^I := V$,
+    \item ${B'}^I := \set{A'; B' \in S(A')}$ for all $B' \in {\cal
+        N}_C$, and
+    \item $r^I := \set{(A', B'); r \in R(A', B')}$ for all $r \in
+      {\cal N}_R$.
+    \end{itemize}
+    Since $A \in S(A)$, we have $A \in A^I$, but $B \not\in S(A)$
+    shows that $A \not\in B^I$. It remains to show that $I$ is a model
+    of ${\cal T}$. Consider a GCI in ${\cal T}$:
+    \begin{itemize}
+    \item $A_1 \sqcap A_2 \sqsubseteq C \in {\cal T}$:
+      Let $D \in (A_1 \sqcap A_2)^I$, \ie $D \in A_1^I$ and $D \in
+      A_2^I$. Then $A_1 \in S(D)$, and $A_2 \in S(D)$. Since (R1) no
+      longer applies, we have $C \in S(D)$, and thus $D \in C^I$.
+    \item $A_1 \sqsubseteq \exists r.C \in {\cal T}$. Let $D \in
+      A_1^I$, \ie $A_1 \in S(D)$. Then (R2) yields $r \in R(D, C)$,
+      and thus $(D, C) \in r^I$. Finally, $C \in C^I$ yields $D \in
+      (\exists r.C)^I$.
+    \item $\exists r. B_1 \sqsubseteq A_1 \in {\cal T}$. Let $D \in
+      (\exists r. B_1)^I$, \ie there is $C$ with $(D, C) \in r^I$ and
+      $C \in B_1^I$. Thus, we have $r \in R(D, C)$ and $B_1 \in
+      S(C)$, and (R3) yields $A_1 \in S(D)$, \ie $D \in A_1^I$.
+    \end{itemize}
+  \end{enumerate}
+\end{Proof}
+
+The following theorem is an immediate consequence of \cref{5.17}.
+
+\begin{Theorem}
+  \label{5.18}
+  Subsumption in $\EL$ with respect to general TBoxen can be decided
+  in polynomial time.
+\end{Theorem}
+
+\chapter{Complexity of reasoning in Description Logics}
+In the following, we consider the computational complexity of
+satisfiability of $\ALC$-concept descriptions
+\begin{itemize}
+\item without a TBox ($\PSpace$-complete), and
+\item with respect to a general TBox ($\ExpTime$-complete).
+\end{itemize}
+These results also hold for consistency of ABoxen, and acyclic TBoxen
+yield the same results as empty ones, but we will not consider these
+extensions here for the sake of simplicity.
+
+Recall that we have
+\begin{equation*}
+  \operatorname{P} \subseteq \NP \subseteq \PSpace = \NPSpace
+  \subseteq \ExpTime,\ \text{and}
+\end{equation*}
+that $P \subset \ExpTime$ is a strict inclusion. However, nothing
+is known for the other inclusions.
+
+\section{Satisfiability in $\ALC$ without TBoxen}
+The tableau-based algorithm described earlier does not run in
+polynomial space.
+\begin{NumberedExample}
+  \label{6.1}
+  \begin{align*}
+    C_0 & := B \\
+    C_{i + 1} &:= \exists r.A \sqcap  \exists r.(\neg A) \sqcap \forall
+    r. C_i
+  \end{align*}
+  The size of $C_n$ is linear in $M$. However, the tableau algorithm
+  applied to ${\cal A}_n := \set{C_n(a)}$ generates a complete ABox
+  containing at least $2^n$ individuals.
+\end{NumberedExample}
+
+However, the algorithm can be modified such that it uses only
+polynomial space. First note that $\PSpace = \NPSpace$ implies that we
+can ignore the non-determinism of the $\sqcup$-rule, \ie assume that
+each application of this rule replaces an ABox by only one new
+ABox. Thus, we always have just one ABox during the run of the
+algorithm. Since we consider satisfiability, we start with an ABox
+${\cal A}_0 = \set{C_0(a_0)}$. The new individuals added by the
+$\exists$-rule together with $a_0$ form a tree (with root $a_0$) such
+that
+\begin{itemize}
+\item each individual has at most $\abs{C_0}$ successors (more
+  precisely, this number is bounded by the number of different
+  existential restrictions in $C_0$), and
+\item the depth of the tree is bounded by $\abs{C_0}$ (more
+  precisely, the role depth of $C_0$, \ie the maximal nesting of
+  existential and value restrictions).
+\end{itemize}
+Instead of generating a complete ABox containing this whole tree, the
+$\PSpace$ algorithm generates all the branches of the tree one after
+another. Branches can be considered separately, since a clash depends
+only on one node. Keeping one such branch, together with backtracking
+information (\ie which successor to consider next) in memory requires
+only polynomial space:
+\begin{itemize}
+\item the length of a branch is linear in $\abs{C_0}$,
+\item each node is labeled with at most $\abs{C_0}$ subconcepts of
+  $C_0$, and
+\item the possible number of successors is also bounded by $\abs{C_0}$.
+\end{itemize}
+
+\begin{Proposition}
+  \label{6.2}
+  Satisfiability of $\ALC$-concept descriptions (without a TBox) is in
+  $\PSpace$.
+\end{Proposition}
+
+Next, we show that we cannot do better, \ie that this problem is also
+$\PSpace$-hard. We do this by reducing  known $\PSpace$-hard problem
+to the satisfiability problem. Instead of the standard QBF problem
+(validity of quantified boolean formulae), we use a game-theoretic
+version of QBF, since a similar problem can be used to show
+$\ExpTime$-hardness for the case of general TBoxen.
+
+As an example, consider the formula
+\begin{equation*}
+  \phi_1 = (p_1 \vee \neg p_2) \wedge (\neg p_1 \vee p_2) \wedge (p_3
+  \vee p_4).
+\end{equation*}
+The first player is assigned the variables $p_1, p_3$ and is looking
+to satisfy the formula. The second player is assigned the variables
+$p_2, p_4$ and is looking for an assignment such that the formula
+evaluates to false.
+
+\begin{Definition}[$\PSpace$ game]
+  \label{6.3}
+  A $\PSpace$ game is of the form $G = (\phi, \Gamma_1, \Gamma_2, <)$,
+  where $\phi$ is a formula of propositional logic, $\Gamma_1 \cap
+  \Gamma_2 = \varnothing$, $\Gamma_1 \cup \gamma_2$ is a partition of
+  the variables occuring in $\phi$ such that $\abs{\gamma_1} =
+  \abs{\gamma_2}$, and $<$ is a total order on $\Gamma_1 \cup
+  \Gamma_2$.
+\end{Definition}
+
+Intuitively, the game is played by two players, Player~1 and
+Player~2. It proceeds in $n = \abs{\gamma_1} + \abs{\gamma_2}$
+rounds. Player~1 starts by choosing a truth value for the least
+variable in $\Gamma_1$ (with respect to $<$), then Player~2 chooses a
+value for the least variable in $\Gamma_2$. This is continued, \ie the
+players alternate in choosing truth values for the least of ``their''
+variables not yet having a value until all the variables in $\Gamma_1
+\cup \Gamma_2$ have a truth value. Player~2 has won the game if the
+formula $\phi$ evaluates to $0$ with respect to the valuation obtained
+during the game.
+
+The question is now whether given a $\PSpace$ game, Player~2 has a
+winning strategy, \ie can always choose appropriate truth values, no
+matter what Player~1 does. To define this more formally, let $G =
+(\phi, \Gamma_1, \Gamma_2, <)$ be a $\PSpace$ game, and assume that
+\begin{align*}
+  \Gamma_1 & = \set{p_1, p_3, \dotsc, p_{n - 1}},\quad & \text{where}\
+  p_1 < p_3 < \dotsb < p_{n - 1} \\
+  \Gamma_2 & = \set{p_2, p_4, \dotsc, p_n},\quad & \text{where}\ p_2 <
+  p_4 < \dotsb < p_n.
+\end{align*}
+A configuration of this game is a word $t \in \set{0, 1}^i$ for some
+$i \leq n$. Intuitively, the $l$-th value in $t$ assigns a truth value
+to $p_l$. The initial configuration is the empty word $\epsilon$.
+
+\begin{Definition}[Winning strategy]
+  \label{6.4}
+  Given a $\PSpace$ game $G = (\phi, \Gamma_1, \Gamma_2, <)$ as
+  described above, a winning strategy for Player~2 is a node-labeled
+  tree $(V, E, l)$ of depth $n$, where $l$ assigns a configuration to
+  each node $v \in V$ such that
+  \begin{itemize}
+  \item the root is labeled with the initial configuration,
+  \item if $l(v) = t$ with $\abs{t}$ even (\ie it is Player~1's turn),
+    and $\abs{t} < n$, then $v$ has two successor nodes $v'$ and $v''$
+    with $l(v') = t0$ and $l(v'') = t1$,
+  \item if $l(v) = t$ with $\abs{t}$ odd (\ie it is Player~2's turn),
+    the $v$ has one successor $v'$ with $l(v') \in \set{t0, t1}$, and
+  \item if $l(v) = t$ with $\abs{t} = n$, then the valuation decribed
+    by $t$ evaluates $\phi$ to $0$.
+  \end{itemize}
+\end{Definition}
+
+\begin{NumberedExample}
+  \label{6.5}
+  Let $\phi = (p_1 \wedge p_2) \vee (p_3 \wedge p_4)$.
+  Then
+  \begin{equation*}
+    \tikzstyle{every node}=[circle,draw=black,thin]
+    \tikzstyle{level 1}=[sibling distance=50mm]
+    \tikzstyle{level 2}=[sibling distance=25mm]
+    \tikzstyle{level 3}=[sibling distance=15mm]
+    \begin{tikzpicture}[baseline]
+      \node [label=above:$\epsilon$] {}
+      child { node [label=left:$0$] {}
+        child { node [label=left:$01$] {}
+          child { node [label=left:$010$] {}
+            child { node [label=below:$0100$] {}}}
+          child { node [label=right:$011$] {}
+            child { node [label=below:$0110$] {}}}}}
+      child { node [label=right:$1$] {}
+        child { node [label=right:$10$] {}
+          child { node [label=left:$100$] {}
+            child { node [label=below:$1001$] {}}}
+          child { node [label=right:$101$] {}
+            child { node [label=below:$1010$] {}}}}};
+    \end{tikzpicture}
+  \end{equation*}
+  is a winning strategy for Player~2.
+\end{NumberedExample}
+
+The existence of a winning strategy for such games is known to be a
+$\PSpace$-complete problem.
+
+\begin{Proposition}
+  \label{6.6}
+  The following problem is $\PSpace$-complete:
+  \begin{description}
+  \item[Input:] a $\PSpace$ game $(\phi, \Gamma_1, \Gamma_2, <)$,
+  \item[Question:] Does Player~2 have a winning strategy in this game?
+  \end{description}
+\end{Proposition}
+
+This problem can be reduced to the satisfiability problem of
+$\ALC$-concept descriptions. Given a $\PSpace$ game $G = (\phi,
+\Gamma_1, \Gamma_2, <)$ as introduced above, we construct an
+$\ALC$-concept description $C_G$ such that Player~2 has a winning strategy
+iff $C_G$ is satisfiable. For each propositional variable $p_i$, we
+introduce a concept name $P_i$ ($i = 1, \dotsc, n$). The concept
+description $C_\phi$ is obtained from $\phi$ by replacing $p_i$ by
+$P_i$, $\wedge$ by $\sqcap$, and $\vee$ by $\sqcup$. The concept
+description $C_G$ is the conjunction of the following descriptions:
+\begin{equation*}
+  C_G = C_1 \sqcap C_2 \sqcap C_3 \sqcap C_4,\ \text{where}
+\end{equation*}
+\begin{itemize}
+\item $C_1 = \bigsqcap_{i \in \set{0, 2, \dotsc, n - 2}}{\forall
+    r^i.\left(\exists r. \neg P_{i + 1} \sqcap \exists r. P_{i + 1}\right)}$ (\ie
+  Player~1 can choose value $0$ or $1$),
+\item $C_2 = \bigsqcap_{i \in \set{1 3, \dotsc, n - 1}}{\forall
+    r^i. \exists r. \top}$ (\ie Player~2 chooses a value for $p_{i + 1}$),
+\item $C_3 = \bigsqcap_{1 \leq i < j \leq n}{\forall
+    r^j. \left(\left(P_i \then \forall r. P_i\right) \sqcap
+      \left(\neg P_i \then \forall r. \neg P_i\right)\right)}$, where
+  $C \then D := \neg C \sqcup D$ (\ie if a truth value for $p_i$ was
+  chosen in the $i$-th move, then it remains fixed), and
+\item $C_4 = \forall r^n. \neg C_\phi$ (\ie $\phi$ evaluates to false
+  at every leaf).
+\end{itemize}
+
+\begin{Lemma}
+  \label{6.7}
+  Player~2 has a winning strategy in $G$ iff $C_G$ is satisfiable.
+\end{Lemma}
+
+\begin{Proof}[\cref{6.7}, sketch]
+  Assume that Player~2 has a winning strategy $(V, E, l)$ with root
+  $v_0$. we define the interpretation $I$ as follows:
+  \begin{itemize}
+  \item $\Delta^I := V$,
+  \item $r^I := E$, and
+  \item $p_i^I := \set{v \in V; p_i\ \text{is set to}\ 1\ \text{in}\ l(v)}$.
+  \end{itemize}
+  It is easy to see that $v_0 \in C_G^I$ (exercise).
+
+  Let now $I$ be an interpretation and $d_0 \in \Delta^I$ such that
+  $d_0 \in C_G^I$. We define a winning strategy $(V, E, l)$ with $V
+  \subseteq \N \times \Delta^I$ such that if $(i, d) \in V$, then $d$
+  is reachable from $d_0$ in $I$ by travelling $i$ steps along $r^I$
+  (strategy condition).
+  We begin with setting $V := \set{(0, d_0)}$, $E := \varnothing$,
+  $l((0, d_0)) := \epsilon$.  This initial tree is extended in rounds
+  $1, \dotsc, n$, where round $i$ adds nodes with depth $i$.
+
+  Round $i$ for odd $i$ (Player~1's turn): for all nodes $(i - 1, d)
+  \in V$, do the following:
+  \begin{itemize}
+  \item select $d', d'' \in \Delta^I$ such that $(d, d') \in r^I$,
+    $(d, d'') \in r^I$, and $d' \in (\neg p_i)^I$, $d'' \in
+    p_i^I$. Such elements exist since $d_0 \in C_1^I$, and $(i - 1,
+    d)$ satisfies the strategy condition by induction, and
+  \item add $(i, d')$ and $(i, d'')$ to $V$, the edges $((i - 1, d),
+    (i, d'))$ and $((i - 1, d), (i, d''))$ to $E$, and set $l((i, d'))
+    = l((i - 1, d))0$ and $l((i, d'')) = l((i - 1, d))1$.
+  \end{itemize}
+
+  Round $i$ for even $i$ (Player~2's turn): for all nodes $(i - 1, d)
+  \in V$, do the following:
+  \begin{itemize}
+  \item select $d' \in \Delta^I$ such that $(d, d') \in r^I$. Such an
+    element exists since $d_0 \in C_2^I$ and $(i - 1, d)$ satisfies
+    the strategy condition by induction, and
+  \item add $(i, d') \in V$, the edge $((i - 1, d), (i, d'))$ to $E$,
+    and set
+    \begin{equation*}
+      l((i, d')) = \begin{cases} l((i - 1, d))0, & \text{if}\ d'
+          \not\in p_i^I \\
+          l((i - 1, d))1, & \text{if}\ d' \in p_i^I.
+        \end{cases}
+    \end{equation*}
+    Since $d_0 \in C_3^I \cap C_4^I$, it is easy to show that this
+    indeed yields a winning strategy.
+  \end{itemize}
+\end{Proof}
+
+\Cref{6.6,6.7} show that satisfiability in $\ALC$ is $\PSpace$-hard.
+
+\begin{Theorem}
+  \label{6.8}
+  Satisfiability of the $\ALC$-concept descriptions (without TBoxen)
+  is $\PSpace$-complete.
+\end{Theorem}
+
+\section{Satisfiability in $\ALC$ with respect to general TBoxen}
+In \cref{chap:5}, we have already shown that satisfiability in $\ALC$
+with respect to general TBoxen is in $\ExpTime$. Here we show that
+this upper bound is optimal, \ie the problem is also
+$\ExpTime$-hard. To this purpose we use a variant of the game
+introduced above.
+
+\begin{Definition}[$\ExpTime$ game]
+  \label{6.9}An $\ExpTime$ game is of the form $G = (\phi_1, \Gamma_1,
+  \Gamma_2, t_0)$, where $\phi$ is a formula of propositional logic,
+  $\gamma_1 \uplus \Gamma_2$ is a partition of the variables in
+  $\phi$, and $t_0$ is an initial valuation of these variables.
+  The game is again played by Player~1 and Player~2, where Player~1
+  controls the variables in $\Gamma_1$ and Player~2 controls the
+  variables in $\Gamma_2$. The players alternate, beginning with
+  Player~1. In each move the player either
+  \begin{itemize}
+  \item chooses one of the variables under her control and flips its
+    truth value, or
+  \item decides to skip, \ie not change the current truth assignment.
+  \end{itemize}
+  Player~1 wins if the formula ever becomes true, and Player~2 wins if
+  she can prevent this from happening.
+\end{Definition}
+Note that
+\begin{itemize}
+\item variables can change their values repeatedly, not just once, and
+\item unless Player~1 wins, the game runs infinitely.
+\end{itemize}
+
+Again, we are interested in whether Player~2 has a winning
+strategy. Formally, such a strategy can be defined as follows: A
+configuration has tthe form $(i, t)$, where $i \in \set{1, 2}$
+describes which player can move next, and $t$ is the current
+valuation. The initial configuration is $(1, t_0)$. For the truth
+assignments $t, t'$ and a variable $p \in \Gamma_1 \cup \Gamma_2$, we
+say that $t'$ is a $p$-variation of $t$ if $t'$ is obtoined from $t$
+by flipping the value of $p$. It is a $\Gamma_i$-variation if $p \in
+\Gamma_i$.
+
+\begin{Definition}[Winning strategy]
+  \label{6.10}
+  Given an $\ExpTime$ game $G = (\phi, \Gamma_1, \Gamma_2, t_0)$, a
+  winning strategy for Player~2 is an infinite node-labeled tree $(V,
+  E, l)$, where $l$ assigns a configuration $l(v)$ to each node $v \in
+  V$ such that
+  \begin{itemize}
+  \item the root is labeled with the initial configuration $(1, t_0)$,
+  \item if $l(v) = (1, t)$, then $v$ has $\abs{\Gamma_1} + 1$
+    successor nodes $v_0, v_1, \dotsc, v_{\abs{\Gamma_1}}$ such that
+    $l(v_0) = (2, t)$ and $l(v_i) = (2, t_i)$, where $t_1, \dotsc,
+    t_{\abs{\Gamma_1}}$ are all $\Gamma_1$-variations of $t$,
+  \item if $l(v) = (2, t)$, then $v$ has one successor node $v'$, such
+    that $l(v') = (1, t')$, where $t' = t$ or $t'$ is a
+    $\Gamma_2$-variation of $t$, and
+  \item for each node $v$, $l(v) = (i, t)$ is such that $t$ assigns
+    $0$ to $\phi$.
+  \end{itemize}
+\end{Definition}
+
+\begin{Proposition}
+  \label{6.11}
+  The following problem is $\ExpTime$-complete. Given an $\ExpTime$
+  game $(\phi, \Gamma_1, \Gamma_2, t_0)$, does Player~2 have a winning
+  strategy for this game?
+\end{Proposition}
+
+This problem can be reduced to satisfiability in $\ALC$ with respect
+to general TBoxen.
+
+As before, we use a concept name $P_i$ for each variable $p_i \in
+\Gamma_1 \cup \Gamma_2$. In addition, we use the following concept
+names:
+\begin{itemize}
+\item $T_1, T_2$ to indicate which player's turn it is,
+\item $F_1, \dotsc, F_n$ to indicate which variable has been flipped
+  in order to reach the current configuration, and
+\item $I$ is the concept name whos satisfiability is to be tested.
+\end{itemize}
+
+The TBox ${\cal T}_G$ consists of the following GCIs:
+\begin{enumerate}
+\item $I \sqsubseteq T_1 \sqcap \bigsqcap_{p_i \in \Gamma_1 \cup
+    \Gamma_2, t_0(p_i) = 1}{P_i} \sqcap \bigsqcap_{\pi_i \in \Gamma_1 \cup
+    \Gamma_2, t_0(p_i) = 0}{\neg P_i}$,
+\item[1b.] $T_1 \sqcap T_2 \sqsubseteq \bot$,
+\item[2.] $T_1 \sqsubseteq \exists r.(\neg F_1 \sqcap \dotsb \sqcap
+  \neg F_n) \sqcap \bigsqcap_{p_i \in \Gamma_1}{\exists r. F_i}$ (if
+  it is Player~1's turn, then there are $\abs{\Gamma_1} + 1$ successor
+  nodes),
+\item[3.] $T_2 \sqsubseteq \exists r.\top$ (if it is Player~2's turn,
+  then there is a successor role),
+\item[4.] $\top \sqsubseteq \bigsqcap_{1 \leq i < j \leq n}{\neg (F_i
+    \sqcap F_j)}$ (at most one variable is flipped in each move),
+\item[5.] $\top \sqsubseteq \bigsqcap_{i = 1}^n \left(\left(P_i \then
+      \forall r.(F_i \then \neg P_i)\right) \sqcap
+    \left(\neg P_i \then \forall r.(F_i \then P_i)\right)\right)$
+  (variables that are flipped really change their values)
+\item[6.] $\top \sqsubseteq \bigsqcap_{i = 1}^n \left(\left(P_i \then
+      \forall r.(\neg F_i \then P_i)\right) \sqcap \left(\neg P_i
+      \then \forall r.(\neg F_i \then \neg P_i)\right)\right)$
+  (variables that are not flipped keep their values),
+\item[7.] $T_1 \sqsubseteq \forall r.T_2$,
+\item[8.] $T_2 \sqsubseteq \forall r.T_1$ (the players alternate), and
+\item[9.]$\top \sqsubseteq \neg C_{\phi}$ (the formula $\phi$ is never
+  satisfied).
+\end{enumerate}
+
+The construction of ${\cal T}_G$ from $G$ is polynomial, since ${\cal
+  T}_G$ contains only ten GCIs, and the size of the GCIs
+\begin{itemize}
+\item 1b, 3, 7, and 8 is constant in $\abs{\phi}$,
+\item 1, 2, 5, 6, and 9 is linear in $\abs{\phi}$, and
+\item 4 is quadratic in $\abs{\phi}$.
+\end{itemize}
+
+The following lemma states that the reduction is correct. Its proof is
+similar to the proof of \cref{6.7}.
+
+\begin{Lemma}
+  \label{6.12}
+  Player~2 has a winning strategy in $G$ iff $I$ is satisfiable with
+  respect to ${\cal T}_G$.
+\end{Lemma}
+
+This lemma, together with \cref{6.11}, shows $\ExpTime$-hardness of
+satisfiability with respect to general TBoxen for $\ALC$. Together
+with the $\ExpTime$ upper bound from \cref{5.10}, we have the following
+theorem.
+
+\begin{Theorem}
+  \label{6.13}
+  Satisfiability of concepts with respect to general TBoxen in $\ALC$
+  is $\ExpTime$-complete.
+\end{Theorem}
+
+\chapter{Description logics with undecibale satisfiability problems}
+In addition to the constructors introduced until now, the original
+\texttt{KL-ONE} system also contained:
+\begin{description}
+\item[Role composition] Syntax: $r \circ s$, semantics: $(r \circ s)^I
+  = \set{(a, c); \exists b \in \Delta^I. (a, b) \in r^I \wedge (b, c)
+    \in s^I}$, and
+\item[Role value maps] Syntax: $(r \sqsubseteq s)$, where $r, s$ are
+  role terms, which are built from role names by composition,
+  semantics: $(r \sqsubseteq s)^I = \set{a \in \Delta^I; r^I(a)
+    \subseteq s^I(a)}$, where $r^I(a) := \set{b; (a, b) \in r^I}$ and
+  $s^I(a) := \set{c; (a, c) \in s^I}$.
+\end{description}
+
+We want to show that for a description logic extending $\ALC$ by role
+value maps, the satisfiability problem for concepts is undecidable. In
+the proof, we use the undecidability result of the domino problem.
+
+\begin{Problem}[Domino problem]
+  Intuitively, we have a finite set of domino types, \ie squares with
+  colored sides.
+  %%% FIXME image
+  Note that it is not allowed to turn the
+  dominos. There are arbitrary many dominoes of each type. The task is
+  to tile the quarter plane with dominoes such that connecting edges
+  have the same color without turning the dominoes.
+
+  Question: Is there such a tiling for the available domino types, if
+  we have arbitrarily many dominoes available from each type?
+\end{Problem}
+
+\begin{Definition}[Domino system]
+  \label{7.1}
+  A domino system ${\cal D} = (D, H, V)$ consists of a finite set $D$
+  of domino types, a horizontal compatibility relation $H \subseteq D
+  \times D$, and a vertical compatibility relation $V \subseteq D
+  \times D$.
+
+  A solution of a system (a tiling) is a mappig ${\cal T}: \N \times
+  \N \to D$, where
+  \begin{itemize}
+  \item from ${\cal T}(x, y) = d$ and ${\cal T}(x + 1, y) = d'$ it
+    follows that $(d, d') \in H$, and
+  \item from ${\cal T}(x, y) = d$ and ${\cal T}(x, y + 1) = d'$ it
+    follows that $(d, d') \in V$.
+  \end{itemize}
+
+  Intuitively, $(d, d') \in H$ means that the right edge of $d$ and
+  the left edge of $d'$ have the same color, and $(d, d') \in V$ means
+  that the upper edge of $d$ and the lower edge of $d'$ have the same
+  color.
+\end{Definition}
+
+The following is a well-known result.
+\begin{Theorem}
+  \label{7.2}
+  The following is undecidable in the general case:
+  Given a domino system ${\cal D}$, does ${\cal D}$ have a solution?
+\end{Theorem}
+
+We now construct an $\ALCrvm$-concept description $C_{\cal D}$ and
+show that $C_{\cal D}$ is satisfiable iff ${\cal D}$ has a
+solution. The concept description must express
+\begin{itemize}
+\item the grid, \ie $\N \times \N$
+  \begin{equation*}
+    \xymatrix{\bullet \ar[r]^{r} & \bullet \\ \bullet \ar[u]^{u}
+      \ar[r]_{r} & \bullet \ar[u]_{u}},\ \text{and}
+  \end{equation*}
+\item the existence of a compatible tiling, \ie the relations $H$ and
+  $V$ are obeyed.
+\end{itemize}
+
+In a first step, we express this locially (for a cell of the grid and
+its direct neighbors). To this end, we construct a concept description
+$D_{\cal D}$ as follows:
+ Let $D = \set{d_1, \dotsc, d_n}$, and $D_1, \dotsc, D_n$ be concept
+ names (one for each domino type in $D$ of ${\cal D}$).
+ \begin{align*}
+   D_{\cal D} & := \exists r.\top \\
+   & \sqcap \exists u.\top \\
+   & \sqcap (u \circ r \sqsubseteq r \circ u) \\
+   & \sqcap (r \circ u \sqsubseteq u \circ r) \\
+   & \sqcap (D_1 \sqcup \dotsb \sqcup D_n) \\
+   & \sqcap \bigsqcap_{1 \leq i < j < n} \neg(D_i \sqcap D_j) \\
+   & \sqcap \bigsqcap_{i = 1}^n \left(D_i \then \bigsqcup_{(d_i, d_j) \in
+     H} \forall r. D_j\right) \\
+   & \sqcap \bigsqcap_{i = 1}^n\left(D_i \then \bigsqcup_{(d_i, d_j)
+       \in V} \forall u. D_j\right),
+ \end{align*}
+ where $C \then D$ is an abbreviation for $\neg C \sqcup D$.
+
+ Next, we ensure that $D_{\cal D}$ holds at every point of the grid:
+ \begin{equation*}
+   C_{\cal D} = (s \circ u \sqsubseteq s) \sqcap (s \circ r
+   \sqsubseteq s) \sqcap \exists s.\top \sqcap \forall s. D_{\cal D}.
+ \end{equation*}
+
+ \begin{equation*}
+   \xymatrix{ & \bullet \\
+     & \bullet \ar[u]^{u} \ar[r]_{r} & \bullet\\
+     & \bullet_{D_{\cal D}} \ar[u]^{u} \ar[r]_{r} & \bullet \ar[u]_{u}
+     \ar[r]_{r} & \bullet \\
+   \bullet \ar[ur]_{s} \ar@/_/[urr]_{s} \ar@/^/[uur]^{s}}
+ \end{equation*}
+
+ \begin{Lemma}
+   \label{7.3}
+   If ${\cal D}$ has a solution, then $C_{\cal D}$ is satisfiable.
+ \end{Lemma}
+
+ \begin{Proof}[\cref{7.3}]
+   Let ${\cal T}: \N \times \N \to D$ be a solution for $D$. We define
+   the interpretation $I_{\cal T}$ as follows:
+   \begin{itemize}
+   \item $\Delta^{I_{\cal T}} := \set{a} \cup \N \times \N$,
+   \item $s^{I_{\cal T}} := \set{(a, (i, j)); (i, j) \in \N \times \N}$,
+   \item $u^{I_{\cal T}} := \set{((i, j), (i, j + 1)); (i, j) \in \N
+       \times \N}$,
+   \item $r^{I_{\cal T}} := \set{((i, j), (i + 1, j)); (i, j) \in \N
+       \times \N}$, and
+   \item $D_k^{I_{\cal T}} := \set{(i, j); {\cal T}(i, j) = d_k}$ for
+     $1 \leq k \leq n$.
+   \end{itemize}
+  It is easy to see that $a \in C_{\cal D}^{I_{\cal T}}$
+   holds. Consequently, $C_{\cal D}$ is satisfiable.
+ \end{Proof}
+
+
+ The other direction is a bit more difficult. The main problem is that
+ there might exist more than one successor for $u$ and $r$. We must
+ choose the right ones.
+
+ \begin{Lemma}
+   \label{7.4}
+   If $C_{\cal D}$ is satisfiable, then $D$ has a solution.
+ \end{Lemma}
+
+ \begin{Proof}
+   Let $I$ be an interpretation and $x \in \Delta^I$ with $x \in
+   C_{\cal D}^I$. We are looking for suitable elements in $\Delta^I$
+   that can function as grid points. We start with a ``stair.''
+
+   \begin{equation*}
+     \xymatrix{
+       & \bullet \ar@{.>}[r] & \bullet \ar@{.>}[r] & \bullet \ar[r]_r
+       & \bullet \\
+       & \bullet \ar@{.>}[r] \ar@{.>}[u] & \bullet \ar@{.>}[u] \ar[r]_r & \bullet \ar[u]^u \ar@{.>}[r] &
+       \bullet \ar@{.>}[u] \\
+       & \bullet \ar@{.>}[u] \ar[r]_r & \bullet \ar@{.>}[r]
+       \ar[u]^u & \bullet \ar@{.>}[r] \ar@{.>}[u] & \bullet
+       \ar@{.>}[u] \\
+       \bullet_x \ar[ur]_s \ar@/_/[urr]_s \ar@/^/[uurr]^s
+     }
+   \end{equation*}
+
+   Since every obtained ``grid point'' is connected to $x$ by $S^I$,
+   each of these points belongs to $D_{\cal D}$. The role value maps
+   in $D_{\cal D}$ yield now the upper and lower points. This in turn
+   yields a grid. Each of the grid points belongs to exactly one of
+   $D_1^I, \dotsc, D_n^I$. This yields the tiling ${\cal T}_I: \N
+   \times \N \to \set{d_1, \dotsc, d_n}$. The implications in $D_{\cal
+     D}$ ensure that this tiling is compatible with $H$ and $V$.
+ \end{Proof}
+
+ The following theorem now follows immediately.
+ \begin{Theorem}
+   \label{7.5}
+   The satisfiability problem for concept descriptions is undecidable
+   for a description logic that extends $\ALC$ with role value maps.
+ \end{Theorem}
+
+ \begin{Remark}
+   Even for the description logic that allows for $\sqcap$, $\forall
+   r.C$ and role value maps, satisfiability is undecidable. The
+   initial \texttt{KL-ONE} system supported these operators.
+ \end{Remark}
+
+\section{Concrete domains}
+So far, the constructors we have introduced alow us to describe
+abstract logical properties of concepts and individuals. It is not
+possible to refer to more concrete things like numbers or strings when
+defining concepts.
+
+For instance, we may want to state that a person has an age (which is
+a number), and then use this to state constraints like
+\begin{itemize}
+\item a student is older than 17, and younger than 27,
+\item a teacher is at least 27, and at most 65 years old,
+\item the age of a student's supervisor is larger than the age of the
+  student, and
+\item a Computer Science course has an identification, which is a
+  string starting with ``CS.''
+\end{itemize}
+
+We cannot simply introduce new concept names, \eg
+$\operatorname{PersonsOlderThan17}$, since the relationships between
+such names (\eg $\operatorname{PersonsOlderThan17} \sqsubseteq
+\operatorname{PersonsOlderThan15}$) would be lost, or would need to be
+modeled explicitly by GCIs, and more complex relations could not be
+modeled by GCIs anyway.
+
+Thus, we allow to refer to concrete values from a domain (such as the
+natural numbers), and to use predicates defined on this domain (such
+as $\geq_{17}, \leq_{65}, <$). In database terminology, these are
+called ``built-in datatypes'' and ``built-in predicates.''
+
+\begin{Definition}[Concrete domain]
+  \label{7.6}
+  A concrete domain is a pair ${\cal D} = (\Delta^{\cal D}, \Phi^{\cal
+    D})$, where $\Delta^{\cal D}$ is a non-empty set, and $\Phi^{\cal
+    D}$ is a set of predicate names. Each $p \in \Phi^{\cal D}$ is
+  equipped with an arity $n$ and an extension $p^{\cal D} \subseteq
+  ({\cal D}^{\cal D})^n$, \ie an $n$-ary concrete predicate.
+\end{Definition}
+
+In order to refer to the elements of a concrete domain, we use
+functional roles, \ie roles that are interpreted as partial functions
+from the abstract domain $\Delta^I$ into the concrete domain
+$\Delta^{\cal D}$. These partial functions will be called concrete
+features. Additionally, we will also use abstract functions, which are
+interpreted as partial functions from $\Delta^I$ to $\Delta^I$.
+
+\begin{Definition}[Concrete domain restriction]
+  \label{7.7}
+  We assume that the set of role names ${\cal N}_R$ has a subset
+  ${\cal N}_{aF}$ of abstract features, and that ${\cal N}_{cF}$ is a
+  set of concrete features, which is disjoint from ${\cal N}_R$,
+  ${\cal N}_C$, and ${\cal N}_I$.
+
+  A feature chain is a sequence $f_1 \dotsm f_m g$ of $m \geq 0$
+  abstract features $f_1, \dotsc, f_m$, followed by a concrete
+  feature $g$.
+
+  If $a_1, \dotsc, a_n$ are feature chains, and $p \in \Phi^{\cal D}$
+  is an $n$-ary predicate, then $\exists a_1, \dotsc, a_n.P$ is a
+  concrete domain restriction.
+
+  An interpretation $I = (\Delta^I, \cdot^I)$ assigns partial
+  functions to abstract and concrete features:
+  \begin{itemize}
+  \item if $f \in {\cal N}_{aF}$, then $F^I \subseteq \Delta^I \times
+    \Delta^I$ is such that $(d, e) \in F^I$ and $(d, e') \in f^I$
+    implies $e = e'$. Instead of $(d, e) \in f^I$, we will write $e =
+    f^I(d)$, and say that $f^I(d)$ is undefined if there is no such
+    $e$, and
+  \item if $g \in {\cal N}_{cF}$, then $g^I \subseteq \Delta^I \times
+    \Delta^{\cal D}$ is such that $(d, e) \in g^I$ and $(d, e') \in
+    g^I$ implies $e = e'$. Again, we use the notation $g^I(d) = e$ for
+    $(d, e) \in g^I$, and say that $g^I(d)$ is undefined if no such
+    $e$ exists.
+  \end{itemize}
+
+  A feature chain $u = f_1 \dotsm f_m g$ is also interpreted as a
+  partial function from $\Delta^I$ to ${\cal D}^{\cal D}$:
+  \begin{equation*}
+    u^I(d) := g^I(f_m^I(\dotsb(f_1^I(d))\dotsb)),\ \text{\ie}
+  \end{equation*}
+  $(d, e) \in u^I$ iff there are $e_1, \dotsc, e_m \in \Delta^I$ such
+  that $(d, e_1) \in f_1^I$, $(e_1, e_2) \in f_2^I, \dotsc, (e_{m -
+    1}, e_m) \in f_m^I$, and $(e_m, e) \in g^I$. We say that $u^I(d)$
+  is undefined if no such $e$ exists.
+
+  The extension of the concrete domain restriction $\exists u_1, \dotsc,
+  u_n. P$ is defined as follows:
+  \begin{equation*}
+    (\exists u_1, \dotsc, u_n.P)^I := \set{d \in \Delta^I; \exists
+      x_1, x_2, \dotsc, x_n \in \Delta^{\cal D}. u_1^I(d) = x_i\
+      \text{for}\ 1 \leq i \leq n\ \text{and}\ (x_1, \dotsc, x_n) \in
+      p^{\cal D}}.
+  \end{equation*}
+\end{Definition}
+
+\begin{Note}
+  Note that $d \in (\exists u_1, \dotsc, u_n. P)^I$ implies that
+  $u_1^I(d), \dotsc, u_n^I(d)$ are defined.
+\end{Note}
+
+In order to express the age constraints from our motivating example,
+we use a concrete domain ${\cal N}$ with the following components
+\begin{itemize}
+\item ${\cal D}^{\cal N} := \N$ (the set of non-negative integers),
+\item $\Phi^{\cal N}$ contains the concrete domain predicate names $>,
+  \geq, < \leq$ (binary), $>_n, \leq_n, <n, \geq_n$ (unary, for any $n
+  \geq 0$) with the obvious extensions.
+\end{itemize}
+
+Using concrete domain restrictions with respect to this domain, we can
+state the following GCIs:
+\begin{align*}
+  \operatorname{Student} & \sqsubseteq \exists
+  \operatorname{age}. >_{17} \sqcap \exists
+  \operatorname{age}. <_{27} \\
+  \operatorname{Teacher} & \sqsubseteq \exists
+  \operatorname{age}. \geq_{27} \sqcap \exists
+  \operatorname{age}. \leq_{65}.
+\end{align*}
+If we also state that only teachers can supervise students
+\begin{equation*}
+  \operatorname{Student} \sqsubseteq \exists
+  \operatorname{supervisedBy}. \operatorname{Teacher},\ \text{then}
+\end{equation*}
+this implies the subsumption relationship
+\begin{equation*}
+  \operatorname{Student} \sqsubseteq \exists \operatorname{age},
+  \operatorname{supervisedBy} \circ \operatorname{age}. <.
+\end{equation*}
+
+If the concrete domain itself is undecidable, then $\ALC({\cal D})$ is
+of course also undecidable. Thus, we restrict the attention to
+``nice'' concrete domains.
+
+\begin{Definition}[Admissible concrete domain]
+  \label{7.8}
+  The concrete domain ${\cal D} = (\Delta^{\cal D}, \Phi^{\cal D})$ is
+  admissible if
+  \begin{enumerate}
+  \item $\Phi^{\cal D}$ is closed under negation, \ie for every $p \in
+    \Phi^{\cal D}$, there is $p' \in \Phi^{\cal D}$ such that
+    ${p'}^{\cal D} = ({\cal D}^{\cal D})^n \setminus p^{\cal D}$,
+    where $n$ is the arity of $p$,
+  \item $\Phi^{\cal D}$ contains a predicate $p$ such that $p^{\cal D}
+    = \Delta^{\cal D}$, and
+  \item the satisfiability of finite conjunctions $\bigwedge_{i =
+      1}^k{p_i(x^{(i)})}$ in ${\cal D}$ is decidable.
+  \end{enumerate}
+\end{Definition}
+
+\begin{Theorem}[Baader/Hanschke 1991]
+  \label{7.9}
+  If ${\cal D}$ is an admissible concrete domain, the satisfiability
+  of $\ALC({\cal D})$-concept descriptions is decidable.
+\end{Theorem}
+
+The proof constructs a tableau-based algorithm for this problem. We
+show now that in the presence of GCIs, satisfiability becomes
+undecidable even for a very simple concrete domain.
+
+We consider the concrete domain $N := ({\cal D}^N, \Phi^N)$, where
+\begin{itemize}
+\item $\Delta^N := \N$, and
+\item $\Phi^N$ consists of
+  \begin{itemize}
+  \item the unary predicate $=_0$, wehre $(=_0)^N = \set{0}$,
+  \item the binary predicate $=$, where $(=)^N = \set{(i, i); i \in \N}$,
+  \item the binary predicate $+_1$, where $(+1)^N = \set{(i, i + 1); i
+      \in \N}$,
+  \item their negation, and
+  \item the unary predicate $T_N$, where $(T_N)^N = \N$.
+  \end{itemize}
+\end{itemize}
+
+It is easy to see that this concrete domain is decidable. We prove
+undecidability by reduction of the halting problem for 2-register
+machines. Such a machine is similar to a Turing machine, but instead
+of a tape it has two registers containing non-negative integers. In
+each step, the machine can increment a gerister or decriment it after
+testing or equality to zero.
+
+\begin{Definition}[Two-register machine]
+  \label{7.10}
+  A (deterministic) two-register-machine (2RM) is a pair ${\cal M} =
+  (Q, P)$ of
+  \begin{itemize}
+    \item a set of states $Q = \set{q_0, q_1, \dotsc, q_l}$, and
+    \item a sequence of instructions $p = I_0, I_1, \dotsc, I_{l -
+        1}$.
+  \end{itemize}
+
+  By definition, $q_0$ is the initial state, and $q_l$ is the halting
+  state. For all $i < l$,
+  \begin{itemize}
+  \item either $I_i = +(p, q_j)$ is incrementation, where $p \in
+    \set{1, 2}$ and $q_j$ is the next state, or
+  \item $I_i = -(p, q_j, q_k)$ is a decrementation, where $p \in \set{1,
+      2}$ a register, $q_j$ is the next state if the register contains
+    $0$, and $q_k$ is the next state otherwise.
+  \end{itemize}
+
+  A configuration of ${\cal M}$ is a tuple $(q, m, n)$, where $q \in
+  Q$ is the current state, and $m, n$ are the register contents. We
+  write $(q_i, n_1, n_2) \then_M (q_j, n_2, m_2)$ if
+  \begin{itemize}
+  \item $i < l$, and
+  \item $I_i = +(p, q_j)$, $m_p = n_p + 1$, an $m_{\bar{p}} =
+    n_{\bar{p}}$, where $\bar{1} = 2$ and $\bar{2} = 1$, or
+  \item $I_i = -(p, q_j, q_k)$, $n_p = m_p = 0$, and $m_{\bar{p}} =
+    n_{\bar{p}}$, or
+  \item $I_i = -(p, q_k, q_j)$, $n_p > 0$, $m_p = n_p - 1$, and
+    $m_{\bar{p}} = n_{\bar{p}}$.
+  \end{itemize}
+\end{Definition}
+
+\begin{Example}
+  the following two-register-machine decides whether the value $x$ in the
+  first register is even. Initially, $r_1$ contains $x$, and $r_2$
+  contains $0$.
+  \begin{align*}
+    {\cal M} & = (Q, P), \\
+    Q & = \set{q_0, q_1, \dotsc, q_6}, \\
+    P & = \set{I_0, I_1, \dotsc, I_5},\ \text{where} \\
+    I_0 & = -(r_1, q_5, q_1), \\
+    I_1 & = +(r_2, q_2), \\
+    I_2 & = -(r_1, q_5, q_3), \\
+    I_3 & = -(r_2, q_5, q_4), \\
+    I_4 & -(r_1, q_6, q_1),\ \text{and} \\
+    I_5 & = +(r_1, q_5).
+  \end{align*}
+\end{Example}
+
+The halting problem for two-register-machines is, given a
+two-register-machine ${\cal M}$ to decide, whether ${\cal M}$ halts
+when started on register contenst $(0, 0$, \ie whether the computation
+\begin{equation*}
+  (p_0, m_0, n_0 \then_M (p_1, n_1, m_1) \then_M \dotso
+\end{equation*}
+ends in $q_l$ instead of continuing indefinitely.
+
+\begin{Theorem}
+  \label{7.11}
+  The halting problem for two-register-machines is undecidable.
+\end{Theorem}
+
+We reduce this problem to unsatisfiability in $\ALC(N)$ with respect
+to general TBoxen, \ie we convert a given two-register-machine ${\cal
+  M}$ into a concept named $B$ and a TBox ${\cal T}_M$, such that
+${\cal M}$ halts iff $B$ is not satisfiable with respect to ${\cal
+  T}_M$.
+
+In ${\cal T}_M$ we use
+\begin{itemize}
+\item an abstract feature $f$ to describe the relation $\then_M$,
+\item two concrete features $g_1, g_2$ to describe register contents
+\item concept names $Q_0, Q_1, \dotsc, Q_l$ for the states, and
+\item a concrete domain $N$.
+\end{itemize}
+
+Then ${\cal T}_M$ consists of the following GCIs:
+\begin{itemize}
+\item the initial configuration is as desired:
+  \begin{equation*}
+    B \sqsubseteq Q_0 \sqcap \exists g_1. =_0 \sqcap \exists g_2. =_0,
+  \end{equation*}
+\item incrementation: For all $I_i = +(p, q_j) \in P$, we have
+  \begin{align*}
+    Q_i & \sqsubseteq \exists f. Q_j \sqcap \exists g_p, f \circ
+    g_p. +_1 \\
+    & \sqcap \exists q_{\bar{p}}, f \circ g_{\bar{p}}. =,
+  \end{align*}
+  where for $p \in \set{1, 2}$, $\bar{p} \in \set{1, 2} \setminus p$,
+\item decrementation: For all $I_i = -(p, q_j, q_k) \in P$, we have
+  \begin{align*}
+    Q_i \sqcap \exists g_p. =_0 & \subseteq \exists f. Q_j \\
+    & \sqcap \exists f. \exists _p. =_0 \\
+    & \sqcap \exists g_{\bar{p}}, f \circ g_{\bar{p}}. = \\
+    Q_i \sqcap \neg(\exists g_p. =_0) & \sqsubseteq \exists f. Q_k \\
+    & \sqcap \exists f \circ g_p, g_p. +_1 \\
+    & \sqcap \exists g_{\bar{p}}, f \circ g_{\bar{p}}. =
+  \end{align*}
+\item computation does not stop:
+  \begin{equation*}
+    \top \sqsubseteq \neg Q_l.
+  \end{equation*}
+\item The states are mutually disjoint:
+  \begin{equation*}
+    \to \sqsubseteq \bigsqcap_{1 \leq i < j \leq l}{\neg(Q_i \sqcap Q_j)}
+  \end{equation*}
+\end{itemize}
+
+\begin{Lemma}
+  \label{7.12}
+  ${\cal M}$ halts iff $B$ is unsatisfiable with respect to ${\cal
+    T}_M$.
+\end{Lemma}
+
+\begin{Proof}[\cref{7.12}]
+  Assume that $B$ is satisfiable with respect to ${\cal T}_M$, and let
+  $I$ be a model of $B$ and ${\cal T}_M$, and let $d \in B^I$. Then
+  there is a (unique) infinite sequence $d = d_0, d_1, d_2, \dotsc$
+  with $d_i \in \Delta^I$, such that $f^I(d_i) = d_{i + 1}$. For $i
+  \geq 0$, let
+  \begin{itemize}
+  \item $p_i = q_j$ if $Q_j$ is the (unique) element of $\set{Q_1,
+      \dotsc, Q_l}$ with $d_i \in Q_j^I$,
+  \item $n_i = g_1^I(d_i)$, and
+  \item $m_i = g_2^I(d_i)$.
+  \end{itemize}
+
+  It is easy to see that
+  \begin{equation*}p
+    (p_0, n_0, m_0) \then_M p_1, n_1, m_1) \then_M \dotso,\ \text{and}
+  \end{equation*}
+  that ${\cal M}$ does not halt.
+
+  Assume now that ${\cal M}$ does not halt, \ie the computation
+  \begin{equation*}
+    (p_0, n_0, m_0) \then_M (p_1, n_1, m_1) \then_M
+  \end{equation*}
+  is infinite. Define an interpretation $I$:
+  \begin{itemize}
+  \item $\Delta^I := \N$,
+  \item $Q_j^I := \set{i; p_i = q_j}$ for $1 \leq j \leq l$,
+  \item $f^I(i) := i + 1$,
+  \item $g_1^I(i) := n_i$,
+  \item $g_2^I(i) := m_i$
+  \item $B^I = \set{0}$.
+  \end{itemize}
+
+  It is easy to see that $I$ is a model of ${\cal T}_M$. Thus, the
+  concept $B$ is satisfiable with respect to ${\cal T}_M$.
+\end{Proof}
+
+Together with \cref{7.11}, this yields the following theorem.
+
+\begin{Theorem}
+  \label{7.13}
+  Satisfiability of $\ALC(N)$-concepts with respect to general TBoxen
+  is undecidable.
+\end{Theorem}
+
+There are various ways to regain decidability.  For example, we can
+drop the predicate $+_1$, or replace general TBoxen with acyclic ones.
+
+\end{document}

@@ -1,0 +1,13 @@
+*~
+#*#
+*.idx
+*.toc
+*.thm
+*.aux
+*.dvi
+*.pdf
+*.log
+*flymake*
+*synctex*
+auto/
+*.patch
